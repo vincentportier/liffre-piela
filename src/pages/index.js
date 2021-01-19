@@ -1,9 +1,21 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import SEO from "../components/SEO"
+import { Fragment } from "react"
 
 const Home = ({ data }) => {
   const posts = data.allMarkdownRemark.edges
+
+  if (posts.length === 0) {
+    return (
+      <Fragment>
+        <SEO title="All posts" />
+
+        <p>No blog posts found.</p>
+      </Fragment>
+    )
+  }
+
   return (
     <div>
       <SEO title="All posts" />
