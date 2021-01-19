@@ -1,5 +1,69 @@
 import React from "react"
+import { graphql, Link } from "gatsby"
+import SEO from "../components/SEO"
 
-export default function Home() {
-  return <div>Hello world!</div>
+const Home = ({ data }) => {
+  const posts = data.allMarkdownRemark.edges
+  return (
+    <div>
+      <SEO title="All posts" />
+      <h1>Liffre Piela blog</h1>
+      <ol>
+        {posts &&
+          posts.map(post => {
+            const title = post.node.frontmatter.title || post.node.fields.slug
+            return (
+              <li key={post.node.fields.slug}>
+                <article>
+                  <header>
+                    <h2>
+                      <Link to={post.node.fields.slug}>
+                        <span>{title}</span>
+                      </Link>
+                    </h2>
+                    <small>{post.node.date}</small>
+                  </header>
+                  <section>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          post.node.frontmatter.description ||
+                          post.node.excerpt,
+                      }}
+                    ></p>
+                  </section>
+                </article>
+              </li>
+            )
+          })}
+      </ol>
+    </div>
+  )
 }
+
+export default Home
+
+export const pageQuery = graphql`
+  query {
+    allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/blog/" } }
+      limit: 1000
+      sort: { fields: frontmatter___date, order: DESC }
+    ) {
+      edges {
+        node {
+          id
+          excerpt
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            date(formatString: "MMMM DD, YYYY")
+            description
+          }
+        }
+      }
+    }
+  }
+`
