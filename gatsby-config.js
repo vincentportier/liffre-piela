@@ -11,5 +11,14 @@ module.exports = {
     siteUrl: `https://www.liffre-piela.netlify.app`,
     description: `Association d'aide humanitaire et de coopération avec Piela (Burkina Faso)`,
   },
-  plugins: [`gatsby-plugin-netlify-cms`],
+  plugins: [
+    `gatsby-plugin-netlify-cms`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `blog`,
+        path: `${__dirname}/content/blog`,
+      },
+    },
+  ],
 }
