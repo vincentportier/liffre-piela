@@ -24,16 +24,28 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
     return
   }
-  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    createPage({
-      path: node.fields.slug,
-      component: blogPostTemplate,
-      context: {
-        // additional data can be passed via context
-        id: node.id,
-      },
+
+  const posts = result.data.allMarkdownRemark.edges
+
+  if (posts.length > 0) {
+    posts.forEach(({ node }, index) => {
+      const nextPostId = index === 0 ? null : posts[index - 1].node.id
+      const previousPostId =
+        index === posts.length - 1 ? null : posts[index + 1].node.id
+
+      createPage({
+        path: node.fields.slug,
+        component: blogPostTemplate,
+        context: {
+          // additional data can be passed via context
+          id: node.id,
+          index,
+          nextPostId,
+          previousPostId,
+        },
+      })
     })
-  })
+  }
 }
 
 const { createFilePath } = require(`gatsby-source-filesystem`)

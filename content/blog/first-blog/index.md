@@ -1,20 +1,21 @@
 ---
-title: First blog
+title: How to create a blog
 date: 2021-01-19T00:05:07.120Z
 description: this is my first blog
 ---
-- - -
+
+---
 
 **Advertisement :)**
 
-* **[pica](https://nodeca.github.io/pica/demo/)** - high quality and fast image
+- **[pica](https://nodeca.github.io/pica/demo/)** - high quality and fast image
   resize in browser.
-* **[babelfish](https://github.com/nodeca/babelfish/)** - developer friendly
+- **[babelfish](https://github.com/nodeca/babelfish/)** - developer friendly
   i18n with plurals support and easy syntax.
 
 You will like those projects!
 
-- - -
+---
 
 # h1 Heading 8-)
 
@@ -30,11 +31,11 @@ You will like those projects!
 
 ## Horizontal Rules
 
-- - -
+---
 
-- - -
+---
 
-- - -
+---
 
 ## Typographic replacements
 
@@ -44,7 +45,7 @@ Enable typographer option to see result.
 
 test.. test... test..... test?..... test!....
 
-!!!!!! ???? ,,  -- ---
+!!!!!! ???? ,, -- ---
 
 "Smartypants, double quotes" and 'single quotes'
 
@@ -54,9 +55,9 @@ test.. test... test..... test?..... test!....
 
 **This is bold text**
 
-*This is italic text*
+_This is italic text_
 
-*This is italic text*
+_This is italic text_
 
 ~~Strikethrough~~
 
@@ -72,15 +73,16 @@ test.. test... test..... test?..... test!....
 
 Unordered
 
-* Create a list by starting a line with `+`, `-`, or `*`
-* Sub-lists are made by indenting 2 spaces:
+- Create a list by starting a line with `+`, `-`, or `*`
+- Sub-lists are made by indenting 2 spaces:
 
-  * Marker character change forces new list start:
+  - Marker character change forces new list start:
 
-    * Ac tristique libero volutpat at
-    * Facilisis in pretium nisl aliquet
-    * Nulla volutpat aliquam velit
-* Very easy!
+    - Ac tristique libero volutpat at
+    - Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
+
+- Very easy!
 
 Ordered
 
@@ -160,8 +162,8 @@ see [how to change output](https://github.com/markdown-it/markdown-it-emoji#chan
 
 ### [Subscript](https://github.com/markdown-it/markdown-it-sub) / [Superscript](https://github.com/markdown-it/markdown-it-sup)
 
-* 19^th^
-* H\~2\~O
+- 19^th^
+- H\~2\~O
 
 ### [<ins>](https://github.com/markdown-it/markdown-it-ins)
 
@@ -193,25 +195,25 @@ Duplicated footnote reference[^second].
 
 Term 1
 
-:   Definition 1
+: Definition 1
 with lazy continuation.
 
-Term 2 with *inline markup*
+Term 2 with _inline markup_
 
-:   Definition 2
-
-```
+: Definition 2
 
 ```
 
-*Compact style:*
+```
+
+_Compact style:_
 
 Term 1
-  ~ Definition 1
+~ Definition 1
 
 Term 2
-  \~ Definition 2a
-  \~ Definition 2b
+\~ Definition 2a
+\~ Definition 2b
 
 ### [Abbreviations](https://github.com/markdown-it/markdown-it-abbr)
 
@@ -224,5 +226,5 @@ It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
 ### [Custom containers](https://github.com/markdown-it/markdown-it-container)
 
 ::: warning
-*here be dragons*
+_here be dragons_
 :::
