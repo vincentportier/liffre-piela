@@ -31,7 +31,7 @@ const Categories = () => {
     <div>
       {categoriesFound.map(category => (
         <p>
-          <Link to={`/category/${category}`}>{category}</Link>
+          <Link to={`/category/${category}`}>{category} test</Link>
         </p>
       ))}
     </div>
