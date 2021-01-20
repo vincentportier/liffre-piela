@@ -1,12 +1,13 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
+import Layout from "../components/layout"
 
 const categoryPageTemplate = ({ data }) => {
   console.log({ data })
   const posts = data.allMarkdownRemark.edges
 
   return (
-    <div>
+    <Layout>
       <ol>
         {posts &&
           posts.map(post => {
@@ -36,7 +37,7 @@ const categoryPageTemplate = ({ data }) => {
             )
           })}
       </ol>
-    </div>
+    </Layout>
   )
 }
 

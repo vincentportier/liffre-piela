@@ -1,7 +1,8 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { graphql, Link } from "gatsby"
 import SEO from "../components/SEO"
 import Img from "gatsby-image"
+import Layout from "../components/layout"
 
 const BlogPostTemplate = ({ data, pageContext }) => {
   const post = data.markdownRemark
@@ -12,7 +13,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
     : null
 
   return (
-    <div>
+    <Layout>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description}
@@ -48,7 +49,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
           </li>
         </ul>
       </nav>
-    </div>
+    </Layout>
   )
 }
 

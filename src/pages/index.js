@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby"
 import SEO from "../components/SEO"
 import { Fragment } from "react"
 import Categories from "../components/categories"
+import Layout from "../components/layout"
 
 const Home = ({ data }) => {
   const posts = data.allMarkdownRemark.edges
@@ -17,7 +18,7 @@ const Home = ({ data }) => {
   }
 
   return (
-    <div>
+    <Layout>
       <SEO title="All posts" />
       <h1>Liffre Piela blog</h1>
       <Categories />
@@ -50,7 +51,7 @@ const Home = ({ data }) => {
             )
           })}
       </ol>
-    </div>
+    </Layout>
   )
 }
 
