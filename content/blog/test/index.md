@@ -6,5 +6,7 @@ author:
   - Liffre Piela
 categories:
   - comité
+  - fête
+  - fête
 ---
 test
