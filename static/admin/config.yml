@@ -42,8 +42,16 @@ collections:
           widget: "select",
           mutliple: true,
           required: true,
-          options: ["comité", "fetes", "uncategorized"],
+          options: ["comité", "fête", "uncategorized"],
           default: ["uncategorized"],
         }
-
+      - {
+          label: "Tags",
+          name: "tags",
+          widget: "list",
+          required: false,
+          allow_add: true,
+          label_singular: "add a tag",
+          max: 5,
+        }
       - { label: "Body", name: "body", widget: "markdown" }
