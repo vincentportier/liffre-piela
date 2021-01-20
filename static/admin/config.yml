@@ -24,6 +24,26 @@ collections:
           name: featuredImage,
           widget: "image",
           allow_multiple: false,
+          required: false,
         }
       - { label: "Description", name: "description", widget: "string" }
+      - {
+          label: "Author",
+          name: "author",
+          widget: "select",
+          mutliple: false,
+          required: true,
+          options: ["Liffre Piela", "Vincent Portier", "Jean-Michel Portier"],
+          default: ["Liffre Piela"],
+        }
+      - {
+          label: "Category",
+          name: "category",
+          widget: "select",
+          mutliple: true,
+          required: true,
+          options: ["comité", "fetes", "uncategorized"],
+          default: ["uncategorized"],
+        }
+
       - { label: "Body", name: "body", widget: "markdown" }
