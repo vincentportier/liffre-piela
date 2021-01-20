@@ -28,14 +28,6 @@ collections:
         }
       - { label: "Description", name: "description", widget: "string" }
       - {
-          label: "Author",
-          name: "author",
-          widget: "select",
-          mutliple: false,
-          required: true,
-          options: ["Liffre Piela", "Vincent Portier", "Jean-Michel Portier"],
-        }
-      - {
           label: "Tags",
           name: "tags",
           widget: "list",

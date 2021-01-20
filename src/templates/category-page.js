@@ -50,7 +50,6 @@ export const pageQuery = graphql`
         node {
           id
           frontmatter {
-            author
             categories
             date(formatString: "MMMM DD, YYYY")
             description
