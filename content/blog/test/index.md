@@ -9,6 +9,8 @@ tags:
   - test
 categories:
   - comité
+  - damn
+  - it's working
 ---
 
 test

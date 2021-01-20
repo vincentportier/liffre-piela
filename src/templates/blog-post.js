@@ -7,6 +7,8 @@ const BlogPostTemplate = ({ data, pageContext }) => {
   const post = data.markdownRemark
   const { next, previous } = data
 
+  console.log(pageContext)
+
   let featuredImgFluid = post.frontmatter.featuredImage
     ? post.frontmatter.featuredImage.childImageSharp.fluid
     : null
@@ -68,6 +70,9 @@ export const pageQuery = graphql`
         title
         description
         date(formatString: "MMMM DD, YYYY")
+        author
+        tags
+        categories
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {
