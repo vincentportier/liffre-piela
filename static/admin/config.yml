@@ -49,7 +49,7 @@ collections:
           label: "Categories",
           name: "categories",
           widget: "list",
-          required: true,
+          required: false,
           allow_add: true,
           max: 3,
           field:
@@ -57,7 +57,7 @@ collections:
               label: "Category",
               name: "category",
               widget: "select",
-              options: ["comité", "fête", "uncategorized"],
+              options: ["comité", "fête"],
             },
         }
       - { label: "Body", name: "body", widget: "markdown" }
