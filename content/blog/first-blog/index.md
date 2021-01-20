@@ -1,6 +1,7 @@
 ---
 title: How to create a blog
 date: 2021-01-19T00:05:07.120Z
+featuredImage: vin06755.jpg
 description: this is my first blog
 ---
 
