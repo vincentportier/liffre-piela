@@ -37,22 +37,30 @@ collections:
           default: ["Liffre Piela"],
         }
       - {
-          label: "Category",
-          name: "category",
-          widget: "select",
-          mutliple: true,
-          required: true,
-          options: ["comité", "fête", "uncategorized"],
-          default: ["uncategorized"],
-        }
-      - {
           label: "Tags",
           name: "tags",
           widget: "list",
           required: false,
           allow_add: true,
-          label_singular: "add a tag",
+          label_singular: "a tag",
           max: 5,
           field: { label: "Tag", name: "tag", widget: "string" },
+        }
+      - {
+          label: "Categories",
+          name: "categories",
+          widget: "list",
+          required: true,
+          allow_add: true,
+          label_singular: "a category",
+          max: 3,
+          field:
+            {
+              label: "Category",
+              name: "category",
+              widget: "select",
+              options: ["comité", "fête", "uncategorized"],
+              default: ["uncategorized"],
+            },
         }
       - { label: "Body", name: "body", widget: "markdown" }
