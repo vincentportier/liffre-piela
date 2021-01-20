@@ -53,5 +53,6 @@ collections:
           allow_add: true,
           label_singular: "add a tag",
           max: 5,
+          field: { label: "Tag", name: "tag", widget: "string" },
         }
       - { label: "Body", name: "body", widget: "markdown" }
