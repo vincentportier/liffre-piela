@@ -30,7 +30,7 @@ const Home = ({ data }) => {
                 <article>
                   <header>
                     <h2>
-                      <Link to={post.node.fields.slug}>
+                      <Link to={`/blog${post.node.fields.slug}`}>
                         <span>{title}</span>
                       </Link>
                     </h2>

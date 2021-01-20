@@ -28,27 +28,11 @@ collections:
         }
       - { label: "Description", name: "description", widget: "string" }
       - {
-          label: "Tags",
-          name: "tags",
-          widget: "list",
-          required: false,
-          allow_add: true,
-          max: 5,
-          field: { label: "Tag", name: "tag", widget: "string" },
-        }
-      - {
           label: "Categories",
           name: "categories",
           widget: "list",
-          required: false,
+          required: true,
           allow_add: true,
-          max: 3,
-          field:
-            {
-              label: "Category",
-              name: "category",
-              widget: "select",
-              options: ["comité", "fête"],
-            },
+          field: { label: "Category", name: "category", widget: "string" },
         }
       - { label: "Body", name: "body", widget: "markdown" }

@@ -4,6 +4,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const categoryPageTemplate = require.resolve(
     `./src/templates/category-page.js`
   )
+  const _ = require("lodash")
   const result = await graphql(`
     {
       allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
@@ -12,7 +13,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             id
             frontmatter {
               categories
-              tags
             }
             fields {
               slug
@@ -37,7 +37,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         index === posts.length - 1 ? null : posts[index + 1].node.id
 
       createPage({
-        path: node.fields.slug,
+        path: `blog${node.fields.slug}`,
         component: blogPostTemplate,
         context: {
           // additional data can be passed via context
@@ -62,7 +62,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   categoriesFound.forEach(cat => {
     createPage({
-      path: `category/${cat}`,
+      path: `blog/category/${_.kebabCase(cat)}`,
       component: categoryPageTemplate,
       context: {
         category: cat,

@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql, useStaticQuery, Link } from "gatsby"
+import _ from "lodash"
 
 const Categories = () => {
   const data = useStaticQuery(graphql`
@@ -31,7 +32,7 @@ const Categories = () => {
     <div>
       {categoriesFound.map(category => (
         <p>
-          <Link to={`/category/${category}`}>{category} test</Link>
+          <Link to={`/blog/category/${_.kebabCase(category)}`}>{category}</Link>
         </p>
       ))}
     </div>

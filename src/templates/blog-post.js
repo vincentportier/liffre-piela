@@ -7,8 +7,6 @@ const BlogPostTemplate = ({ data, pageContext }) => {
   const post = data.markdownRemark
   const { next, previous } = data
 
-  console.log(pageContext)
-
   let featuredImgFluid = post.frontmatter.featuredImage
     ? post.frontmatter.featuredImage.childImageSharp.fluid
     : null
@@ -35,7 +33,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
         <ul>
           <li>
             {previous && (
-              <Link to={previous.fields.slug} rel="prev">
+              <Link to={`/blog${previous.fields.slug}`} rel="prev">
                 ← {previous.frontmatter.title}
               </Link>
             )}
@@ -43,7 +41,7 @@ const BlogPostTemplate = ({ data, pageContext }) => {
 
           <li>
             {next && (
-              <Link to={next.fields.slug} rel="next">
+              <Link to={`/blog${next.fields.slug}`} rel="next">
                 {next.frontmatter.title} →
               </Link>
             )}
@@ -70,7 +68,6 @@ export const pageQuery = graphql`
         title
         description
         date(formatString: "MMMM DD, YYYY")
-        tags
         categories
       }
     }
