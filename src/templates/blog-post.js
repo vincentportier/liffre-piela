@@ -1,10 +1,15 @@
 import React, { useEffect } from "react"
 import { graphql, Link } from "gatsby"
 import SEO from "../components/SEO"
+import Img from "gatsby-image"
 
 const BlogPostTemplate = ({ data, pageContext }) => {
   const post = data.markdownRemark
   const { next, previous } = data
+
+  let featuredImgFluid = post.frontmatter.featuredImage
+    ? post.frontmatter.featuredImage.childImageSharp.fluid
+    : null
 
   return (
     <div>
@@ -15,6 +20,9 @@ const BlogPostTemplate = ({ data, pageContext }) => {
       />
       <article>
         <header>
+          {featuredImgFluid && (
+            <Img fluid={featuredImgFluid} alt="featured-image"></Img>
+          )}
           <h1>{post.frontmatter.title}</h1>
           <p>{post.frontmatter.date}</p>
         </header>
@@ -50,6 +58,13 @@ export const pageQuery = graphql`
       id
       html
       frontmatter {
+        featuredImage {
+          childImageSharp {
+            fluid(maxWidth: 800) {
+              ...GatsbyImageSharpFluid_withWebp_tracedSVG
+            }
+          }
+        }
         title
         description
         date(formatString: "MMMM DD, YYYY")
