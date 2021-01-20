@@ -2,7 +2,8 @@
 title: Je fais la fte
 date: 2021-01-20T07:14:58.583Z
 description: je suis dans la fete
-author: - Vincent Portier
+author:
+  - Vincent Portier
 categories:
   - fête
 ---
