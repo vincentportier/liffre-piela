@@ -31,7 +31,6 @@ collections:
           label: "Categories",
           name: "categories",
           widget: "list",
-          required: true,
           allow_add: true,
           field: { label: "Category", name: "category", widget: "string" },
         }
