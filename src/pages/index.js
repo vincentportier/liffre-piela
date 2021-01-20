@@ -2,6 +2,7 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import SEO from "../components/SEO"
 import { Fragment } from "react"
+import Categories from "../components/categories"
 
 const Home = ({ data }) => {
   const posts = data.allMarkdownRemark.edges
@@ -10,7 +11,6 @@ const Home = ({ data }) => {
     return (
       <Fragment>
         <SEO title="All posts" />
-
         <p>No blog posts found.</p>
       </Fragment>
     )
@@ -20,6 +20,7 @@ const Home = ({ data }) => {
     <div>
       <SEO title="All posts" />
       <h1>Liffre Piela blog</h1>
+      <Categories />
       <ol>
         {posts &&
           posts.map(post => {

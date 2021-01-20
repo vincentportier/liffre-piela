@@ -34,7 +34,6 @@ collections:
           mutliple: false,
           required: true,
           options: ["Liffre Piela", "Vincent Portier", "Jean-Michel Portier"],
-          default: ["Liffre Piela"],
         }
       - {
           label: "Tags",
