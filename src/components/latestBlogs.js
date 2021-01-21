@@ -25,50 +25,72 @@ const StyledGrid = styled.div`
 
 const StyledCard = styled.div`
   ${({ theme }) => theme.mixins.boxShadow}
-  margin-top:25px;
-  .card-inner {
-    display: grid;
-    grid-template-columns: 30% 1fr;
+  margin-top: 25px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  height: 300px;
 
+  @media (max-width: 768px) {
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .gatsby-image-wrapper {
+    height: 300px;
     @media (max-width: 768px) {
-      grid-template-columns: 1fr;
+      height: 200px;
     }
+  }
 
-    .card-content {
-      display: flex;
-      flex-direction: column;
-      padding: 20px 30px;
-      width: 100%;
-    }
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 25px;
+    width: 100%;
+  }
 
-    h2 {
-      font-size: 35px;
-    }
-    small {
+  h2 {
+    font-size: 30px;
+    margin-top: 10px;
+  }
+
+  p {
+    margin: 15px 0 15px 0;
+    font-size: var(--fz-md);
+  }
+
+  small {
+    a {
       color: var(--text-secondary);
       transition: var(--transition);
-      a {
-        &:hover {
-          color: inherit;
-          text-decoration: underline;
-        }
+      &:hover {
+        text-decoration: underline;
       }
     }
-    ul {
-      list-style: none;
-      li {
-        background: var(--primary);
-        color: var(--white);
-        border-radius: var(--border-radius);
-        padding: 2px 5px;
-        font-size: var(--fz-xxs);
-        margin-right: 10px;
-      }
+  }
+
+  ul {
+    margin-top: 5px;
+    list-style: none;
+
+    li {
+      background: var(--primary);
+      color: var(--white);
+      border-radius: var(--border-radius);
+      padding: 2px 8px;
+      font-size: var(--fz-xxs);
+      margin-right: 10px;
     }
-    .full-article-button {
-      color: var(--text-secondary);
-      margin: 10px 0 0 auto;
-      font-size: var(--fz-reg);
+  }
+
+  .full-article-button {
+    margin: auto 0 0 auto;
+    text-align: right;
+    color: var(--text-secondary);
+    font-size: var(--fz-lg);
+    &:hover {
+      text-decoration: underline;
     }
   }
 `
@@ -89,7 +111,7 @@ const LatestBlogs = () => {
               title
               featuredImage {
                 childImageSharp {
-                  fluid(maxWidth: 800) {
+                  fluid(maxWidth: 1200) {
                     ...GatsbyImageSharpFluid_withWebp_tracedSVG
                   }
                 }
@@ -125,31 +147,33 @@ const LatestBlogs = () => {
               : null
             return (
               <StyledCard>
-                <div className="card-inner">
-                  <Image fluid={featuredImgFluid} />
-                  <div className="card-content">
-                    <header>
-                      <small>
-                        <Link to="/blog">BLOG</Link>
-                      </small>
-                      <h2>
-                        <Link to={`/blog${slug}`}>{title}</Link>
-                      </h2>
-                      <small>Liffre-Piela, {date}</small>
-                    </header>
-                    <ul>
-                      {categories &&
-                        categories.map(cat => (
-                          <Link to={`/blog/category/${_.kebabCase(cat)}`}>
-                            <li>{cat}</li>
-                          </Link>
-                        ))}
-                    </ul>
-                    <p>{description}</p>
-                    <Link to={`/blog${slug}`} className="full-article-button">
-                      {`>>`} Lire l'article complet
-                    </Link>
-                  </div>
+                <Image fluid={featuredImgFluid} />
+                <div className="card-content">
+                  <header>
+                    <small>
+                      <Link to="/blog">BLOG</Link>
+                    </small>
+                    <h2>
+                      <Link to={`/blog${slug}`}>{title}</Link>
+                    </h2>
+                    <small>Liffre-Piela, {date}</small>
+                  </header>
+                  <ul>
+                    {categories &&
+                      categories.map(cat => (
+                        <Link to={`/blog/category/${_.kebabCase(cat)}`}>
+                          <li>{cat}</li>
+                        </Link>
+                      ))}
+                  </ul>
+                  <p>
+                    {description && description.length > 200
+                      ? description.substring(0, 160) + "..."
+                      : description}
+                  </p>
+                  <Link to={`/blog${slug}`} className="full-article-button">
+                    <span>{`>>`} Lire l'article complet</span>
+                  </Link>
                 </div>
               </StyledCard>
             )

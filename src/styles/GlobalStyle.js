@@ -11,6 +11,7 @@ html {
     box-sizing: border-box;
     width: 100%;
     scroll-behavior: smooth;
+    color:var(--text-primary);
   }
 
   *,

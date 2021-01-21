@@ -18,6 +18,7 @@ const StyledHeader = styled.header`
   pointer-events: auto !important;
   user-select: auto !important;
   backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   transition: var(--transition);
   ${props =>
     props.scrollDirection === "up" &&
@@ -45,6 +46,12 @@ const StyledNav = styled.nav`
   max-width: 1380px;
   .left-nav {
     ${({ theme }) => theme.mixins.flexBetween};
+    .logo {
+      margin-right: 50px;
+    }
+    li {
+      margin-right: 20px;
+    }
   }
 
   .button {

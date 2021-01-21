@@ -15,8 +15,8 @@ const theme = {
   `,
   palette: css`
     --white: #ffffff;
-    --black: #000000;
-    --text-primary: rgba(0, 0, 0, 0.87);
+    --black: #43414e;
+    --text-primary: #43414e;
     --text-secondary: rgba(0, 0, 0, 0.54);
     --text-disabled: rgba(0, 0, 0, 0.38);
     --primary: #1976d2;
