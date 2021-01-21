@@ -1,6 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery, Link } from "gatsby"
+import Image from "gatsby-image"
+import _ from "lodash"
 
 const StyledGrid = styled.div``
 
@@ -36,6 +38,36 @@ const LatestBlogs = () => {
   `)
 
   const posts = data.allMarkdownRemark.edges
-  return <StyledGrid>{JSON.stringify(posts)}</StyledGrid>
+
+  return (
+    <StyledGrid>
+      {posts &&
+        posts.map(post => {
+          const { title, description, categories, date } = post.node.frontmatter
+          const slug = post.node.fields.slug
+          const featuredImgFluid = post.node.frontmatter.featuredImage
+            ? post.node.frontmatter.featuredImage.childImageSharp.fluid
+            : null
+          return (
+            <div style={{ width: "100px" }}>
+              <Image fluid={featuredImgFluid} />
+              <Link to={`/blog${slug}`}>
+                <h1>{title}</h1>
+              </Link>
+              <ul>
+                {categories &&
+                  categories.map(cat => (
+                    <Link to={`/blog/category/${_.kebabCase(cat)}`}>
+                      <li>{cat}</li>
+                    </Link>
+                  ))}
+              </ul>
+              <small>{date}</small>
+              <p>{description}</p>
+            </div>
+          )
+        })}
+    </StyledGrid>
+  )
 }
 export default LatestBlogs

@@ -5,7 +5,9 @@ featuredImage: vin07047.jpg
 description: This is the description of my third blog
 categories:
   - fetes
+  - comite
 ---
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim id dui in dictum. Sed in aliquet lectus. Ut vestibulum dolor at posuere dignissim. Duis malesuada lacinia tempor. Aenean laoreet urna at mattis sodales. Nunc finibus venenatis quam egestas vulputate. Morbi tincidunt fermentum nibh, a imperdiet mauris porta sed. Phasellus id arcu dignissim, varius arcu vitae, commodo elit. Aliquam euismod, nunc sed luctus consectetur, elit sapien laoreet nulla, ac consequat massa arcu rutrum augue. Mauris id mollis ex, in congue leo. Proin non quam sapien. Vestibulum eleifend fringilla nulla in ultricies. Praesent pellentesque ipsum ut augue iaculis maximus. Suspendisse cursus, justo ut volutpat finibus, nisi massa mattis nunc, sed lacinia nunc lectus sed tellus. Aliquam quis elementum justo, in pretium est. Vivamus eleifend viverra sapien eget pretium.
 
 Fusce in consequat ligula. Nunc finibus hendrerit odio nec tristique. Nam rutrum magna mollis semper volutpat. Nam sodales, felis nec pulvinar malesuada, dui ligula lacinia purus, sed scelerisque nibh mi ac dui. Integer eu fringilla arcu. Curabitur consectetur magna vel tincidunt iaculis. Pellentesque finibus urna libero, congue laoreet ante dapibus non. Nam placerat iaculis leo vitae rutrum. Sed est quam, vehicula sit amet tincidunt eget, posuere non nibh. Praesent interdum ultrices sollicitudin. Proin mollis quis dolor vel malesuada. Suspendisse potenti.

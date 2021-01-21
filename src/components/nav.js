@@ -83,7 +83,7 @@ const Nav = () => {
         <div className="left-nav">
           <div className="logo">
             <Link to="/">
-              <span>logo</span>
+              <h1>Liffre Piela</h1>
             </Link>
           </div>
           <StyledLinks>
