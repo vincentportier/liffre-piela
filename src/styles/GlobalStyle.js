@@ -33,13 +33,31 @@ html {
 
 #root {
     min-height: 100vh;
-    height:200vh;
     width:100%;
   }
 
 body {
     font-family: "Roboto", sans-serif;
 }
+
+main {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1600px;
+    min-height: 100vh;
+    padding: 200px 150px;
+
+    @media (max-width: 1080px) {
+      padding: 200px 100px;
+    }
+    @media (max-width: 768px) {
+      padding: 150px 50px;
+    }
+    @media (max-width: 480px) {
+      padding: 125px 25px;
+    }
+
+  }
 
 a {
     display: inline-block;

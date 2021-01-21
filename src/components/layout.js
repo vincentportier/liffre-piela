@@ -3,6 +3,9 @@ import Nav from "../components/nav"
 import { ThemeProvider } from "styled-components"
 import GlobalStyle from "../styles/GlobalStyle"
 import theme from "../styles/theme"
+import styled from "styled-components"
+
+const StyledContent = styled.main``
 
 const Layout = ({ children }) => {
   return (
@@ -10,7 +13,7 @@ const Layout = ({ children }) => {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Nav />
-        {children}
+        <StyledContent>{children}</StyledContent>
       </ThemeProvider>
     </div>
   )

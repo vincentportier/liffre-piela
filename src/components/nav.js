@@ -49,7 +49,7 @@ const StyledNav = styled.nav`
 
   .button {
     ${({ theme }) => theme.mixins.button}
-    background:var(--black);
+    background:var(--primary);
     color: var(--white);
   }
 `
