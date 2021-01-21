@@ -3,6 +3,44 @@ import { graphql, Link } from "gatsby"
 import SEO from "../components/SEO"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
+import styled from "styled-components"
+
+const StyledHeader = styled.header``
+const StyledFeaturedImage = styled.div`
+  position: relative;
+
+  max-width: 500px;
+  margin: 50px auto 50px auto;
+  @media (max-width: 768px) {
+    margin: 50px auto 50px;
+    width: 70%;
+  }
+
+  .wrapper {
+    ${({ theme }) => theme.mixins.boxShadow};
+    display: block;
+    position: relative;
+
+    width: 100%;
+    border-radius: var(--border-radius);
+
+    .img {
+      position: relative;
+      border-radius: var(--border-radius);
+    }
+  }
+`
+const StyledBlogNav = styled.nav`
+  ${({ theme }) => theme.mixins.flexCenter}
+  ul {
+    color: var(--text-secondary);
+    margin-top: 50px;
+    padding: 0 20px;
+    width: 100%;
+    ${({ theme }) => theme.mixins.flexBetween}
+    list-style: none;
+  }
+`
 
 const BlogPostTemplate = ({ data, pageContext }) => {
   const post = data.markdownRemark
@@ -20,35 +58,48 @@ const BlogPostTemplate = ({ data, pageContext }) => {
         article={true}
       />
       <article>
-        <header>
+        <StyledHeader>
+          <Link to="/blog">
+            <small>BLOG</small>
+          </Link>
+
           {featuredImgFluid && (
-            <Img fluid={featuredImgFluid} alt="featured-image"></Img>
+            <StyledFeaturedImage>
+              <div className="wrapper">
+                <Img
+                  fluid={featuredImgFluid}
+                  alt="featured-image"
+                  className="img"
+                ></Img>
+              </div>
+            </StyledFeaturedImage>
           )}
           <h1>{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
-        </header>
+          <p>Liffre Piela, {post.frontmatter.date}</p>
+        </StyledHeader>
         <section dangerouslySetInnerHTML={{ __html: post.html }}></section>
       </article>
       <footer></footer>
-      <nav>
+      <StyledBlogNav>
         <ul>
           <li>
             {previous && (
               <Link to={`/blog${previous.fields.slug}`} rel="prev">
-                ← {previous.frontmatter.title}
+                <span>← </span>
+                {previous.frontmatter.title}
               </Link>
             )}
           </li>
-
           <li>
             {next && (
               <Link to={`/blog${next.fields.slug}`} rel="next">
-                {next.frontmatter.title} →
+                {next.frontmatter.title}
+                <span> →</span>
               </Link>
             )}
           </li>
         </ul>
-      </nav>
+      </StyledBlogNav>
     </Layout>
   )
 }
@@ -61,7 +112,7 @@ export const pageQuery = graphql`
       frontmatter {
         featuredImage {
           childImageSharp {
-            fluid(maxWidth: 800) {
+            fluid(maxHeight: 800) {
               ...GatsbyImageSharpFluid_withWebp_tracedSVG
             }
           }
