@@ -32,9 +32,12 @@ const Categories = () => {
     <div>
       {categoriesFound.map(category => (
         <p>
-          <Link to={`/blog/category/${_.kebabCase(category)}`}>{category}</Link>
+          <Link to={`/blog/category/${_.kebabCase(category)}`}>
+            {category.charAt(0).toUpperCase() + category.slice(1)}
+          </Link>
         </p>
       ))}
+      <Link to={`/blog/category/uncategorized`}>Uncategorized</Link>
     </div>
   )
 }

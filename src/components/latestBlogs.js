@@ -98,6 +98,13 @@ const StyledCard = styled.div`
 const LatestBlogs = () => {
   const data = useStaticQuery(graphql`
     query {
+      placeholder: file(name: { eq: "placeholder" }) {
+        childImageSharp {
+          fluid(maxWidth: 1200) {
+            ...GatsbyImageSharpFluid_withWebp_tracedSVG
+          }
+        }
+      }
       allMarkdownRemark(
         sort: { fields: [frontmatter___date], order: DESC }
         limit: 3
@@ -126,6 +133,7 @@ const LatestBlogs = () => {
     }
   `)
 
+  const placeholderImageFluid = data.placeholder.childImageSharp.fluid
   const posts = data.allMarkdownRemark.edges
 
   return (
@@ -135,16 +143,16 @@ const LatestBlogs = () => {
       <StyledGrid>
         {posts &&
           posts.map(post => {
-            const {
-              title,
-              description,
-              categories,
-              date,
-            } = post.node.frontmatter
+            let { title, description, categories, date } = post.node.frontmatter
             const slug = post.node.fields.slug
             const featuredImgFluid = post.node.frontmatter.featuredImage
               ? post.node.frontmatter.featuredImage.childImageSharp.fluid
-              : null
+              : placeholderImageFluid
+
+            if (categories === null || categories.length === 0) {
+              categories = ["uncategorized"]
+            }
+
             return (
               <StyledCard>
                 <Image fluid={featuredImgFluid} />

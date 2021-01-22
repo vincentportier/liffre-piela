@@ -4,6 +4,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const categoryPageTemplate = require.resolve(
     `./src/templates/category-page.js`
   )
+  const uncategorizedPageTemplate = require.resolve(
+    `./src/templates/uncategorized.js`
+  )
   const _ = require("lodash")
   const result = await graphql(`
     {
@@ -68,6 +71,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         category: cat,
       },
     })
+  })
+
+  createPage({
+    path: `blog/category/uncategorized`,
+    component: uncategorizedPageTemplate,
+    context: {},
   })
 }
 
