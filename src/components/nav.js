@@ -4,7 +4,7 @@ import { css } from "styled-components"
 import { Link } from "gatsby"
 import { navLinks } from "../config"
 import useScrollDirection from "../hooks/useScrollDirection"
-import Icon from "../components/icons/icon"
+import IconLogo from "../components/icons/logo"
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexCenter};
@@ -44,13 +44,23 @@ const StyledHeader = styled.header`
 const StyledNav = styled.nav`
   ${({ theme }) => theme.mixins.flexBetween};
   width: 100%;
+  height: 100%;
+  overflow: hidden;
   max-width: 1380px;
   .left-nav {
     ${({ theme }) => theme.mixins.flexBetween};
+
     .logo {
-      margin-right: 50px;
-      height: 100px;
-      width: 100px;
+      svg {
+        height: 200px;
+        max-height: ${props =>
+          props.scrolledToTop
+            ? css`calc(var(--nav-height) - 10px)`
+            : css`calc(var(--nav-height-scroll) - 10px)`};
+        margin-right: 50px;
+        cursor: pointer;
+        transition: var(--transition);
+      }
     }
     li {
       margin-right: 20px;
@@ -68,6 +78,10 @@ const StyledLinks = styled.div`
   ul {
     ${({ theme }) => theme.mixins.flexBetween};
     list-style: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fz-md);
+    font-weight: lighter;
+    z-index: 15;
   }
 `
 
@@ -89,10 +103,12 @@ const Nav = () => {
       scrollDirection={scrollDirection}
       scrolledToTop={scrolledToTop}
     >
-      <StyledNav>
+      <StyledNav scrolledToTop={scrolledToTop}>
         <div className="left-nav">
           <div className="logo">
-            <Icon name="Logo" className="logo" />
+            <Link to="/">
+              <IconLogo />
+            </Link>
           </div>
           <StyledLinks>
             <ul>
