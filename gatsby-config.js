@@ -35,6 +35,7 @@ module.exports = {
         path: `${__dirname}/content/blog`,
       },
     },
+
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
   ],

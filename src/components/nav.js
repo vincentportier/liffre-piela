@@ -4,6 +4,7 @@ import { css } from "styled-components"
 import { Link } from "gatsby"
 import { navLinks } from "../config"
 import useScrollDirection from "../hooks/useScrollDirection"
+import Icon from "../components/icons/icon"
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexCenter};
@@ -48,6 +49,8 @@ const StyledNav = styled.nav`
     ${({ theme }) => theme.mixins.flexBetween};
     .logo {
       margin-right: 50px;
+      height: 100px;
+      width: 100px;
     }
     li {
       margin-right: 20px;
@@ -89,9 +92,7 @@ const Nav = () => {
       <StyledNav>
         <div className="left-nav">
           <div className="logo">
-            <Link to="/">
-              <h1>Liffre Piela</h1>
-            </Link>
+            <Icon name="Logo" className="logo" />
           </div>
           <StyledLinks>
             <ul>
