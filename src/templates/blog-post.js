@@ -33,12 +33,16 @@ const StyledFeaturedImage = styled.div`
 const StyledBlogNav = styled.nav`
   ${({ theme }) => theme.mixins.flexCenter}
   ul {
-    color: var(--text-secondary);
+    color: var(--primary);
     margin-top: 50px;
     padding: 0 20px;
     width: 100%;
     ${({ theme }) => theme.mixins.flexBetween}
     list-style: none;
+    small {
+      display: block;
+      color: var(--text-secondary);
+    }
   }
 `
 
@@ -85,16 +89,21 @@ const BlogPostTemplate = ({ data, pageContext }) => {
           <li>
             {previous && (
               <Link to={`/blog${previous.fields.slug}`} rel="prev">
-                <span>← </span>
-                {previous.frontmatter.title}
+                <div>
+                  <small>précédent</small>
+                  <span>← {previous.frontmatter.title}</span>
+                </div>
               </Link>
             )}
           </li>
           <li>
             {next && (
               <Link to={`/blog${next.fields.slug}`} rel="next">
-                {next.frontmatter.title}
-                <span> →</span>
+                <div>
+                  <small style={{ textAlign: "right" }}>suivant</small>
+
+                  <span>{next.frontmatter.title} →</span>
+                </div>
               </Link>
             )}
           </li>

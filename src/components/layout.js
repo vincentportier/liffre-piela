@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components"
 import GlobalStyle from "../styles/GlobalStyle"
 import theme from "../styles/theme"
 import styled from "styled-components"
+import Footer from "../components/footer"
 
 const StyledContent = styled.main``
 
@@ -14,6 +15,7 @@ const Layout = ({ children }) => {
         <GlobalStyle />
         <Nav />
         <StyledContent>{children}</StyledContent>
+        <Footer />
       </ThemeProvider>
     </div>
   )

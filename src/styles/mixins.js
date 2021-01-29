@@ -14,8 +14,8 @@ const mixins = {
   button: css`
     border-radius: var(--border-radius);
     background-color: var(--primary);
+    color: var(--white);
     cursor: pointer;
-
     outline: none;
     border: none;
     font-size: var(--fz-s);
@@ -28,6 +28,11 @@ const mixins = {
     }
     &:after {
       display: none !important;
+    }
+    a {
+      &:hover {
+        color: inherit;
+      }
     }
   `,
   boxShadow: css`

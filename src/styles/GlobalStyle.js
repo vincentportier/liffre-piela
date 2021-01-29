@@ -69,11 +69,6 @@ a {
     color: inherit;
     position: relative;
     cursor:pointer;
-    &:hover,
-    &:focus {
-      color: var(--primary);
-
-	}
 }
 
 `

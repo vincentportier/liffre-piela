@@ -7,13 +7,14 @@ import _ from "lodash"
 const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
-
-  .section-title {
-    font-size: 35px;
-  }
-  .section-subtitle {
-    font-size: 25px;
-    color: var(--text-secondary);
+  .section-header {
+    h1 {
+      font-size: var(--fz-xxl);
+    }
+    h2 {
+      font-size: var(--fz-xl);
+      color: var(--text-secondary);
+    }
   }
 `
 
@@ -117,6 +118,14 @@ const StyledCard = styled.div`
   }
 `
 
+const StyledBlogButton = styled.div`
+  ${({ theme }) => theme.mixins.flexCenter}
+  margin-top:50px;
+  a {
+    ${({ theme }) => theme.mixins.button}
+  }
+`
+
 const LatestBlogs = () => {
   const data = useStaticQuery(graphql`
     query {
@@ -160,10 +169,10 @@ const LatestBlogs = () => {
 
   return (
     <StyledSection>
-      <h2 className="section-title">Nos derniers articles</h2>
-      <h1 className="section-subtitle">
-        Retrouvez l'actualité de Liffré Piela
-      </h1>
+      <header className="section-header">
+        <h1>Nos derniers articles</h1>
+        <h2>Retrouvez l'actualité de Liffré Piela</h2>
+      </header>
       <StyledGrid>
         {posts &&
           posts.map(post => {
@@ -218,6 +227,11 @@ const LatestBlogs = () => {
             )
           })}
       </StyledGrid>
+      <div>
+        <StyledBlogButton>
+          <Link to="/blog">Tous les articles</Link>
+        </StyledBlogButton>
+      </div>
     </StyledSection>
   )
 }

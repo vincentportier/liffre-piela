@@ -19,7 +19,7 @@ const theme = {
     --text-primary: #43414e;
     --text-secondary: rgba(0, 0, 0, 0.54);
     --text-disabled: rgba(0, 0, 0, 0.38);
-    --primary: #1976d2;
+    --primary: #d56d31;
     --secondary: #dc004e;
     --error: #f44336;
     --warning: #ff9800;
