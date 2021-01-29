@@ -8,6 +8,7 @@ import IconLogo from "../components/icons/logo"
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexCenter};
+
   position: fixed;
   top: 0;
   z-index: 10;
@@ -19,7 +20,7 @@ const StyledHeader = styled.header`
   pointer-events: auto !important;
   user-select: auto !important;
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
   transition: var(--transition);
   ${props =>
     props.scrollDirection === "up" &&
@@ -38,6 +39,7 @@ const StyledHeader = styled.header`
       border: none;
       height: var(--nav-height-scroll);
       transform: translateY(calc(var(--nav-height-scroll) * -1));
+      box-shadow: none;
     `};
 `
 
@@ -48,8 +50,9 @@ const StyledNav = styled.nav`
   overflow: hidden;
   max-width: 1380px;
   .left-nav {
-    ${({ theme }) => theme.mixins.flexBetween};
-
+    display: flex;
+    align-items: center;
+    width: 100%;
     .logo {
       svg {
         height: 200px;
@@ -78,10 +81,9 @@ const StyledLinks = styled.div`
   ul {
     ${({ theme }) => theme.mixins.flexBetween};
     list-style: none;
-    font-family: "Montserrat", sans-serif;
-    font-size: var(--fz-md);
-    font-weight: lighter;
-    z-index: 15;
+    font-family: "Roboto", sans-serif;
+    font-size: var(--fz-lg);
+    font-weight: 600;
   }
 `
 
@@ -123,7 +125,9 @@ const Nav = () => {
             </ul>
           </StyledLinks>
         </div>
-        <button className="button">Make a donation</button>
+        <Link to="/blog">
+          <button className="button">Blog</button>
+        </Link>
       </StyledNav>
     </StyledHeader>
   )

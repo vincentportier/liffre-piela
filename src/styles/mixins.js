@@ -15,16 +15,16 @@ const mixins = {
     border-radius: var(--border-radius);
     background-color: var(--primary);
     cursor: pointer;
-    padding: 5px 10px;
+
     outline: none;
     border: none;
     font-size: var(--fz-s);
     line-height: 1;
     text-decoration: none;
     transition: var(--transition);
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1.5rem;
     &:hover {
-      box-shadow: 0 10px 30px -15px var(--black);
+      opacity: 0.75;
     }
     &:after {
       display: none !important;

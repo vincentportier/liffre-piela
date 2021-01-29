@@ -19,78 +19,100 @@ const StyledSection = styled.section`
 
 const StyledGrid = styled.div`
   display: grid;
-  width: 100%;
-  grid-template-columns: 1fr;
+  margin: 20px 0;
+  grid-template-columns: repeat(3, minmax(250px, 1fr));
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+
+  @media (max-width: 1080px) {
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, minmax(250px, 1fr));
+  }
 `
 
 const StyledCard = styled.div`
   ${({ theme }) => theme.mixins.boxShadow}
-  margin-top: 25px;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: 40% 1fr;
-  height: 300px;
+  position: relative;
 
-  @media (max-width: 768px) {
-    height: auto;
-    grid-template-columns: 1fr;
-  }
-
-  .gatsby-image-wrapper {
-    height: 300px;
-    @media (max-width: 768px) {
-      height: 200px;
+  .card-image-container {
+    width: 100%;
+    height: 168px;
+    overflow: hidden;
+    object-fit: contain;
+    img {
+      display: inline-block;
     }
   }
 
   .card-content {
-    display: flex;
-    flex-direction: column;
-    padding: 15px 25px;
-    width: 100%;
-  }
+    padding: 5px 10px;
 
-  h2 {
-    font-size: 30px;
-    margin-top: 10px;
-  }
+    h2 {
+      a {
+        &:hover {
+          color: var(--text-primary);
+          cursor: pointer;
+        }
+      }
+    }
+    p {
+      margin: 15px 0 50px;
+      font-size: var(--fz-md);
+    }
 
-  p {
-    margin: 15px 0 15px 0;
-    font-size: var(--fz-md);
-  }
-
-  small {
-    a {
+    small {
       color: var(--text-secondary);
       transition: var(--transition);
-      &:hover {
-        text-decoration: underline;
+      a {
+        &:hover {
+          text-decoration: underline;
+          color: var(--text-secondary);
+        }
+      }
+    }
+
+    ul {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      list-style-type: none;
+      flex-wrap: wrap;
+      margin-top: 3px;
+
+      li {
+        background: var(--primary);
+        color: var(--white);
+        border-radius: var(--border-radius);
+        padding: 2px 6px;
+        margin: 5px 5px 0 0;
+        font-size: var(--fz-xxs);
+        &:hover {
+          opacity: 0.75;
+        }
+
+        a {
+          &:hover {
+            color: var(--white);
+          }
+        }
       }
     }
   }
 
-  ul {
-    margin-top: 5px;
-    list-style: none;
+  footer {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
 
-    li {
-      background: var(--primary);
-      color: var(--white);
-      border-radius: var(--border-radius);
-      padding: 2px 8px;
-      font-size: var(--fz-xxs);
-      margin-right: 10px;
-    }
-  }
-
-  .full-article-button {
-    margin: auto 0 0 auto;
-    text-align: right;
-    color: var(--text-secondary);
-    font-size: var(--fz-lg);
-    &:hover {
-      text-decoration: underline;
+    a {
+      color: var(--text-secondary);
+      font-size: var(--fz-lg);
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 `
@@ -107,7 +129,7 @@ const LatestBlogs = () => {
       }
       allMarkdownRemark(
         sort: { fields: [frontmatter___date], order: DESC }
-        limit: 3
+        limit: 6
       ) {
         edges {
           node {
@@ -138,8 +160,10 @@ const LatestBlogs = () => {
 
   return (
     <StyledSection>
-      <h2 className="section-title">Derniers articles</h2>
-      <p className="section-subtitle">Retrouvez l'actualité de l'association</p>
+      <h2 className="section-title">Nos derniers articles</h2>
+      <h1 className="section-subtitle">
+        Retrouvez l'actualité de Liffré Piela
+      </h1>
       <StyledGrid>
         {posts &&
           posts.map(post => {
@@ -154,8 +178,10 @@ const LatestBlogs = () => {
             }
 
             return (
-              <StyledCard>
-                <Image fluid={featuredImgFluid} />
+              <StyledCard key={slug}>
+                <div className="card-image-container">
+                  <Image fluid={featuredImgFluid} />
+                </div>
                 <div className="card-content">
                   <header>
                     <small>
@@ -164,25 +190,30 @@ const LatestBlogs = () => {
                     <h2>
                       <Link to={`/blog${slug}`}>{title}</Link>
                     </h2>
-                    <small>Liffre-Piela, {date}</small>
+                    <small>Liffré-Piela, {date}</small>
+                    <ul>
+                      {categories &&
+                        categories.map(cat => (
+                          <li>
+                            <Link to={`/blog/category/${_.kebabCase(cat)}`}>
+                              {cat}
+                            </Link>
+                          </li>
+                        ))}
+                    </ul>
                   </header>
-                  <ul>
-                    {categories &&
-                      categories.map(cat => (
-                        <Link to={`/blog/category/${_.kebabCase(cat)}`}>
-                          <li>{cat}</li>
-                        </Link>
-                      ))}
-                  </ul>
+
                   <p>
                     {description && description.length > 200
                       ? description.substring(0, 160) + "..."
                       : description}
                   </p>
-                  <Link to={`/blog${slug}`} className="full-article-button">
+                </div>
+                <footer>
+                  <Link to={`/blog${slug}`}>
                     <span>{`>>`} Lire l'article complet</span>
                   </Link>
-                </div>
+                </footer>
               </StyledCard>
             )
           })}

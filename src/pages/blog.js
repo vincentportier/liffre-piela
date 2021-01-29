@@ -22,7 +22,7 @@ const Blog = ({ data }) => {
       <SEO title="All posts" />
       <h1>Liffre Piela blog</h1>
       <Categories />
-      <ol>
+      <ul>
         {posts &&
           posts.map(post => {
             const title = post.node.frontmatter.title || post.node.fields.slug
@@ -50,7 +50,7 @@ const Blog = ({ data }) => {
               </li>
             )
           })}
-      </ol>
+      </ul>
     </Layout>
   )
 }
