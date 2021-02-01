@@ -31,6 +31,8 @@ categories:
 
 This is some regular text within the blog... This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...
 
+![this is the alt](vin06799-hdr.jpg "this is the title")
+
 *This is some italic text !!! This is some regular text within the blog... This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...*
 
 [This is a link](https://vportier.com)
@@ -69,11 +71,7 @@ this is an unordered list
 * item 2
 * item 3
 
-
-
 > "Your time is limited, so don't waste it living someone else's life. Don't be trapped by dogma – which is living with the results of other people's thinking." -Steve Jobs
-
-
 
 ```
 This is a code block
