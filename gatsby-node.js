@@ -56,8 +56,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         // additional data can be passed via context
         id: node.id,
         index,
-        nextPostId: null,
-        previousPostId: null,
+        nextPostId,
+        previousPostId,
       },
     })
   })
