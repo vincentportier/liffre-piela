@@ -91,17 +91,16 @@ const StyledBlogNav = styled.nav`
 `
 
 const BlogPostTemplate = ({ data, pageContext }) => {
-  console.log(pageContext.categories)
-  const post = data.markdownRemark
-  const { next, previous } = data
+  // const post = data.markdownRemark
+  // const { next, previous } = data
 
-  let featuredImgFluid = post.frontmatter.featuredImage
-    ? post.frontmatter.featuredImage.childImageSharp.fluid
-    : null
+  // let featuredImgFluid = post.frontmatter.featuredImage
+  //   ? post.frontmatter.featuredImage.childImageSharp.fluid
+  //   : null
 
   return (
     <Layout>
-      <SEO
+      {/* <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description}
         article={true}
@@ -160,46 +159,47 @@ const BlogPostTemplate = ({ data, pageContext }) => {
             )}
           </li>
         </ul>
-      </StyledBlogNav>
+      </StyledBlogNav> */}
     </Layout>
   )
 }
 
-export const pageQuery = graphql`
-  query($id: String!, $previousPostId: String, $nextPostId: String) {
-    markdownRemark(id: { eq: $id }) {
-      id
-      html
-      frontmatter {
-        featuredImage {
-          childImageSharp {
-            fluid(maxWidth: 1600) {
-              ...GatsbyImageSharpFluid_withWebp_tracedSVG
-            }
-          }
-        }
-        title
-        description
-        date(formatString: "MMMM DD, YYYY")
-        categories
-      }
-    }
-    previous: markdownRemark(id: { eq: $previousPostId }) {
-      frontmatter {
-        title
-      }
-      fields {
-        slug
-      }
-    }
-    next: markdownRemark(id: { eq: $nextPostId }) {
-      frontmatter {
-        title
-      }
-      fields {
-        slug
-      }
-    }
-  }
-`
 export default BlogPostTemplate
+
+// export const pageQuery = graphql`
+//   query($id: String!, $previousPostId: String, $nextPostId: String) {
+//     markdownRemark(id: { eq: $id }) {
+//       id
+//       html
+//       frontmatter {
+//         featuredImage {
+//           childImageSharp {
+//             fluid(maxWidth: 1600) {
+//               ...GatsbyImageSharpFluid_withWebp_tracedSVG
+//             }
+//           }
+//         }
+//         title
+//         description
+//         date(formatString: "MMMM DD, YYYY")
+//         categories
+//       }
+//     }
+//     previous: markdownRemark(id: { eq: $previousPostId }) {
+//       frontmatter {
+//         title
+//       }
+//       fields {
+//         slug
+//       }
+//     }
+//     next: markdownRemark(id: { eq: $nextPostId }) {
+//       frontmatter {
+//         title
+//       }
+//       fields {
+//         slug
+//       }
+//     }
+//   }
+// `
