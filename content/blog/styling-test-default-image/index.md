@@ -5,6 +5,8 @@ featuredImage: "vin06799-hdr.jpg"
 description: This is a styling test
 categories:
   - Fiesta
+  - What happens with a giant category
+  - test
 ---
 
 # Heading 1

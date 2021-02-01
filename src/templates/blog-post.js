@@ -91,6 +91,7 @@ const StyledBlogNav = styled.nav`
 `
 
 const BlogPostTemplate = ({ data, pageContext }) => {
+  console.log(pageContext.categories)
   const post = data.markdownRemark
   const { next, previous } = data
 

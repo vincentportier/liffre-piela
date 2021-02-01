@@ -1,6 +1,8 @@
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
+
   const blogPostTemplate = require.resolve(`./src/templates/blog-post.js`)
+
   const categoryPageTemplate = require.resolve(
     `./src/templates/category-page.js`
   )
@@ -8,9 +10,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     `./src/templates/uncategorized.js`
   )
   const _ = require("lodash")
+
   const result = await graphql(`
     {
-      allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      posts: allMarkdownRemark(
+        sort: { fields: [frontmatter___date], order: DESC }
+      ) {
         edges {
           node {
             id
@@ -23,6 +28,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         }
       }
+      categoriesGroup: allMarkdownRemark {
+        group(field: frontmatter___categories) {
+          fieldValue
+        }
+      }
     }
   `)
   // Handle errors
@@ -31,7 +41,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return
   }
 
-  const posts = result.data.allMarkdownRemark.edges
+  const posts = result.data.posts.edges
+  const categories = result.data.categoriesGroup.group
 
   if (posts.length > 0) {
     posts.forEach(({ node }, index) => {
@@ -48,6 +59,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           index,
           nextPostId,
           previousPostId,
+          categories,
         },
       })
     })

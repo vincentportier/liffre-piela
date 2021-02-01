@@ -4,7 +4,6 @@ import Layout from "../components/layout"
 
 const uncategorizedPageTemplate = ({ data }) => {
   let posts = data.allMarkdownRemark.edges
-  console.log(posts)
   posts = posts.filter(post => {
     if (post.node.frontmatter.categories === null) return true
     if (post.node.frontmatter.categories.length === 0) return true

@@ -14,7 +14,7 @@ const StyledHeader = styled.header`
   z-index: 10;
   padding: 0px 50px;
   width: 100%;
-  height: 120px;
+  height: var(--nav-height);
   background: var(--white);
   filter: none !important;
   pointer-events: auto !important;
