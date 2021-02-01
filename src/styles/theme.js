@@ -13,6 +13,16 @@ const theme = {
     --fz-xxl: 22px;
     --fz-heading: 32px;
   `,
+  fontFamilies: css`
+    --fontFamily-sans: Montserrat, system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
+    --fontFamily-serif: "Merriweather", "Georgia", Cambria, "Times New Roman",
+      Times, serif;
+    --font-body: var(--fontFamily-serif);
+    --font-heading: var(--fontFamily-sans);
+  `,
   palette: css`
     --white: #ffffff;
     --black: #43414e;

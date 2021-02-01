@@ -196,9 +196,9 @@ const LatestBlogs = () => {
                     <small>
                       <Link to="/blog">BLOG</Link>
                     </small>
-                    <h2>
+                    <h1>
                       <Link to={`/blog${slug}`}>{title}</Link>
-                    </h2>
+                    </h1>
                     <small>Liffré-Piela, {date}</small>
                     <ul>
                       {categories &&

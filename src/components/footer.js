@@ -14,7 +14,7 @@ const StyledFooter = styled.footer`
   line-height: 1;
 
   a {
-    padding: 10px;
+    text-decoration: underline;
   }
 `
 
@@ -22,8 +22,9 @@ const Footer = () => {
   return (
     <StyledFooter>
       <div>
+        <span>Conception </span>
         <a href="https://vportier.com" target="_blank" rel="noreferrer">
-          <div>Conception Vincent Portier</div>
+          <span>Vincent Portier</span>
         </a>
       </div>
     </StyledFooter>

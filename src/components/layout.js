@@ -15,6 +15,7 @@ const Layout = ({ children }) => {
         <GlobalStyle />
         <Nav />
         <StyledContent>{children}</StyledContent>
+
         <Footer />
       </ThemeProvider>
     </div>
