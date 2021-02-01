@@ -8,6 +8,9 @@ const StyledSection = styled.section`
   flex-direction: column;
   header {
     text-align: center;
+    h1 {
+      font-size: var(--fz-xxl);
+    }
   }
 
   ul {
@@ -17,17 +20,14 @@ const StyledSection = styled.section`
     flex-wrap: wrap;
 
     li {
-      margin: 20px;
+      margin: 1rem;
       div {
         position: relative;
-        font-family: "Roboto", sans-serif;
         color: var(--white);
-        background-color: var(--text-secondary);
-        font-weight: 500;
+        background-color: rgba(1, 1, 1, 0.75);
         border-radius: var(--border-radius);
-        padding: 5px 15px;
-        span {
-        }
+        padding: 3px 15px;
+
         .badge {
           ${({ theme }) => theme.mixins.flexCenter}
           position: absolute;
@@ -98,7 +98,8 @@ const Categories = () => {
   return (
     <StyledSection>
       <header>
-        <h1>Categories</h1>
+        <h1>Catégories</h1>
+        <p>retrouvez tous nos articles par catégories</p>
       </header>
       <ul>
         {categoriesFound.length &&

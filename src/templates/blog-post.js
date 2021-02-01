@@ -4,43 +4,88 @@ import SEO from "../components/SEO"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 import styled from "styled-components"
+import IconLogo from "../components/icons/logo"
 
-const StyledHeader = styled.header``
-const StyledFeaturedImage = styled.div`
-  position: relative;
-  max-width: 500px;
-  margin: 50px auto 50px auto;
-  @media (max-width: 768px) {
-    margin: 50px auto 50px;
-    width: 70%;
+const StyledArticle = styled.article`
+  a {
+    text-decoration: underline;
+    transition: var(--transition);
+  }
+  a:hover {
+    color: var(--primary);
+  }
+`
+const StyledHeader = styled.header`
+  a {
+    text-decoration: underline;
+    color: var(--text-secondary);
   }
 
-  .wrapper {
-    ${({ theme }) => theme.mixins.boxShadow};
-    display: block;
-    position: relative;
+  h1 {
+    margin-bottom: 0;
+  }
+  p {
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+  .image-container {
+    margin-bottom: 2rem;
+  }
+`
 
-    width: 100%;
-    border-radius: var(--border-radius);
+const StyledFooter = styled.footer`
+  ${({ theme }) => theme.mixins.flexCenter}
+  margin-top:2rem;
+  border-top: 1px solid rgba(1, 1, 1, 0.2);
+  padding: 1rem;
 
-    .img {
-      position: relative;
-      border-radius: var(--border-radius);
+  div {
+    ${({ theme }) => theme.mixins.flexCenter}
+
+    @media (max-width:480px) {
+      flex-wrap: wrap;
+    }
+
+    p {
+      margin: 0;
+      font-style: italic;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: var(--fz-md);
+    }
+  }
+
+  svg {
+    width: 200px;
+    min-width: 75px;
+    margin: 2rem;
+
+    @media (max-width: 480px) {
+      width: 100px;
     }
   }
 `
+
 const StyledBlogNav = styled.nav`
   ${({ theme }) => theme.mixins.flexCenter}
+  margin-top:2rem;
   ul {
-    color: var(--primary);
-    margin-top: 50px;
-    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
     width: 100%;
-    ${({ theme }) => theme.mixins.flexBetween}
     list-style: none;
-    small {
-      display: block;
-      color: var(--text-secondary);
+    .next {
+      text-align: right;
+    }
+    li {
+      font-size: var(--fz-sm);
+      width: 40%;
+      p {
+        font-style: italic;
+        color: var(--text-secondary);
+        margin-bottom: 0;
+      }
     }
   }
 `
@@ -60,50 +105,57 @@ const BlogPostTemplate = ({ data, pageContext }) => {
         description={post.frontmatter.description}
         article={true}
       />
-      <article>
+      <StyledArticle>
         <StyledHeader>
-          <Link to="/blog">
-            <small>BLOG</small>
-          </Link>
-
-          {featuredImgFluid && (
-            <StyledFeaturedImage>
-              <div className="wrapper">
-                <Img
-                  fluid={featuredImgFluid}
-                  alt="featured-image"
-                  className="img"
-                ></Img>
-              </div>
-            </StyledFeaturedImage>
-          )}
+          <Link to="/blog">BLOG</Link>
           <h1>{post.frontmatter.title}</h1>
           <p>Liffre Piela, {post.frontmatter.date}</p>
+
+          {featuredImgFluid && (
+            <div className="image-container">
+              <Img
+                fluid={featuredImgFluid}
+                alt="featured-image"
+                className="img"
+              ></Img>{" "}
+            </div>
+          )}
         </StyledHeader>
         <section dangerouslySetInnerHTML={{ __html: post.html }}></section>
-      </article>
-      <footer></footer>
+      </StyledArticle>
+
+      <StyledFooter>
+        <div>
+          <IconLogo />
+          <p>
+            L’association Liffré Piéla vient en aide à la région defavorisée de
+            Piéla située au Nord du Burkina Faso. Elle intervient nottamment
+            dans les domaines de la lutte contre la faim, l'accès à l’eau
+            potable, à l’éducation et à l’instruction.
+          </p>
+        </div>
+      </StyledFooter>
+
       <StyledBlogNav>
         <ul>
-          <li>
+          <li className="previous">
             {previous && (
-              <Link to={`/blog${previous.fields.slug}`} rel="prev">
-                <div>
-                  <small>précédent</small>
-                  <span>← {previous.frontmatter.title}</span>
-                </div>
-              </Link>
+              <div>
+                <p>← Article précédent</p>
+                <Link to={`/blog${previous.fields.slug}`} rel="prev">
+                  {previous.frontmatter.title}
+                </Link>
+              </div>
             )}
           </li>
-          <li>
+          <li className="next">
             {next && (
-              <Link to={`/blog${next.fields.slug}`} rel="next">
-                <div>
-                  <small style={{ textAlign: "right" }}>suivant</small>
-
-                  <span>{next.frontmatter.title} →</span>
-                </div>
-              </Link>
+              <div>
+                <p>Article suivant →</p>
+                <Link to={`/blog${next.fields.slug}`} rel="next">
+                  {next.frontmatter.title}
+                </Link>
+              </div>
             )}
           </li>
         </ul>
@@ -120,7 +172,7 @@ export const pageQuery = graphql`
       frontmatter {
         featuredImage {
           childImageSharp {
-            fluid(maxHeight: 800) {
+            fluid(maxWidth: 1600) {
               ...GatsbyImageSharpFluid_withWebp_tracedSVG
             }
           }

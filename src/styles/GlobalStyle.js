@@ -51,7 +51,7 @@ body {
 main {
     margin: 0 auto;
     width: 100%;
-    max-width: 1600px;
+    max-width: 1200px;
     min-height: 100vh;
     padding: 200px 150px;
 
@@ -85,6 +85,8 @@ h6 {
   font-family: var(--font-header);
   line-height: 1.1;
   letter-spacing: -0.025em;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
 }
 h1 {
   font-weight:900
@@ -99,22 +101,22 @@ font-weight:bold;
 
 
 h1 {
-  font-size:var(--fz-xxl)
+  font-size:2.488rem;
 }
 h2 {
-  font-size:var(--fz-xl)
+  font-size:2.074rem;
 }
 h3 {
-  font-size:var(--fz-lg)
+  font-size:1.728rem;
 }
 h4 {
-  font-size:var(--fz-md)
+  font-size:1.44rem;
 }
 h5 {
-  font-size:var(--fz-sm)
+  font-size:1.2rem;
 }
 h6 {
-  font-size:var(--fz-xs)
+  font-size:1rem;
 }
 
 a {
@@ -124,20 +126,20 @@ a {
     position: relative;
     cursor:pointer;
     text-decoration:none;
+    
 }
 
 //Prose
 
 p {
   line-height: 1.6;
-  margin: 0 0 0 0;
+  margin: 0 0 2rem 0;
   padding: 0;
 }
 
 ul,
 ol {
-  margin-left: 0;
-  margin-right: 0;
+  margin: 0 0 2rem 0;
   padding: 0;
   list-style-position: outside;
   list-style-image: none;
@@ -177,7 +179,6 @@ blockquote {
 
 blockquote > :last-child {
   margin-bottom: 0px;
-
 }
 
 

@@ -66,7 +66,7 @@ const StyledNav = styled.nav`
       }
     }
     li {
-      margin-right: 20px;
+      margin: 0 20px;
     }
   }
 
@@ -80,7 +80,7 @@ const StyledNav = styled.nav`
 const StyledLinks = styled.div`
   ul {
     ${({ theme }) => theme.mixins.flexBetween};
-
+    margin: 0;
     list-style: none;
     font-size: var(--fz-lg);
     font-weight: 600;

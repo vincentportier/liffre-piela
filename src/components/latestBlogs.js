@@ -10,20 +10,22 @@ const StyledSection = styled.section`
   .section-header {
     h1 {
       font-size: var(--fz-xxl);
+      margin-bottom: 0;
     }
     h2 {
-      font-size: var(--fz-xl);
+      margin-top: 1rem;
       color: var(--text-secondary);
+      font-size: var(--fz-lg);
     }
   }
 `
 
 const StyledGrid = styled.div`
   display: grid;
-  margin: 20px 0;
+  margin: 2rem 0;
   grid-template-columns: repeat(3, minmax(250px, 1fr));
-  grid-column-gap: 30px;
-  grid-row-gap: 30px;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1rem;
 
   @media (max-width: 1080px) {
     grid-template-columns: repeat(2, minmax(250px, 1fr));
@@ -42,25 +44,23 @@ const StyledCard = styled.div`
     width: 100%;
     height: 168px;
     overflow: hidden;
-    object-fit: contain;
-    img {
-      display: inline-block;
-    }
   }
 
   .card-content {
     padding: 5px 10px;
 
-    h2 {
+    h1 {
+      margin: 0;
+      font-size: var(--fz-xxl);
       a {
+        transition: var(--transition);
         &:hover {
-          color: var(--text-primary);
-          cursor: pointer;
+          opacity: 0.85;
         }
       }
     }
     p {
-      margin: 15px 0 50px;
+      margin-bottom: 50px;
       font-size: var(--fz-md);
     }
 
@@ -82,6 +82,7 @@ const StyledCard = styled.div`
       list-style-type: none;
       flex-wrap: wrap;
       margin-top: 3px;
+      margin-bottom: 1rem;
 
       li {
         background: var(--primary);
@@ -171,7 +172,7 @@ const LatestBlogs = () => {
     <StyledSection>
       <header className="section-header">
         <h1>Nos derniers articles</h1>
-        <h2>Retrouvez l'actualité de Liffré Piela</h2>
+        <h2>Retrouvez l'actualité de Liffré Piéla</h2>
       </header>
       <StyledGrid>
         {posts &&
