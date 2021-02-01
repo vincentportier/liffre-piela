@@ -8,7 +8,6 @@ import styled from "styled-components"
 const StyledHeader = styled.header``
 const StyledFeaturedImage = styled.div`
   position: relative;
-
   max-width: 500px;
   margin: 50px auto 50px auto;
   @media (max-width: 768px) {

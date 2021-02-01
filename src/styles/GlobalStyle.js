@@ -33,7 +33,7 @@ html {
     ${({ theme }) => theme.fontSizes}
     ${({ theme }) => theme.fontFamilies}
     --nav-height:100px;
-	--nav-height-scroll:70px;
+	  --nav-height-scroll:70px;
     --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
     --border-radius:3px;
 }
@@ -67,7 +67,7 @@ main {
 
   }
 
-  hr {
+hr {
   background: var(--text-primary);
   height: 1px;
   margin:0 auto;
@@ -82,7 +82,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-headers);
+  font-family: var(--font-header);
   line-height: 1.1;
   letter-spacing: -0.025em;
 }
@@ -95,7 +95,6 @@ h4,
 h5,
 h6 {
 font-weight:bold;
-color:var(--text-secondary)
 }
 
 
@@ -120,11 +119,11 @@ h6 {
 
 a {
     display: inline-block;
-    text-decoration: none;
     text-decoration-skip-ink: auto;
     color: inherit;
     position: relative;
     cursor:pointer;
+    text-decoration:none;
 }
 
 //Prose
@@ -147,11 +146,11 @@ ol {
 ul li,
 ol li {
   padding-left: 0;
-  margin-bottom: calc(var(2rem) / 2);
+  margin-bottom: 1rem;
 }
 
 li > p {
-  margin-bottom: calc(var(2rem) / 2);
+  margin-bottom: 1rem;
 }
 
 li *:last-child {
@@ -159,6 +158,9 @@ li *:last-child {
 }
 
 li > ul {
+  margin-left: 2rem;
+}
+li > ol {
   margin-left: 2rem;
 }
 
@@ -174,13 +176,11 @@ blockquote {
 }
 
 blockquote > :last-child {
-  margin-bottom: 0;
+  margin-bottom: 0px;
 
 }
 
-code {
-  color:orangered
-}
+
 blockquote > ul,
 blockquote > ol {
   list-style-position: inside;

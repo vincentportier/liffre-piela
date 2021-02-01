@@ -80,7 +80,7 @@ const StyledNav = styled.nav`
 const StyledLinks = styled.div`
   ul {
     ${({ theme }) => theme.mixins.flexBetween};
-    margin-bottom: 0;
+
     list-style: none;
     font-size: var(--fz-lg);
     font-weight: 600;
