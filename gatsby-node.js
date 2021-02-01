@@ -44,51 +44,22 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const posts = result.data.posts.edges
   const categories = result.data.categoriesGroup.group
 
-  if (posts.length > 0) {
-    posts.forEach(({ node }, index) => {
-      const nextPostId = index === 0 ? null : posts[index - 1].node.id
-      const previousPostId =
-        index === posts.length - 1 ? null : posts[index + 1].node.id
+  posts.forEach(({ node }, index) => {
+    // const nextPostId = index === 0 ? null : posts[index - 1].node.id
+    // const previousPostId =
+    //   index === posts.length - 1 ? null : posts[index + 1].node.id
 
-      createPage({
-        path: `blog${node.fields.slug}`,
-        component: blogPostTemplate,
-        context: {
-          // additional data can be passed via context
-          id: node.id,
-          index,
-          nextPostId,
-          previousPostId,
-          categories,
-        },
-      })
-    })
-  }
-
-  const categoriesFound = []
-  posts.forEach(post => {
-    post.node.frontmatter.categories &&
-      post.node.frontmatter.categories.forEach(cat => {
-        if (categoriesFound.indexOf(cat) === -1) {
-          categoriesFound.push(cat)
-        }
-      })
-  })
-
-  categoriesFound.forEach(cat => {
     createPage({
-      path: `blog/category/${_.kebabCase(cat)}`,
-      component: categoryPageTemplate,
+      path: `blog${node.fields.slug}`,
+      component: blogPostTemplate,
       context: {
-        category: cat,
+        // additional data can be passed via context
+        id: node.id,
+        index,
+        nextPostId: null,
+        previousPostId: null,
       },
     })
-  })
-
-  createPage({
-    path: `blog/category/uncategorized`,
-    component: uncategorizedPageTemplate,
-    context: {},
   })
 }
 
