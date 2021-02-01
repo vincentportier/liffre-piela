@@ -128,49 +128,49 @@ const StyledBlogButton = styled.div`
 `
 
 const LatestBlogs = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      placeholder: file(name: { eq: "placeholder" }) {
-        childImageSharp {
-          fluid(maxWidth: 1200) {
-            ...GatsbyImageSharpFluid_withWebp_tracedSVG
-          }
-        }
-      }
-      allMarkdownRemark(
-        sort: { fields: [frontmatter___date], order: DESC }
-        limit: 6
-      ) {
-        edges {
-          node {
-            frontmatter {
-              categories
-              date(formatString: "MMMM DD, YYYY")
-              description
-              title
-              featuredImage {
-                childImageSharp {
-                  fluid(maxWidth: 1200) {
-                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
-                  }
-                }
-              }
-            }
-            fields {
-              slug
-            }
-          }
-        }
-      }
-    }
-  `)
+  // const data = useStaticQuery(graphql`
+  //   query {
+  //     placeholder: file(name: { eq: "placeholder" }) {
+  //       childImageSharp {
+  //         fluid(maxWidth: 1200) {
+  //           ...GatsbyImageSharpFluid_withWebp_tracedSVG
+  //         }
+  //       }
+  //     }
+  //     allMarkdownRemark(
+  //       sort: { fields: [frontmatter___date], order: DESC }
+  //       limit: 6
+  //     ) {
+  //       edges {
+  //         node {
+  //           frontmatter {
+  //             categories
+  //             date(formatString: "MMMM DD, YYYY")
+  //             description
+  //             title
+  //             featuredImage {
+  //               childImageSharp {
+  //                 fluid(maxWidth: 1200) {
+  //                   ...GatsbyImageSharpFluid_withWebp_tracedSVG
+  //                 }
+  //               }
+  //             }
+  //           }
+  //           fields {
+  //             slug
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `)
 
-  const placeholderImageFluid = data.placeholder.childImageSharp.fluid
-  const posts = data.allMarkdownRemark.edges
+  // const placeholderImageFluid = data.placeholder.childImageSharp.fluid
+  // const posts = data.allMarkdownRemark.edges
 
   return (
     <StyledSection>
-      <header className="section-header">
+      {/* <header className="section-header">
         <h1>Nos derniers articles</h1>
         <h2>Retrouvez l'actualité de Liffré Piéla</h2>
       </header>
@@ -232,7 +232,7 @@ const LatestBlogs = () => {
         <StyledBlogButton>
           <Link to="/blog">Tous les articles</Link>
         </StyledBlogButton>
-      </div>
+      </div> */}
     </StyledSection>
   )
 }
