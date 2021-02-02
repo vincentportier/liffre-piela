@@ -46,10 +46,14 @@ const CategoryPageTemplate = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <h1>
-        {category} ({count})
+      <h1
+        style={{
+          fontSize: "var(--fz-xxl)",
+        }}
+      >
+        {count} article{count <= 1 ? null : "s"} dans la categorie: {category}
       </h1>
-      <h2>Articles</h2>
+
       <PostsGrid posts={posts} />
 
       {numPages <= 1 ? null : (
