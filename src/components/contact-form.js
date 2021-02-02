@@ -11,24 +11,12 @@ const StyledContactSection = styled.section`
     margin-bottom: 60px;
   }
 
-  .overline {
+  h2 {
     display: block;
     margin-bottom: 20px;
     color: var(--primary);
-    font-size: var(--fz-md);
+    font-size: var(--fz-xxl);
     font-weight: 400;
-
-    &:before {
-      bottom: 0;
-      margin-right: 10px;
-      font-size: var(--fz-sm);
-      counter-increment: section;
-      content: "0" counter(section) ".";
-    }
-
-    &:after {
-      display: none;
-    }
   }
   .title {
     font-size: clamp(var(--fz-heading), 5vw, 100px);
@@ -115,9 +103,8 @@ const ContactForm = () => {
 
   return (
     <StyledContactSection id="contact" ref={revealContainer}>
-      <h2 className="overline">Contact</h2>
-      <h2 className="title">Envoyez nous un message!</h2>
-      <p>message text placeholder</p>
+      <h1>Contact</h1>
+      <h2>Envoyez nous un message!</h2>
       <StyledForm
         onSubmit={e => handleSubmit(e)}
         name="contact"
