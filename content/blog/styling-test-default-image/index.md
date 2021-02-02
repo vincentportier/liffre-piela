@@ -39,7 +39,7 @@ categories:
 
 This is some regular text within the blog... This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...
 
-![this is the alt](compressed.jpg "this is the title")
+![this is the alt](compressed.jpg, "this is the title")
 
 [This is a link](https://vportier.com)
 

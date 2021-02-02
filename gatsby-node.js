@@ -3,12 +3,10 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const blogPostTemplate = require.resolve(`./src/templates/blog-post.js`)
 
-  const categoryPageTemplate = require.resolve(
+  const CategoryPageTemplate = require.resolve(
     `./src/templates/category-page.js`
   )
-  const uncategorizedPageTemplate = require.resolve(
-    `./src/templates/uncategorized.js`
-  )
+
   const _ = require("lodash")
 
   const result = await graphql(`
@@ -79,7 +77,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   const BlogPageTemplate = require.resolve(`./src/templates/blog.js`)
 
-  const postsPerPage = 1
+  const postsPerPage = 9
   const numPages = Math.ceil(posts.length / postsPerPage)
 
   Array.from({ length: numPages }).forEach((_, i) => {
@@ -94,6 +92,32 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         countCategories,
         allCategories,
       },
+    })
+  })
+
+  // create the categories pages
+
+  allCategories.forEach((cat, i) => {
+    const link = `/blog/category/${_.kebabCase(cat)}`
+    const numPages = Math.ceil(countCategories[cat] / postsPerPage)
+    Array.from({
+      length: numPages,
+    }).forEach((_, i) => {
+      createPage({
+        path: i === 0 ? link : `${link}/page/${i + 1}`,
+        component: CategoryPageTemplate,
+        context: {
+          allCategories: allCategories,
+          category: cat,
+          limit: postsPerPage,
+          skip: i * postsPerPage,
+          currentPage: i + 1,
+          numPages,
+          count: countCategories[cat],
+          countCategories,
+          allCategories,
+        },
+      })
     })
   })
 }

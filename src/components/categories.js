@@ -1,5 +1,5 @@
 import React from "react"
-import { graphql, useStaticQuery, Link } from "gatsby"
+import { Link } from "gatsby"
 import _ from "lodash"
 import styled from "styled-components"
 
@@ -45,56 +45,8 @@ const StyledSection = styled.section`
   }
 `
 
-const Categories = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      allMarkdownRemark {
-        edges {
-          node {
-            frontmatter {
-              categories
-            }
-          }
-        }
-      }
-    }
-  `)
-
-  // const [isHome, setIsHome] = useState(null)
-
-  // useEffect(() => {
-  //   let location = window.location.pathname
-
-  //   if (location === "/") setIsHome(true)
-  //   else setIsHome(false)
-  // }, [])
-
-  const posts = data.allMarkdownRemark.edges
-  const categoriesFound = ["uncategorized"]
-  const allCategories = []
-
-  posts.forEach(post => {
-    if (
-      !post.node.frontmatter.categories ||
-      post.node.frontmatter.categories.length === 0
-    ) {
-      allCategories.push("uncategorized")
-    }
-
-    post.node.frontmatter.categories &&
-      post.node.frontmatter.categories.forEach(cat => {
-        allCategories.unshift(cat)
-        if (categoriesFound.indexOf(cat) === -1) {
-          categoriesFound.unshift(cat)
-        }
-      })
-  })
-
-  categoriesFound.forEach((cat, idx) => {
-    let count = allCategories.filter(categ => categ === cat).length
-    categoriesFound[idx] = [cat, count]
-  })
-
+const Categories = ({ countCategories, allCategories }) => {
+  console.log(allCategories)
   return (
     <StyledSection>
       <header>
@@ -102,17 +54,20 @@ const Categories = () => {
         <p>retrouvez tous nos articles par catégories</p>
       </header>
       <ul>
-        {categoriesFound.length &&
-          categoriesFound.map(([cat, count]) => (
-            <li>
-              <Link to={`/blog/category/${_.kebabCase(cat)}`}>
-                <div>
-                  <span>{cat.charAt(0).toUpperCase() + cat.slice(1)}</span>
-                  <div className="badge">{count >= 100 ? "99+" : count}</div>
-                </div>
-              </Link>
-            </li>
-          ))}
+        {allCategories &&
+          allCategories.map(cat => {
+            let count = countCategories[cat]
+            return (
+              <li>
+                <Link to={`/blog/category/${_.kebabCase(cat)}`}>
+                  <div>
+                    <span>{cat}</span>
+                    <div className="badge">{count >= 100 ? "99+" : count}</div>
+                  </div>
+                </Link>
+              </li>
+            )
+          })}
       </ul>
     </StyledSection>
   )

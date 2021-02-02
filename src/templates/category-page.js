@@ -1,14 +1,55 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
+import styled from "styled-components"
+import Categories from "../components/categories"
+import _ from "lodash"
 
-const categoryPageTemplate = ({ data }) => {
-  console.log({ data })
+const StyledPageNavigation = styled.div`
+  ${({ theme }) => theme.mixins.flexCenter}
+
+  ul {
+    display: flex;
+    list-style-type: none;
+    flex-wrap: wrap;
+    li {
+      margin: 5px;
+    }
+  }
+  .active {
+    font-weight: 900;
+  }
+`
+
+const CategoryPageTemplate = ({ data, pageContext }) => {
   const posts = data.allMarkdownRemark.edges
+
+  const {
+    numPages,
+    currentPage,
+    category,
+    count,
+    allCategories,
+    countCategories,
+  } = pageContext
+
+  const [location, setLocation] = useState(null)
+
+  useEffect(() => {
+    let location = window.location.href
+    const lastChar = location.slice(-1)
+    lastChar === category.slice(-1)
+      ? setLocation(1)
+      : setLocation(parseInt(lastChar))
+  }, [])
 
   return (
     <Layout>
-      <ol>
+      <h1>
+        {category} ({count})
+      </h1>
+      <h2>Articles</h2>
+      <ul>
         {posts &&
           posts.map(post => {
             const title = post.node.frontmatter.title || post.node.fields.slug
@@ -36,16 +77,71 @@ const categoryPageTemplate = ({ data }) => {
               </li>
             )
           })}
-      </ol>
+      </ul>
+      {numPages <= 1 ? null : (
+        <StyledPageNavigation>
+          <ul>
+            <li>
+              <Link
+                to={
+                  currentPage === 1
+                    ? `/blog/category/${category}`
+                    : currentPage === 2
+                    ? `/blog/category/${category}`
+                    : `/blog/category/${category}/page/${currentPage - 1}`
+                }
+              >
+                🡐
+              </Link>
+            </li>
+            {Array.from({ length: numPages }).map((item, i) => {
+              const index = i + 1
+              const link =
+                index === 1
+                  ? `/blog/category/${category}`
+                  : `/blog/category/${category}/page/${index}`
+              return (
+                <li className={location === index ? "active" : null}>
+                  {currentPage === index ? (
+                    <span>{index}</span>
+                  ) : (
+                    <Link to={link}>{index}</Link>
+                  )}
+                </li>
+              )
+            })}
+            <li>
+              <Link
+                to={
+                  currentPage === numPages
+                    ? `/blog/category/${category}/page/${currentPage}`
+                    : `/blog/category/${category}/page/${currentPage + 1}`
+                }
+              >
+                🡒
+              </Link>
+            </li>
+          </ul>
+        </StyledPageNavigation>
+      )}
+      <Categories
+        countCategories={countCategories}
+        allCategories={allCategories}
+      />
     </Layout>
   )
 }
 
 export const pageQuery = graphql`
-  query($category: String!) {
+  query($category: String!, $skip: Int!, $limit: Int!) {
     allMarkdownRemark(
-      filter: { frontmatter: { categories: { in: [$category] } } }
       sort: { fields: frontmatter___date, order: DESC }
+      filter: {
+        fileAbsolutePath: { regex: "/blog/" }
+        frontmatter: { categories: { in: [$category] } }
+      }
+      limit: $limit
+      skip: $skip
     ) {
       edges {
         node {
@@ -55,13 +151,6 @@ export const pageQuery = graphql`
             date(formatString: "MMMM DD, YYYY")
             description
             title
-            featuredImage {
-              childImageSharp {
-                fluid(maxWidth: 800) {
-                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
-                }
-              }
-            }
           }
           fields {
             slug
@@ -72,4 +161,4 @@ export const pageQuery = graphql`
     }
   }
 `
-export default categoryPageTemplate
+export default CategoryPageTemplate

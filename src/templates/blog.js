@@ -45,9 +45,15 @@ const StyledPosts = styled.div`
 `
 
 const StyledPageNavigation = styled.div`
+  ${({ theme }) => theme.mixins.flexCenter}
+
   ul {
     display: flex;
     list-style-type: none;
+    flex-wrap: wrap;
+    li {
+      margin: 5px;
+    }
   }
   .active {
     font-weight: 900;
@@ -66,8 +72,6 @@ const BlogPageTemplate = ({ data, pageContext }) => {
     lastChar === "g" ? setLocation(1) : setLocation(parseInt(lastChar))
   }, [])
 
-  console.log(location)
-
   return (
     <Layout>
       <SEO title="All posts" />
@@ -76,9 +80,6 @@ const BlogPageTemplate = ({ data, pageContext }) => {
         <h1>BLOG</h1>
       </StyledHero>
 
-      <StyledCategories>
-        <Categories />
-      </StyledCategories>
       <StyledPosts>
         <h1>Les articles récent</h1>
 
@@ -130,7 +131,7 @@ const BlogPageTemplate = ({ data, pageContext }) => {
                     : `/blog/page/${currentPage - 1}`
                 }
               >
-                précédent
+                🡐
               </Link>
             </li>
             {Array.from({ length: numPages }).map((item, i) => {
@@ -154,12 +155,16 @@ const BlogPageTemplate = ({ data, pageContext }) => {
                     : `/blog/page/${currentPage + 1}`
                 }
               >
-                suivant
+                🡒
               </Link>
             </li>
           </ul>
         </StyledPageNavigation>
       )}
+      <Categories
+        countCategories={countCategories}
+        allCategories={allCategories}
+      />
     </Layout>
   )
 }
