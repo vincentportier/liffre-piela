@@ -15,6 +15,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     {
       posts: allMarkdownRemark(
         sort: { fields: [frontmatter___date], order: DESC }
+        filter: { fileAbsolutePath: { regex: "/blog/" } }
       ) {
         edges {
           node {
@@ -28,11 +29,6 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         }
       }
-      categoriesGroup: allMarkdownRemark {
-        group(field: frontmatter___categories) {
-          fieldValue
-        }
-      }
     }
   `)
   // Handle errors
@@ -42,7 +38,25 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   const posts = result.data.posts.edges
-  const categories = result.data.categoriesGroup.group
+  const categories = []
+
+  // loop through all the posts and push all the categories
+  posts &&
+    posts.forEach(({ node }) => {
+      node.frontmatter.categories.forEach(cat => categories.push(cat))
+    })
+
+  // count the amount of articles per category
+  const countCategories = categories.reduce((prev, curr) => {
+    prev[curr] = (prev[curr] || 0) + 1
+    return prev
+  }, {})
+
+  // get each unique category
+
+  const allCategories = Object.keys(countCategories)
+
+  // Create a page per blog post
 
   posts.forEach(({ node }, index) => {
     const nextPostId = index === 0 ? null : posts[index - 1].node.id
@@ -53,11 +67,32 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       path: `blog${node.fields.slug}`,
       component: blogPostTemplate,
       context: {
-        // additional data can be passed via context
         id: node.id,
         index,
         nextPostId,
         previousPostId,
+      },
+    })
+  })
+
+  // create the blog list pages
+
+  const BlogPageTemplate = require.resolve(`./src/templates/blog.js`)
+
+  const postsPerPage = 1
+  const numPages = Math.ceil(posts.length / postsPerPage)
+
+  Array.from({ length: numPages }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? `/blog` : `/blog/page/${i + 1}`,
+      component: BlogPageTemplate,
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        currentPage: i + 1,
+        numPages,
+        countCategories,
+        allCategories,
       },
     })
   })

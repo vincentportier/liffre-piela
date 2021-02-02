@@ -5,6 +5,7 @@ featuredImage: compressed.jpg
 description: this is a second article
 categories:
   - comite
+  - test
 ---
 
 bloudiblaaaaa

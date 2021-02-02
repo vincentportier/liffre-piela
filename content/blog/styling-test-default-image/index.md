@@ -7,6 +7,10 @@ categories:
   - Fiesta
   - What happens with a giant category
   - test
+  - comite
+  - bloubli
+  - comitey
+  - test
 ---
 
 # Heading 1
@@ -35,9 +39,7 @@ categories:
 
 This is some regular text within the blog... This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...
 
-![this is the alt](vin06799-hdr.jpg "this is the title")
-
-_This is some italic text !!! This is some regular text within the blog... This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog..._
+![this is the alt](compressed.jpg "this is the title")
 
 [This is a link](https://vportier.com)
 

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { graphql, Link } from "gatsby"
 import SEO from "../components/SEO"
 import { Fragment } from "react"
@@ -43,18 +43,30 @@ const StyledPosts = styled.div`
     list-style: none;
   }
 `
-const blogPageTemplate = ({ data }) => {
+
+const StyledPageNavigation = styled.div`
+  ul {
+    display: flex;
+    list-style-type: none;
+  }
+  .active {
+    font-weight: 900;
+  }
+`
+
+const BlogPageTemplate = ({ data, pageContext }) => {
   const posts = data.allMarkdownRemark.edges
   const heroImgFluid = data.hero.childImageSharp.fluid
+  const { countCategories, allCategories, numPages, currentPage } = pageContext
+  const [location, setLocation] = useState(null)
 
-  if (posts.length === 0) {
-    return (
-      <Fragment>
-        <SEO title="All posts" />
-        <p>No blog posts found.</p>
-      </Fragment>
-    )
-  }
+  useEffect(() => {
+    let location = window.location.href
+    const lastChar = location.slice(-1)
+    lastChar === "g" ? setLocation(1) : setLocation(parseInt(lastChar))
+  }, [])
+
+  console.log(location)
 
   return (
     <Layout>
@@ -63,6 +75,7 @@ const blogPageTemplate = ({ data }) => {
         <Img fluid={heroImgFluid} alt="hero" />
         <h1>BLOG</h1>
       </StyledHero>
+
       <StyledCategories>
         <Categories />
       </StyledCategories>
@@ -104,14 +117,57 @@ const blogPageTemplate = ({ data }) => {
             })}
         </ul>
       </StyledPosts>
+      {numPages === 1 ? null : (
+        <StyledPageNavigation>
+          <ul>
+            <li>
+              <Link
+                to={
+                  currentPage === 1
+                    ? "/blog"
+                    : currentPage === 2
+                    ? "/blog"
+                    : `/blog/page/${currentPage - 1}`
+                }
+              >
+                précédent
+              </Link>
+            </li>
+            {Array.from({ length: numPages }).map((item, i) => {
+              const index = i + 1
+              const link = index === 1 ? "/blog" : `/blog/page/${index}`
+              return (
+                <li className={location === index ? "active" : null}>
+                  {currentPage === index ? (
+                    <span>{index}</span>
+                  ) : (
+                    <Link to={link}>{index}</Link>
+                  )}
+                </li>
+              )
+            })}
+            <li>
+              <Link
+                to={
+                  currentPage === numPages
+                    ? `/blog/page/${currentPage}`
+                    : `/blog/page/${currentPage + 1}`
+                }
+              >
+                suivant
+              </Link>
+            </li>
+          </ul>
+        </StyledPageNavigation>
+      )}
     </Layout>
   )
 }
 
-export default blogPageTemplate
+export default BlogPageTemplate
 
 export const pageQuery = graphql`
-  query {
+  query($skip: Int!, $limit: Int!) {
     hero: file(name: { eq: "hero" }) {
       childImageSharp {
         fluid(maxHeight: 500) {
@@ -121,8 +177,9 @@ export const pageQuery = graphql`
     }
     allMarkdownRemark(
       filter: { fileAbsolutePath: { regex: "/blog/" } }
-      limit: 1000
+      limit: $limit
       sort: { fields: frontmatter___date, order: DESC }
+      skip: $skip
     ) {
       edges {
         node {
