@@ -150,7 +150,7 @@ const LatestBlogs = () => {
               title
               featuredImage {
                 childImageSharp {
-                  fluid(maxWidth: 1200) {
+                  fluid(maxWidth: 250) {
                     ...GatsbyImageSharpFluid_withWebp_tracedSVG
                   }
                 }

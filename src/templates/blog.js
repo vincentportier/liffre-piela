@@ -80,44 +80,6 @@ const BlogPageTemplate = ({ data, pageContext }) => {
         <h1>BLOG</h1>
       </StyledHero>
       <PostsGrid posts={posts} />
-      {/* <StyledPosts>
-        <h1>Les articles récent</h1>
-
-        <ul>
-          {posts &&
-            posts.map(post => {
-              const slug = post.node.fields.slug
-              const { title, date, description } = post.node.frontmatter
-
-              return (
-                <li key={post.node.fields.slug}>
-                  <article>
-                    <header>
-                      <h2>
-                        <Link to={`/blog${slug}`}>{title}</Link>
-                      </h2>
-
-                      <p>{date}</p>
-                    </header>
-                    <section>
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: description || post.node.excerpt,
-                        }}
-                      ></p>
-                    </section>
-                    <footer>
-                      <Link to={`/blog${slug}`}>
-                        <span>{`>>`} Lire l'article complet</span>
-                      </Link>
-                    </footer>
-                  </article>
-                  <hr />
-                </li>
-              )
-            })}
-        </ul>
-      </StyledPosts> */}
       {numPages === 1 ? null : (
         <StyledPageNavigation>
           <ul>
