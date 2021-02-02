@@ -1,8 +1,8 @@
 ---
-title: Styling test - default image Styling test - default image Styling test - default image
+title: Styling test
 date: 2021-02-01T02:12:04.116Z
 featuredImage: "compressed.jpg"
-description: This is a styling test
+description: This is a styling test This is a styling test This is a styling test This is a styling test This is a styling test This is a styling test
 categories:
   - Fiesta
   - What happens with a giant category
@@ -38,7 +38,7 @@ categories:
 
 This is some regular text within the blog... This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...This is some regular text within the blog...
 
-![this is the alt](compressed.jpg, "this is the title")
+![this is the alt](compressed.jpg "this is the title")
 
 [This is a link](https://vportier.com)
 

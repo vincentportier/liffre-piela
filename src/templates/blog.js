@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { graphql, Link } from "gatsby"
 import SEO from "../components/SEO"
-import { Fragment } from "react"
 import Categories from "../components/categories"
 import Layout from "../components/layout"
+import PostsGrid from "../components/posts-grid"
 import styled from "styled-components"
 import Img from "gatsby-image"
 
@@ -79,8 +79,8 @@ const BlogPageTemplate = ({ data, pageContext }) => {
         <Img fluid={heroImgFluid} alt="hero" />
         <h1>BLOG</h1>
       </StyledHero>
-
-      <StyledPosts>
+      <PostsGrid posts={posts} />
+      {/* <StyledPosts>
         <h1>Les articles récent</h1>
 
         <ul>
@@ -117,7 +117,7 @@ const BlogPageTemplate = ({ data, pageContext }) => {
               )
             })}
         </ul>
-      </StyledPosts>
+      </StyledPosts> */}
       {numPages === 1 ? null : (
         <StyledPageNavigation>
           <ul>

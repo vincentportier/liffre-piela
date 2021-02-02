@@ -91,6 +91,7 @@ const StyledHamburgerButton = styled.button`
 
 const StyledSidebar = styled.div`
   display: none;
+  font-family: var(--font-heading);
   @media (max-width: 768px) {
     ${({ theme }) => theme.mixins.flexCenter};
     position: fixed;
@@ -245,6 +246,9 @@ const Menu = () => {
         >
           <nav ref={navRef}>
             <ul>
+              <li key="home" onClick={() => setMenuOpen(false)}>
+                <Link to="/">Home</Link>
+              </li>
               {navLinks &&
                 navLinks.map(({ name, url }, i) => (
                   <li key={i} onClick={() => setMenuOpen(false)}>

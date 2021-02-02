@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import styled from "styled-components"
 import Categories from "../components/categories"
+import PostsGrid from "../components/posts-grid"
 import _ from "lodash"
 
 const StyledPageNavigation = styled.div`
@@ -49,35 +50,8 @@ const CategoryPageTemplate = ({ data, pageContext }) => {
         {category} ({count})
       </h1>
       <h2>Articles</h2>
-      <ul>
-        {posts &&
-          posts.map(post => {
-            const title = post.node.frontmatter.title || post.node.fields.slug
-            return (
-              <li key={post.node.fields.slug}>
-                <article>
-                  <header>
-                    <h2>
-                      <Link to={`/blog${post.node.fields.slug}`}>
-                        <span>{title}</span>
-                      </Link>
-                    </h2>
-                    <small>{post.node.date}</small>
-                  </header>
-                  <section>
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html:
-                          post.node.frontmatter.description ||
-                          post.node.excerpt,
-                      }}
-                    ></p>
-                  </section>
-                </article>
-              </li>
-            )
-          })}
-      </ul>
+      <PostsGrid posts={posts} />
+
       {numPages <= 1 ? null : (
         <StyledPageNavigation>
           <ul>
