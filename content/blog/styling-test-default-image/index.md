@@ -10,7 +10,6 @@ categories:
   - comite
   - bloubli
   - comitey
-  - test
 ---
 
 # Heading 1

@@ -9,7 +9,6 @@ const Home = ({ data }) => {
     <Layout>
       <SEO title="Liffre Piela" />
       <LatestBlogs />
-      <Categories />
     </Layout>
   )
 }

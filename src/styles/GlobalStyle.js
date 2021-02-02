@@ -36,6 +36,11 @@ html {
 	  --nav-height-scroll:70px;
     --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
     --border-radius:3px;
+    --hamburger-width: 30px;
+    --ham-before: top 0.1s ease-in 0.25s, opacity 0.1s ease-in;
+    --ham-before-active: top 0.1s ease-out, opacity 0.1s ease-out 0.12s;
+    --ham-after: bottom 0.1s ease-in 0.25s, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    --ham-after-active: bottom 0.1s ease-out, transform 0.22s cubic-bezier(0.215, 0.61, 0.355, 1) 0.12s;
 }
 
 #root {
@@ -46,6 +51,17 @@ html {
 body {
   color:var(--text-primary);
   font-family: "Roboto", sans-serif;
+
+  &.blur {
+      overflow: hidden;
+
+      #content > * {
+        filter: blur(5px) brightness(1);
+        transition: var(--transition);
+        pointer-events: none;
+        user-select: none;
+      }
+    }
 }
 
 main {

@@ -5,6 +5,7 @@ import { Link } from "gatsby"
 import { navLinks } from "../config"
 import useScrollDirection from "../hooks/useScrollDirection"
 import IconLogo from "../components/icons/logo"
+import Menu from "../components/menu"
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexCenter};
@@ -58,9 +59,10 @@ const StyledNav = styled.nav`
         height: 200px;
         max-height: ${props =>
           props.scrolledToTop
-            ? css`calc(var(--nav-height) - 10px)`
-            : css`calc(var(--nav-height-scroll) - 10px)`};
+            ? css`calc(var(--nav-height) - 20px)`
+            : css`calc(var(--nav-height-scroll) - 20px)`};
         margin-right: 50px;
+
         cursor: pointer;
         transition: var(--transition);
       }
@@ -74,6 +76,9 @@ const StyledNav = styled.nav`
     ${({ theme }) => theme.mixins.button}
     background:var(--primary);
     color: var(--white);
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 `
 
@@ -84,6 +89,10 @@ const StyledLinks = styled.div`
     list-style: none;
     font-size: var(--fz-lg);
     font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 `
 
@@ -129,6 +138,7 @@ const Nav = () => {
           <button className="button">Blog</button>
         </Link>
       </StyledNav>
+      <Menu />
     </StyledHeader>
   )
 }

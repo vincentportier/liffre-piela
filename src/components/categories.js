@@ -46,7 +46,6 @@ const StyledSection = styled.section`
 `
 
 const Categories = ({ countCategories, allCategories }) => {
-  console.log(allCategories)
   return (
     <StyledSection>
       <header>

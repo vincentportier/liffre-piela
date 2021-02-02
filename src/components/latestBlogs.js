@@ -183,10 +183,6 @@ const LatestBlogs = () => {
               ? post.node.frontmatter.featuredImage.childImageSharp.fluid
               : placeholderImageFluid
 
-            if (categories === null || categories.length === 0) {
-              categories = ["uncategorized"]
-            }
-
             return (
               <StyledCard key={slug}>
                 <div className="card-image-container">

@@ -5,8 +5,12 @@ import Img from "gatsby-image"
 import Layout from "../components/layout"
 import styled from "styled-components"
 import IconLogo from "../components/icons/logo"
+import _ from "lodash"
 
 const StyledArticle = styled.article`
+  .blog-link {
+    margin-top: 2rem;
+  }
   a {
     text-decoration: underline;
     transition: var(--transition);
@@ -30,6 +34,33 @@ const StyledHeader = styled.header`
   }
   .image-container {
     margin-bottom: 2rem;
+  }
+  ul {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    list-style-type: none;
+    flex-wrap: wrap;
+
+    li {
+      background: var(--primary);
+      color: var(--white);
+      border-radius: var(--border-radius);
+      padding: 2px 6px;
+      margin: 10px 10px 0 0;
+      font-size: var(--fz-xxs);
+      transition: var(--transition);
+      &:hover {
+        opacity: 0.75;
+      }
+      a {
+        text-decoration: none;
+        color: var(--white);
+        &:hover {
+          color: var(--white);
+        }
+      }
+    }
   }
 `
 
@@ -90,7 +121,7 @@ const StyledBlogNav = styled.nav`
   }
 `
 
-const BlogPostTemplate = ({ data, pageContext }) => {
+const BlogPostTemplate = ({ data }) => {
   const post = data.markdownRemark
   const { next, previous } = data
 
@@ -107,10 +138,20 @@ const BlogPostTemplate = ({ data, pageContext }) => {
       />
       <StyledArticle>
         <StyledHeader>
-          <Link to="/blog">BLOG</Link>
+          <Link to="/blog" className="blog-link">
+            BLOG
+          </Link>
           <h1>{post.frontmatter.title}</h1>
           <p>Liffre Piela, {post.frontmatter.date}</p>
-
+          {post.frontmatter.categories && (
+            <ul>
+              {post.frontmatter.categories.map(cat => (
+                <li>
+                  <Link to={`/blog/category/${_.kebabCase(cat)}`}>{cat}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
           {featuredImgFluid && (
             <div className="image-container">
               <Img

@@ -1,7 +1,7 @@
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
-  const blogPostTemplate = require.resolve(`./src/templates/blog-post.js`)
+  const BlogPostTemplate = require.resolve(`./src/templates/blog-post.js`)
 
   const CategoryPageTemplate = require.resolve(
     `./src/templates/category-page.js`
@@ -29,6 +29,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
       }
     }
   `)
+
   // Handle errors
   if (result.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
@@ -41,7 +42,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   // loop through all the posts and push all the categories
   posts &&
     posts.forEach(({ node }) => {
-      node.frontmatter.categories.forEach(cat => categories.push(cat))
+      node.frontmatter.categories &&
+        node.frontmatter.categories.forEach(cat => categories.push(cat))
     })
 
   // count the amount of articles per category
@@ -63,7 +65,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
     createPage({
       path: `blog${node.fields.slug}`,
-      component: blogPostTemplate,
+      component: BlogPostTemplate,
       context: {
         id: node.id,
         index,
