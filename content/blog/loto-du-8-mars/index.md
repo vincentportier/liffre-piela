@@ -1,6 +1,6 @@
 ---
 title: Loto du 8 Mars
-date: 2021-02-19T10:33:32.073Z
+date: 2020-02-20T10:33:32.073Z
 featuredImage: loto-crop.jpg
 description: Venez nous rejoindre et tenter votre chance, au loto le 8 mars 2020
 categories:
