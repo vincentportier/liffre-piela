@@ -133,7 +133,7 @@ const ContactForm = () => {
               name="name"
               value={name}
               onChange={e => handleChange(e)}
-              placeholder="Name"
+              placeholder="Nom"
               required
             />
           </label>
