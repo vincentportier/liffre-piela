@@ -18,6 +18,13 @@ const StyledArticle = styled.article`
   a:hover {
     color: var(--primary);
   }
+  section {
+    img {
+      display: block;
+      width: 100%;
+      object-fit: contain;
+    }
+  }
 `
 const StyledHeader = styled.header`
   a {

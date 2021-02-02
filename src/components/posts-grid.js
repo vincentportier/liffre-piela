@@ -24,7 +24,7 @@ const StyledPostsGrid = styled.div`
   }
 
   footer {
-    margin: 1rem 0;
+    margin: 10px 0;
     display: flex;
     justify-content: flex-end;
     a {

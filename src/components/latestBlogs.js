@@ -132,7 +132,7 @@ const LatestBlogs = () => {
     query {
       placeholder: file(name: { eq: "placeholder" }) {
         childImageSharp {
-          fluid(maxWidth: 1200) {
+          fluid(maxWidth: 250) {
             ...GatsbyImageSharpFluid_withWebp_tracedSVG
           }
         }
