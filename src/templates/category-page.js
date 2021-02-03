@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { graphql, Link } from "gatsby"
 import Layout from "../components/layout"
 import styled from "styled-components"
@@ -22,7 +22,7 @@ const StyledPageNavigation = styled.div`
   }
 `
 
-const CategoryPageTemplate = ({ data, pageContext }) => {
+const CategoryPageTemplate = ({ data, pageContext, location }) => {
   const posts = data.allMarkdownRemark.edges
 
   const {
@@ -34,18 +34,8 @@ const CategoryPageTemplate = ({ data, pageContext }) => {
     countCategories,
   } = pageContext
 
-  const [location, setLocation] = useState(null)
-
-  useEffect(() => {
-    let location = window.location.href
-    const lastChar = location.slice(-1)
-    lastChar === category.slice(-1)
-      ? setLocation(1)
-      : setLocation(parseInt(lastChar))
-  }, [])
-
   return (
-    <Layout>
+    <Layout location={location}>
       <h1
         style={{
           fontSize: "var(--fz-xxl)",
@@ -63,10 +53,12 @@ const CategoryPageTemplate = ({ data, pageContext }) => {
               <Link
                 to={
                   currentPage === 1
-                    ? `/blog/category/${category}`
+                    ? `/blog/category/${_.kebabCase(category)}`
                     : currentPage === 2
-                    ? `/blog/category/${category}`
-                    : `/blog/category/${category}/page/${currentPage - 1}`
+                    ? `/blog/category/${_.kebabCase(category)}`
+                    : `/blog/category/${_.kebabCase(category)}/page/${
+                        currentPage - 1
+                      }`
                 }
               >
                 🡐
@@ -76,10 +68,10 @@ const CategoryPageTemplate = ({ data, pageContext }) => {
               const index = i + 1
               const link =
                 index === 1
-                  ? `/blog/category/${category}`
-                  : `/blog/category/${category}/page/${index}`
+                  ? `/blog/category/${_.kebabCase(category)}`
+                  : `/blog/category/${_.kebabCase(category)}/page/${index}`
               return (
-                <li className={location === index ? "active" : null}>
+                <li className={currentPage === index ? "active" : null}>
                   {currentPage === index ? (
                     <span>{index}</span>
                   ) : (
@@ -92,8 +84,12 @@ const CategoryPageTemplate = ({ data, pageContext }) => {
               <Link
                 to={
                   currentPage === numPages
-                    ? `/blog/category/${category}/page/${currentPage}`
-                    : `/blog/category/${category}/page/${currentPage + 1}`
+                    ? `/blog/category/${_.kebabCase(
+                        category
+                      )}/page/${currentPage}`
+                    : `/blog/category/${_.kebabCase(category)}/page/${
+                        currentPage + 1
+                      }`
                 }
               >
                 🡒

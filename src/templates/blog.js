@@ -1,48 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { graphql, Link } from "gatsby"
 import SEO from "../components/SEO"
 import Categories from "../components/categories"
 import Layout from "../components/layout"
 import PostsGrid from "../components/posts-grid"
 import styled from "styled-components"
-import Img from "gatsby-image"
-
-const StyledHero = styled.div`
-  position: relative;
-  width: 100%;
-  height: 250px;
-  overflow: hidden;
-  @media (max-width: 675px) {
-    height: 120px;
-  }
-  h1 {
-    margin: 0;
-    color: var(--white);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-`
-
-const StyledCategories = styled.div`
-  position: absolute;
-  right: 50px;
-  top: calc(var(--nav-height) + 250px + 2rem);
-  width: 100px;
-  ul {
-    flex-direction: column;
-    a {
-      background-color: none;
-    }
-  }
-`
-
-const StyledPosts = styled.div`
-  ul {
-    list-style: none;
-  }
-`
 
 const StyledPageNavigation = styled.div`
   ${({ theme }) => theme.mixins.flexCenter}
@@ -60,25 +22,13 @@ const StyledPageNavigation = styled.div`
   }
 `
 
-const BlogPageTemplate = ({ data, pageContext }) => {
+const BlogPageTemplate = ({ data, pageContext, location }) => {
   const posts = data.allMarkdownRemark.edges
-  const heroImgFluid = data.hero.childImageSharp.fluid
   const { countCategories, allCategories, numPages, currentPage } = pageContext
-  const [location, setLocation] = useState(null)
-
-  useEffect(() => {
-    let location = window.location.href
-    const lastChar = location.slice(-1)
-    lastChar === "g" ? setLocation(1) : setLocation(parseInt(lastChar))
-  }, [])
 
   return (
-    <Layout>
+    <Layout location={location} banner={true} bannerText="Blog">
       <SEO title="All posts" />
-      <StyledHero>
-        <Img fluid={heroImgFluid} alt="hero" />
-        <h1>BLOG</h1>
-      </StyledHero>
       <PostsGrid posts={posts} />
       {numPages === 1 ? null : (
         <StyledPageNavigation>
@@ -100,7 +50,7 @@ const BlogPageTemplate = ({ data, pageContext }) => {
               const index = i + 1
               const link = index === 1 ? "/blog" : `/blog/page/${index}`
               return (
-                <li className={location === index ? "active" : null}>
+                <li className={currentPage === index ? "active" : null}>
                   {currentPage === index ? (
                     <span>{index}</span>
                   ) : (
@@ -135,13 +85,6 @@ export default BlogPageTemplate
 
 export const pageQuery = graphql`
   query($skip: Int!, $limit: Int!) {
-    hero: file(name: { eq: "hero" }) {
-      childImageSharp {
-        fluid(maxHeight: 500) {
-          ...GatsbyImageSharpFluid_withWebp_tracedSVG
-        }
-      }
-    }
     allMarkdownRemark(
       filter: { fileAbsolutePath: { regex: "/blog/" } }
       limit: $limit

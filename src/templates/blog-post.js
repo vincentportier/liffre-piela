@@ -128,7 +128,7 @@ const StyledBlogNav = styled.nav`
   }
 `
 
-const BlogPostTemplate = ({ data }) => {
+const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
   const { next, previous } = data
 
@@ -137,7 +137,7 @@ const BlogPostTemplate = ({ data }) => {
     : null
 
   return (
-    <Layout>
+    <Layout location={location}>
       <SEO
         title={post.frontmatter.title}
         description={post.frontmatter.description}
@@ -177,9 +177,9 @@ const BlogPostTemplate = ({ data }) => {
           <IconLogo />
           <p>
             L’association Liffré Piéla vient en aide à la région defavorisée de
-            Piéla située au Nord du Burkina Faso. Elle intervient nottamment
-            dans les domaines de la lutte contre la faim, l'accès à l’eau
-            potable, à l’éducation et à l’instruction.
+            Piéla située au Nord du Burkina Faso. Elle intervient notamment dans
+            les domaines de la lutte contre la faim, l'accès à l’eau potable, à
+            l’éducation et à l’instruction.
           </p>
         </div>
       </StyledFooter>

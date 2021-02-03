@@ -7,9 +7,9 @@ const StyledLink = styled(Link)`
   ${({ theme }) => theme.mixins.button}
 `
 
-const PageNotFound = () => {
+const PageNotFound = ({ location }) => {
   return (
-    <Layout>
+    <Layout location={location}>
       <h1>Oups, voilà qui n'était pas prévu...</h1>
       <h2>La page que vous recherchez semble introuvable!</h2>
       <StyledLink to="/">Retour à la page d'accueil</StyledLink>

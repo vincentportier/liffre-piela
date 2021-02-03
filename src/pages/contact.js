@@ -2,9 +2,9 @@ import React from "react"
 import Layout from "../components/layout"
 import ContactForm from "../components/contact-form"
 
-const ContactPage = () => {
+const ContactPage = ({ location }) => {
   return (
-    <Layout>
+    <Layout location={location} banner={true} bannerText="Contact">
       <ContactForm />
     </Layout>
   )

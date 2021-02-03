@@ -16,11 +16,9 @@ const StyledHeader = styled.header`
   padding: 0px 50px;
   width: 100%;
   height: var(--nav-height);
-  background: var(--white);
   filter: none !important;
   pointer-events: auto !important;
   user-select: auto !important;
-  backdrop-filter: blur(10px);
 
   transition: var(--transition);
   ${props =>
@@ -28,6 +26,7 @@ const StyledHeader = styled.header`
     !props.scrolledToTop &&
     css`
       border: none;
+      background: var(--white);
       height: var(--nav-height-scroll);
       transform: translateY(0px);
       box-shadow: rgba(0, 0, 0, 0.09) 0px 6px 9px 0px;

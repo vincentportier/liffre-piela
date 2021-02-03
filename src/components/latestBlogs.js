@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { graphql, useStaticQuery, Link } from "gatsby"
+import { Link } from "gatsby"
 import Image from "gatsby-image"
 import _ from "lodash"
 
@@ -127,46 +127,9 @@ const StyledBlogButton = styled.div`
   }
 `
 
-const LatestBlogs = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      placeholder: file(name: { eq: "placeholder" }) {
-        childImageSharp {
-          fluid(maxWidth: 250) {
-            ...GatsbyImageSharpFluid_withWebp_tracedSVG
-          }
-        }
-      }
-      allMarkdownRemark(
-        sort: { fields: [frontmatter___date], order: DESC }
-        limit: 6
-      ) {
-        edges {
-          node {
-            frontmatter {
-              categories
-              date(formatString: "MMMM DD, YYYY")
-              description
-              title
-              featuredImage {
-                childImageSharp {
-                  fluid(maxWidth: 250) {
-                    ...GatsbyImageSharpFluid_withWebp_tracedSVG
-                  }
-                }
-              }
-            }
-            fields {
-              slug
-            }
-          }
-        }
-      }
-    }
-  `)
-
-  const placeholderImageFluid = data.placeholder.childImageSharp.fluid
-  const posts = data.allMarkdownRemark.edges
+const LatestBlogs = ({ placeholder, lastSixPosts }) => {
+  const placeholderImageFluid = placeholder.childImageSharp.fluid
+  const posts = lastSixPosts.edges
 
   return (
     <StyledSection>
@@ -200,7 +163,7 @@ const LatestBlogs = () => {
                     <ul>
                       {categories &&
                         categories.map(cat => (
-                          <li>
+                          <li key={cat}>
                             <Link to={`/blog/category/${_.kebabCase(cat)}`}>
                               {cat}
                             </Link>

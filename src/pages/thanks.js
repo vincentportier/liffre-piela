@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import Layout from "../components/layout"
 import styled from "styled-components"
-import SEO from "../components/SEO"
 import { Link } from "gatsby"
 
 const StyledContent = styled.main`
@@ -18,9 +17,9 @@ const StyledHomeButton = styled(Link)`
   margin-top: 50px;
 `
 
-export default function ThankYouPage() {
+const ThankYouPage = ({ location }) => {
   return (
-    <Layout>
+    <Layout location={location}>
       <StyledContent>
         <h1>
           Merci d'avoir contact Liffré Piéla, nous reviendrons vers vous dès que
@@ -31,3 +30,5 @@ export default function ThankYouPage() {
     </Layout>
   )
 }
+
+export default ThankYouPage
