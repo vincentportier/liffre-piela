@@ -5,6 +5,7 @@ import { Link } from "gatsby"
 import { navLinks } from "../config"
 import useScrollDirection from "../hooks/useScrollDirection"
 import IconLogo from "../components/icons/logo"
+
 import Menu from "../components/menu"
 
 const StyledHeader = styled.header`
@@ -19,14 +20,14 @@ const StyledHeader = styled.header`
   filter: none !important;
   pointer-events: auto !important;
   user-select: auto !important;
-
+  background: var(--white);
   transition: var(--transition);
   ${props =>
     props.scrollDirection === "up" &&
     !props.scrolledToTop &&
     css`
       border: none;
-      background: var(--white);
+
       height: var(--nav-height-scroll);
       transform: translateY(0px);
       box-shadow: rgba(0, 0, 0, 0.09) 0px 6px 9px 0px;

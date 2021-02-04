@@ -4,7 +4,7 @@ import ContactForm from "../components/contact-form"
 
 const ContactPage = ({ location }) => {
   return (
-    <Layout location={location} banner={true} bannerText="Contact">
+    <Layout location={location} banner={true} bannerText="CONTACT">
       <ContactForm />
     </Layout>
   )

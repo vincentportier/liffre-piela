@@ -21,10 +21,12 @@ const ThankYouPage = ({ location }) => {
   return (
     <Layout location={location}>
       <StyledContent>
-        <h1>
-          Merci d'avoir contact Liffré Piéla, nous reviendrons vers vous dès que
-          possible.
-        </h1>
+        <div className="no-banner">
+          <h1>
+            Merci d'avoir contact Liffré Piéla, nous reviendrons vers vous dès
+            que possible.
+          </h1>
+        </div>
         <StyledHomeButton to="/">Retourner à l'accueil </StyledHomeButton>
       </StyledContent>
     </Layout>

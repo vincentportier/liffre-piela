@@ -103,7 +103,6 @@ const ContactForm = () => {
 
   return (
     <StyledContactSection id="contact" ref={revealContainer}>
-      <h1>Contact</h1>
       <h2>Envoyez nous un message!</h2>
       <StyledForm
         onSubmit={e => handleSubmit(e)}

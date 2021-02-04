@@ -6,11 +6,7 @@ import Layout from "../components/layout"
 
 const Home = ({ location, data }) => {
   return (
-    <Layout
-      location={location}
-      banner={true}
-      bannerText="Bievenue sur le site de Liffre Piela"
-    >
+    <Layout location={location} banner={true}>
       <SEO title="Liffre Piela" />
       <LatestBlogs
         placeholder={data.placeholder}

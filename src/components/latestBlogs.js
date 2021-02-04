@@ -8,6 +8,7 @@ const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
   .section-header {
+    text-align: center;
     h1 {
       font-size: var(--fz-xxl);
       margin-bottom: 0;
@@ -24,8 +25,8 @@ const StyledGrid = styled.div`
   display: grid;
   margin: 2rem 0;
   grid-template-columns: repeat(3, minmax(250px, 1fr));
-  grid-column-gap: 1rem;
-  grid-row-gap: 1rem;
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
 
   @media (max-width: 1080px) {
     grid-template-columns: repeat(2, minmax(250px, 1fr));
@@ -36,9 +37,10 @@ const StyledGrid = styled.div`
 `
 
 const StyledCard = styled.div`
-  ${({ theme }) => theme.mixins.boxShadow}
   overflow: hidden;
   position: relative;
+  ${({ theme }) => theme.mixins.boxShadow}
+  transition: var(--transition);
 
   .card-image-container {
     width: 100%;

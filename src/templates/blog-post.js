@@ -143,35 +143,36 @@ const BlogPostTemplate = ({ data, location }) => {
         description={post.frontmatter.description}
         article={true}
       />
-      <StyledArticle>
-        <StyledHeader>
-          <Link to="/blog" className="blog-link">
-            BLOG
-          </Link>
-          <h1>{post.frontmatter.title}</h1>
-          <p>Liffre Piela, {post.frontmatter.date}</p>
-          {post.frontmatter.categories && (
-            <ul>
-              {post.frontmatter.categories.map(cat => (
-                <li>
-                  <Link to={`/blog/category/${_.kebabCase(cat)}`}>{cat}</Link>
-                </li>
-              ))}
-            </ul>
-          )}
-          {featuredImgFluid && (
-            <div className="image-container">
-              <Img
-                fluid={featuredImgFluid}
-                alt="featured-image"
-                className="img"
-              ></Img>{" "}
-            </div>
-          )}
-        </StyledHeader>
-        <section dangerouslySetInnerHTML={{ __html: post.html }}></section>
-      </StyledArticle>
-
+      <div className="no-banner">
+        <StyledArticle>
+          <StyledHeader>
+            <Link to="/blog" className="blog-link">
+              BLOG
+            </Link>
+            <h1>{post.frontmatter.title}</h1>
+            <p>Liffre Piela, {post.frontmatter.date}</p>
+            {post.frontmatter.categories && (
+              <ul>
+                {post.frontmatter.categories.map(cat => (
+                  <li>
+                    <Link to={`/blog/category/${_.kebabCase(cat)}`}>{cat}</Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {featuredImgFluid && (
+              <div className="image-container">
+                <Img
+                  fluid={featuredImgFluid}
+                  alt="featured-image"
+                  className="img"
+                ></Img>{" "}
+              </div>
+            )}
+          </StyledHeader>
+          <section dangerouslySetInnerHTML={{ __html: post.html }}></section>
+        </StyledArticle>
+      </div>
       <StyledFooter>
         <div>
           <IconLogo />

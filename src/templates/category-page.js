@@ -36,72 +36,74 @@ const CategoryPageTemplate = ({ data, pageContext, location }) => {
 
   return (
     <Layout location={location}>
-      <h1
-        style={{
-          fontSize: "var(--fz-xxl)",
-        }}
-      >
-        {count} article{count <= 1 ? null : "s"} dans la categorie: {category}
-      </h1>
+      <div className="no-banner">
+        <h1
+          style={{
+            fontSize: "var(--fz-xxl)",
+          }}
+        >
+          {count} article{count <= 1 ? null : "s"} dans la categorie: {category}
+        </h1>
 
-      <PostsGrid posts={posts} />
+        <PostsGrid posts={posts} />
 
-      {numPages <= 1 ? null : (
-        <StyledPageNavigation>
-          <ul>
-            <li>
-              <Link
-                to={
-                  currentPage === 1
+        {numPages <= 1 ? null : (
+          <StyledPageNavigation>
+            <ul>
+              <li>
+                <Link
+                  to={
+                    currentPage === 1
+                      ? `/blog/category/${_.kebabCase(category)}`
+                      : currentPage === 2
+                      ? `/blog/category/${_.kebabCase(category)}`
+                      : `/blog/category/${_.kebabCase(category)}/page/${
+                          currentPage - 1
+                        }`
+                  }
+                >
+                  🡐
+                </Link>
+              </li>
+              {Array.from({ length: numPages }).map((item, i) => {
+                const index = i + 1
+                const link =
+                  index === 1
                     ? `/blog/category/${_.kebabCase(category)}`
-                    : currentPage === 2
-                    ? `/blog/category/${_.kebabCase(category)}`
-                    : `/blog/category/${_.kebabCase(category)}/page/${
-                        currentPage - 1
-                      }`
-                }
-              >
-                🡐
-              </Link>
-            </li>
-            {Array.from({ length: numPages }).map((item, i) => {
-              const index = i + 1
-              const link =
-                index === 1
-                  ? `/blog/category/${_.kebabCase(category)}`
-                  : `/blog/category/${_.kebabCase(category)}/page/${index}`
-              return (
-                <li className={currentPage === index ? "active" : null}>
-                  {currentPage === index ? (
-                    <span>{index}</span>
-                  ) : (
-                    <Link to={link}>{index}</Link>
-                  )}
-                </li>
-              )
-            })}
-            <li>
-              <Link
-                to={
-                  currentPage === numPages
-                    ? `/blog/category/${_.kebabCase(
-                        category
-                      )}/page/${currentPage}`
-                    : `/blog/category/${_.kebabCase(category)}/page/${
-                        currentPage + 1
-                      }`
-                }
-              >
-                🡒
-              </Link>
-            </li>
-          </ul>
-        </StyledPageNavigation>
-      )}
-      <Categories
-        countCategories={countCategories}
-        allCategories={allCategories}
-      />
+                    : `/blog/category/${_.kebabCase(category)}/page/${index}`
+                return (
+                  <li className={currentPage === index ? "active" : null}>
+                    {currentPage === index ? (
+                      <span>{index}</span>
+                    ) : (
+                      <Link to={link}>{index}</Link>
+                    )}
+                  </li>
+                )
+              })}
+              <li>
+                <Link
+                  to={
+                    currentPage === numPages
+                      ? `/blog/category/${_.kebabCase(
+                          category
+                        )}/page/${currentPage}`
+                      : `/blog/category/${_.kebabCase(category)}/page/${
+                          currentPage + 1
+                        }`
+                  }
+                >
+                  🡒
+                </Link>
+              </li>
+            </ul>
+          </StyledPageNavigation>
+        )}
+        <Categories
+          countCategories={countCategories}
+          allCategories={allCategories}
+        />
+      </div>
     </Layout>
   )
 }

@@ -3,7 +3,7 @@ import Layout from "../components/layout"
 
 const AproposPage = ({ location }) => {
   return (
-    <Layout location={location} banner={true} bannerText="À propos">
+    <Layout location={location} banner={true} bannerText="A PROPOS">
       <div>
         <h1>À propos de Liffré-Piéla</h1>
         <h3>L'association</h3>

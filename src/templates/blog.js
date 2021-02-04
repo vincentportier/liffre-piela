@@ -27,7 +27,7 @@ const BlogPageTemplate = ({ data, pageContext, location }) => {
   const { countCategories, allCategories, numPages, currentPage } = pageContext
 
   return (
-    <Layout location={location} banner={true} bannerText="Blog">
+    <Layout location={location} banner={true} bannerText="BLOG">
       <SEO title="All posts" />
       <PostsGrid posts={posts} />
       {numPages === 1 ? null : (

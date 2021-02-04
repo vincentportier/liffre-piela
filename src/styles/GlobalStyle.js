@@ -69,18 +69,21 @@ main {
     width: 100%;
     max-width: 1200px;
     min-height: 100vh;
-    padding: 100px 150px 150px 150px;
+    padding: 0px 150px 150px 150px;
 
     @media (max-width: 1080px) {
-      padding: 100px 100px 150px 100px;
+      padding: 0px 100px 150px 100px;
     }
     @media (max-width: 768px) {
-      padding: 100px 50px 150px 50px;
+      padding: 0px 50px 150px 50px;
     }
     @media (max-width: 480px) {
-      padding: 100px 25px 125px 25px;
+      padding: 0px 25px 125px 25px;
     }
 
+    .no-banner {
+      padding-top:var(--nav-height);
+    }
   }
 
 hr {
