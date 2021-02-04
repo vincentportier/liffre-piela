@@ -89,6 +89,10 @@ const StyledInnerWrapper = styled.div`
       margin: 0;
       padding: 20px 50px;
       background: var(--primary);
+
+      @media (max-width: 780px) {
+        font-size: 25px;
+      }
     }
   }
   .content-home {
