@@ -7,7 +7,7 @@ const AproposPage = ({ location }) => {
     <Layout location={location} banner={true} bannerText="A PROPOS">
       <SEO title="A propos - Liffré-Piéla" />
       <div>
-        <h1>À propos de Liffré-Piéla</h1>
+        <h2>À propos de Liffré-Piéla</h2>
         <h3>L'association</h3>
         <p>
           Créée en 1978, l'association vient en aide à la région de Piéla située
