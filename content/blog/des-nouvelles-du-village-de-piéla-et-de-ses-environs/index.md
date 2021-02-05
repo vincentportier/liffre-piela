@@ -4,7 +4,7 @@ date: 2019-12-20T04:10:55.215Z
 featuredImage: voyage-piela-11-.jpg
 description: Des nouvelles rassurantes du village de Piéla
 categories:
-  - Comité
+  - comité
 ---
 Tout dernièrement, Josué, secrétaire de l'Association de Développement Economique et Social de Piéla (A.D.D.E.S.P.), nous a donné des nouvelles rassurantes de PIELA : les populations vivent normalement, en dehors des soubresauts politiques du pays. Tant mieux pour nos amis de Piéla !
 
