@@ -117,7 +117,7 @@ const Nav = () => {
       <StyledNav scrolledToTop={scrolledToTop}>
         <div className="left-nav">
           <div className="logo">
-            <Link to="/">
+            <Link to="/" aria-label="home">
               <IconLogo />
             </Link>
           </div>
