@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import Image from "gatsby-image"
+import Img from "gatsby-image"
 import _ from "lodash"
 
 const StyledSection = styled.section`
@@ -87,7 +87,7 @@ const StyledCard = styled.div`
       margin-bottom: 1rem;
 
       li {
-        background: var(--primary);
+        background: var(--black);
         color: var(--white);
         border-radius: var(--border-radius);
         padding: 2px 6px;
@@ -151,7 +151,7 @@ const LatestBlogs = ({ placeholder, lastSixPosts }) => {
             return (
               <StyledCard key={slug}>
                 <div className="card-image-container">
-                  <Image fluid={featuredImgFluid} />
+                  <Img fluid={featuredImgFluid} />
                 </div>
                 <div className="card-content">
                   <header>
