@@ -18,7 +18,7 @@ const mixins = {
     cursor: pointer;
     outline: none;
     border: none;
-    font-size: var(--fz-s);
+    font-size: 24px;
     line-height: 1;
     text-decoration: none;
     transition: var(--transition);
