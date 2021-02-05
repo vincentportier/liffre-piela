@@ -7,7 +7,7 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: `Liffré-Piéla - association d'aide humanitaire `,
+    title: `Liffré-Piéla - Association d'aide humanitaire `,
     siteUrl: `https://www.liffre-piela.netlify.app`,
     description: `Liffré-Piéla est une association d'aide humanitaire et de coopération avec la région de Piéla au Burkina Faso`,
     image: `/og.png`,
@@ -16,6 +16,21 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-netlify-cms`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `LiffrePiela`,
+        short_name: `LiffrePiela`,
+        start_url: `/`,
+        background_color: `#FFFFFF`,
+        theme_color: `#d56d31`,
+        display: `standalone`,
+        icon: `src/images/favicons/icon.png`,
+      },
+    },
+    `gatsby-plugin-offline`,
+    `gatsby-plugin-sitemap`,
+    "gatsby-plugin-robots-txt",
     {
       resolve: `gatsby-transformer-remark`,
       options: {
