@@ -5,6 +5,7 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 import { Dialog } from "@reach/dialog"
 import "@reach/dialog/styles.css"
+import SEO from "../components/SEO"
 
 const StyledImageGrid = styled.div`
   margin-top: 2rem;
@@ -114,6 +115,10 @@ const PhotoGalleryPage = ({ data, location }) => {
   }
   return (
     <Layout banner={true} bannerText={"GALLERIE"} location={location}>
+      <SEO
+        title="Gallerie photos - Liffré-Piéla"
+        description="Retrouvez les dernières photos de Liffré-Piéla, association d'aide humanitaire et de coopération avec la région de Piéla au Burkina Faso"
+      />
       <StyledImageGrid>
         {photos &&
           photos.map(({ node }, index) => (

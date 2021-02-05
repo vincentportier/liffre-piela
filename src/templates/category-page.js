@@ -5,6 +5,7 @@ import styled from "styled-components"
 import Categories from "../components/categories"
 import PostsGrid from "../components/posts-grid"
 import _ from "lodash"
+import SEO from "../components/SEO"
 
 const StyledPageNavigation = styled.div`
   ${({ theme }) => theme.mixins.flexCenter}
@@ -36,6 +37,10 @@ const CategoryPageTemplate = ({ data, pageContext, location }) => {
 
   return (
     <Layout location={location}>
+      <SEO
+        title={`Catégorie: ${category} - Liffré Piéla`}
+        description={`Retrouvez tous les blogs de Liffré Piéla dans la catégorie ${category}`}
+      />
       <div className="no-banner">
         <h1
           style={{

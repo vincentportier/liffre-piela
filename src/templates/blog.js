@@ -28,7 +28,10 @@ const BlogPageTemplate = ({ data, pageContext, location }) => {
 
   return (
     <Layout location={location} banner={true} bannerText="BLOG">
-      <SEO title="All posts" />
+      <SEO
+        title="Tous les blogs - Liffré-Piéla"
+        description="Retrouvez tous les blogs de Liffré-Piéla, l'association d'aide humanitaire et de coopération avec la région de Piéla au Burkina Faso"
+      />
       <PostsGrid posts={posts} />
       {numPages === 1 ? null : (
         <StyledPageNavigation>

@@ -7,7 +7,7 @@ import Layout from "../components/layout"
 const Home = ({ location, data }) => {
   return (
     <Layout location={location} banner={true}>
-      <SEO title="Liffre Piela" />
+      <SEO />
       <LatestBlogs
         placeholder={data.placeholder}
         lastSixPosts={data.lastSixPosts}

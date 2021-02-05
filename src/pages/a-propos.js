@@ -1,9 +1,11 @@
 import React from "react"
 import Layout from "../components/layout"
+import SEO from "../components/SEO"
 
 const AproposPage = ({ location }) => {
   return (
     <Layout location={location} banner={true} bannerText="A PROPOS">
+      <SEO title="A propos - Liffré-Piéla" />
       <div>
         <h1>À propos de Liffré-Piéla</h1>
         <h3>L'association</h3>

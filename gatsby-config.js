@@ -7,9 +7,10 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: `Liffre-Piela`,
+    title: `Liffré-Piéla - association d'aide humanitaire `,
     siteUrl: `https://www.liffre-piela.netlify.app`,
-    description: `Association d'aide humanitaire et de coopération avec Piela (Burkina Faso)`,
+    description: `Liffré-Piéla est une association d'aide humanitaire et de coopération avec la région de Piéla au Burkina Faso`,
+    image: `/og.png`,
   },
   plugins: [
     `gatsby-plugin-sharp`,

@@ -139,9 +139,12 @@ const BlogPostTemplate = ({ data, location }) => {
   return (
     <Layout location={location}>
       <SEO
-        title={post.frontmatter.title}
+        title={`${post.frontmatter.title} - Liffré Piéla`}
         description={post.frontmatter.description}
         article={true}
+        image={
+          post.frontmatter.featuredImage ? post.frontmatter.featuredImage : null
+        }
       />
       <div className="no-banner">
         <StyledArticle>
@@ -164,9 +167,9 @@ const BlogPostTemplate = ({ data, location }) => {
               <div className="image-container">
                 <Img
                   fluid={featuredImgFluid}
-                  alt="featured-image"
+                  alt={`featured image - ${post.frontmatter.featuredImage.name}`}
                   className="img"
-                ></Img>{" "}
+                ></Img>
               </div>
             )}
           </StyledHeader>
@@ -222,6 +225,7 @@ export const pageQuery = graphql`
       html
       frontmatter {
         featuredImage {
+          name
           childImageSharp {
             fluid(maxWidth: 1600) {
               ...GatsbyImageSharpFluid_withWebp_tracedSVG

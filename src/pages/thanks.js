@@ -2,6 +2,7 @@ import React from "react"
 import Layout from "../components/layout"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import SEO from "../components/SEO"
 
 const StyledContent = styled.main`
   display: flex;
@@ -20,6 +21,7 @@ const StyledHomeButton = styled(Link)`
 const ThankYouPage = ({ location }) => {
   return (
     <Layout location={location}>
+      <SEO title="Merci d'avoir contacté Liffré-Piéla" />
       <StyledContent>
         <div className="no-banner">
           <h1>
