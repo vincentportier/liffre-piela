@@ -50,7 +50,7 @@ const StyledHeader = styled.header`
     flex-wrap: wrap;
 
     li {
-      background: var(--primary);
+      background: var(--text-primary);
       color: var(--white);
       border-radius: var(--border-radius);
       padding: 2px 6px;

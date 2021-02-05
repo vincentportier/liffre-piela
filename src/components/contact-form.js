@@ -14,7 +14,7 @@ const StyledContactSection = styled.section`
   h2 {
     display: block;
     margin-bottom: 20px;
-    color: var(--primary);
+    color: var(--text-primary);
     font-size: var(--fz-xxl);
     font-weight: 400;
   }

@@ -27,8 +27,9 @@ const StyledPostsGrid = styled.div`
     margin: 10px 0;
     display: flex;
     justify-content: flex-end;
+
     a {
-      color: var(--primary);
+      color: #8c451d;
     }
   }
 `
