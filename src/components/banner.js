@@ -50,8 +50,8 @@ const Banner = ({ className, bannerText, location }) => {
             <h1>LIFFRE-PIELA</h1>
           </div>
           <div className="subtitle">
-            <h3>Association d'aide à la région de</h3>
-            <h2>Piéla, Burkina Faso.</h2>
+            <h2>Association d'aide à la région de</h2>
+            <h3>Piéla, Burkina Faso.</h3>
           </div>
         </div>
       </StyledInnerWrapper>
@@ -138,7 +138,7 @@ const StyledInnerWrapper = styled.div`
       }
     }
     .subtitle {
-      h3 {
+      h2 {
         background: var(--text-primary);
 
         font-family: "Roboto", sans-serif;
@@ -159,7 +159,7 @@ const StyledInnerWrapper = styled.div`
           font-size: 25px;
         }
       }
-      h2 {
+      h3 {
         background: var(--text-primary);
 
         font-family: "Montserrat", sans-serif;
