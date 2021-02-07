@@ -6,8 +6,8 @@ module.exports = {
     },
 
     {
-      name: "Gallerie photo",
-      url: "/gallerie-photo",
+      name: "Galerie photo",
+      url: "/galerie-photo",
     },
     {
       name: "Contact",
