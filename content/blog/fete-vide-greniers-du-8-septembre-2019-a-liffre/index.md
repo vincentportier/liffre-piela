@@ -1,5 +1,5 @@
 ---
-title: "FETE : VIDE-GRENIERS DU 8 SEPTEMBRE 2019 A LIFFRE"
+title: "Fête : Vide-Greniers du 8 septembre à Liffré"
 date: 2019-09-12T16:58:02.905Z
 featuredImage: sept_videgrenier.jpg
 description: Vide-greniers du 8 septembre 2019 à Liffré
