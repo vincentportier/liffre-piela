@@ -6,6 +6,10 @@ description: Vide-greniers du 8 septembre 2019 à Liffré
 categories:
   - fête
 ---
+![](sept_videgrenier3.jpg)
+
+![](sept_videgrenier3.jpg)
+
 Le soleil étant de la partie, beaucoup de visiteurs sont venus passer leur journée au vide-greniers, le dimanche 8 septembre 2019, à LIFFRE (Ille-et-Vilaine)
 
 L'Association Liffré-Piéla (Burkina-Faso)faisait partie de l'organisation avec d'autres Associations de Liffré.
