@@ -8,7 +8,7 @@ categories:
 ---
 ![](sept_videgrenier3.jpg)
 
-![](sept_videgrenier3.jpg)
+![](sept_videgrenier2.jpg)
 
 Le soleil étant de la partie, beaucoup de visiteurs sont venus passer leur journée au vide-greniers, le dimanche 8 septembre 2019, à LIFFRE (Ille-et-Vilaine)
 
