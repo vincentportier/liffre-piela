@@ -14,6 +14,7 @@ const StyledImageGrid = styled.div`
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   grid-template-columns: repeat(3, minmax(250px, 1fr));
+
   @media (max-width: 1080px) {
     grid-template-columns: repeat(2, minmax(250px, 1fr));
   }
@@ -22,7 +23,13 @@ const StyledImageGrid = styled.div`
   }
 `
 const StyledImageContainer = styled.div`
-  max-width: 500px;
+  object-fit: cover;
+  width: 100%;
+  max-height: 220px;
+  overflow: hidden;
+  @media (max-width: 768px) {
+    max-height: 100%;
+  }
 `
 
 const StyledDialog = styled(Dialog)`
@@ -175,7 +182,10 @@ const PhotoGalleryPage = ({ data, location }) => {
 
 export const pageQuery = graphql`
   {
-    photos: allFile(filter: { relativeDirectory: { eq: "gallery" } }) {
+    photos: allFile(
+      filter: { relativeDirectory: { eq: "gallery" } }
+      sort: { fields: name, order: ASC }
+    ) {
       edges {
         node {
           name
