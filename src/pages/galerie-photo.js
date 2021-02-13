@@ -121,7 +121,7 @@ const PhotoGalleryPage = ({ data, location }) => {
     return
   }
   return (
-    <Layout banner={true} bannerText={"GALLERIE"} location={location}>
+    <Layout banner={true} bannerText={"GALERIE"} location={location}>
       <SEO
         title="Gallerie photos - Liffré-Piéla"
         description="Retrouvez les dernières photos de Liffré-Piéla, association d'aide humanitaire et de coopération avec la région de Piéla au Burkina Faso"
