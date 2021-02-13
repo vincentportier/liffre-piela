@@ -1,7 +1,7 @@
 ---
 title: Liffré-Piéla a 40 ans
 date: 2018-03-28T13:23:19.276Z
-featuredImage: _copie-0_img_4219.jpg
+featuredImage: img_8681.jpg
 description: Anniversaire 40 ans Association Liffré-Piéla
 categories:
   - fête
@@ -28,30 +28,30 @@ L'auditoire , au jeu des questions réponses, a, de nouveau, vu l'importance de 
 
 Sont réalisés à ce jour, précisait Louis GIEU: 13 forages, 8 classes de primaire et autant pour le Lycée, 7 logements d'enseignants et aide au dispensaire des sœurs de Rillé, dont des collè
 
-![](_copie-0_img_4145.jpg)
+![](img_4145.jpg)
 
-![](_copie-0_img_4148.jpg)
+![](img_4148.jpg)
 
-![](_copie-0_img_4152.jpg)
+![](img_4152.jpg)
 
-![](_copie-0_img_4154.jpg)
+![](img_4154.jpg)
 
-![](_copie-0_img_4170.jpg)
+![](img_4170.jpg)
 
-![](_copie-0_img_4181.jpg)
+![](img_4181.jpg)
 
-![](_copie-0_img_4185.jpg)
+![](img_4185.jpg)
 
-![](_copie-0_img_4200.jpg)
+![](img_8680.jpg)
 
-![](_copie-0_img_4206.jpg)
+![](img_4200.jpg)
 
-![](_copie-0_img_4215.jpg)
+![](img_4206.jpg)
 
-![](_copie-0_img_8680.jpg)
+![](img_4215.jpg)
 
-![](_copie-0_img_8681.jpg)
+![](img_4219.jpg)
 
-![](_copie-0_img_8684.jpg)
+![](img_8684.jpg)
 
 gues relayèrent l'appel à l'aide de 1977. La supérieure, Mère Marie-Angèle assistait aussi à la fête de dimanche.
