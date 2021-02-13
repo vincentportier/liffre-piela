@@ -1,8 +1,8 @@
 ---
-title: FETE - DIMANCHE DE SOLIDARITE AVEC L'ASSOCIATION LIFFRE-PIELA (Burkina-Faso)
+title: Dimanche de solidarité avec l'association Liffré-Piéla (Burkina-Faso)
 date: 2019-11-11T09:55:16.156Z
 featuredImage: novembre2019.jpg
-description: DIMANCHE DE SOLIDARITE AVEC L'ASSOCIATION LIFFRE-PIELA (Burkina-Faso)
+description: Dimanche de solidarité avec l'association Liffré-Piéla (Burkina-Faso)
 categories:
   - fête
 ---
