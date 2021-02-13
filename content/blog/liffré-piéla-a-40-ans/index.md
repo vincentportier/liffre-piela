@@ -26,7 +26,7 @@ Près de 70 personnes ont assisté, lundi, au débat animé par Daniel Nadinga e
 
 L'auditoire , au jeu des questions réponses, a, de nouveau, vu l'importance de la continuité du soutien, pour le développement d'une région au climat difficile. 
 
-Sont réalisés à ce jour, précisait Louis GIEU: 13 forages, 8 classes de primaire et autant pour le Lycée, 7 logements d'enseignants et aide au dispensaire des sœurs de Rillé, dont des collè
+Sont réalisés à ce jour, précisait Louis GIEU: 13 forages, 8 classes de primaire et autant pour le Lycée, 7 logements d'enseignants et aide au dispensaire des sœurs de Rillé, dont des collègues relayèrent l'appel à l'aide de 1977. La supérieure, Mère Marie-Angèle assistait aussi à la fête de dimanche.
 
 ![](img_4145.jpg)
 
@@ -53,5 +53,3 @@ Sont réalisés à ce jour, précisait Louis GIEU: 13 forages, 8 classes de prim
 ![](img_4219.jpg)
 
 ![](img_8684.jpg)
-
-gues relayèrent l'appel à l'aide de 1977. La supérieure, Mère Marie-Angèle assistait aussi à la fête de dimanche.
