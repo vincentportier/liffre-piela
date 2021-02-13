@@ -4,7 +4,7 @@ date: 2019-08-28T22:00:00.000Z
 featuredImage: 27-08-2019-recolte-pommes-de-terre3.jpg
 description: Récolte de Pommes de terre 2019
 categories:
-  - Divers
+  - divers
 ---
 En cette fin d'été, une vingtaine de bénévoles se sont retrouvés sur le terrain, mis gracieusement à disposition par la Société GIBOIRE que nous remercions, pour la traditionnelle récolte des pommes de terre.
 
