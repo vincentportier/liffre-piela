@@ -4,7 +4,7 @@ date: 2020-09-07T11:23:08.643Z
 featuredImage: asso.jpg
 description: Journée des associations du pays de Liffré.
 categories:
-  - comité
+  - divers
 ---
 Le samedi 5 Septembre 2020, se tenait la journée des Associations du pays de Liffré.
 
