@@ -4,7 +4,7 @@ date: 2020-11-16T09:56:47.442Z
 featuredImage: legumes.jpg
 description: Fruits, légumes et végétaux à vendre pour soutenir Piéla
 categories:
-  - comité
+  - divers
 ---
 ## Renouvellez votre ahesion
 
