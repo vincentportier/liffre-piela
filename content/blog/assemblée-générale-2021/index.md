@@ -18,8 +18,8 @@ Ainsi 28.000€ ont été envoyés en 2020 à l'Association départementale pour
 
 Dans les futurs projets à financer , un centre de formation agro-sylvo-pastoral est proposé par l'A.D.D.E.S.P, l'association espère reprendre ses activités pour contribuer à ce dossier intéressant.
 
-Les prochaines dates à retenir sont la fête d'automne le 14 Novembre et un Loto le 12 Décembre.
+Les prochaines dates à retenir sont la fête d'automne le 14 Novembre et un Loto le 27 Novembre.
 
-<!--\[if !supportEmptyParas]--> <!--\[endif]-->
+<!--\\[if !supportEmptyParas]--> <!--\\[endif]-->
 
 <!--EndFragment-->
