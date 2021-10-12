@@ -2,7 +2,7 @@
 title: Fête d'automne 14 Novembre 2021
 date: 2021-10-07T09:55:24.945Z
 featuredImage: plante.jpg
-description: Fête d'automne
+description: "Fête d'automne 14 Novembre "
 categories:
   - fête
 ---
