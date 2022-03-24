@@ -1,7 +1,7 @@
 ---
 title: Bol de Riz le 9 Avril 2022
 date: 2022-03-23T15:04:49.954Z
-featuredImage: ""
+featuredImage: istockphoto-1242507868-612x612.jpg
 description: Bol de Riz le 9 Avril 2022
 categories:
   - divers
