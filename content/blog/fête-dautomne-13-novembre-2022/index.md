@@ -3,6 +3,8 @@ title: Fête d'automne 13 Novembre 2022
 date: 2022-10-18T17:00:38.020Z
 featuredImage: photos-jouet-2.jpg
 description: Vente de Végétaux, livres, jouets au profit de Piéla (Burkina-Faso)
+categories:
+  - fête
 ---
 <!--StartFragment-->
 
@@ -21,7 +23,7 @@ Produits d'Automne\
 Artisanat Africain \
 Ventes de jouets et de livres, à partir de 0,50 €\
 Buvette, crêpes, gâteaux\
-ADHÉSTONS\
+ADHÉSIONS\
 Entrée gratuite
 
 <!--EndFragment-->
