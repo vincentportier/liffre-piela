@@ -27,3 +27,5 @@ ADHÉSIONS\
 Entrée gratuite
 
 <!--EndFragment-->
+
+![](p1000565-2-.jpg)
