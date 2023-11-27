@@ -1,6 +1,6 @@
 ---
 title: Fête d'automne 2023
-date: 2022-09-16T20:03:22.064Z
+date: 2023-11-27T10:03:29.688Z
 featuredImage: p1000701.jpg
 description: Fête d'Automne
 categories:
