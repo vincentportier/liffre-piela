@@ -12,4 +12,4 @@ Le résultat  satisfaisant de cette journée contribuera à financer en partie l
 
 Le Comité
 
-![](p1000794-prêt-pour-la-vente.jpg)
+![](p1000799-l-on-fait-son-marché.jpg)
