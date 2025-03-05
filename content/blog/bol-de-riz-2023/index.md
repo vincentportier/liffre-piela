@@ -1,9 +1,11 @@
 ---
-title: Bol de Riz 2024
-date: 2024-03-10T20:09:29.528Z
+title: Bol de Riz 2025 Espace Inter Génération
+date: 2025-03-05T19:52:23.489Z
 featuredImage: istockphoto-1242507868-612x612.jpg
-description: Bol de RIz Samedi 23 Mars 2024
+description: Bol de Riz Samedi 29 Mars 2025
 categories:
   - divers
 ---
-De 17H30 à 19h le samedi 23 Mars, vous pourrez récupérer votre bol de riz sur la place de la mairie sous un barnum. 5€/bol de riz au bénéfice de nos amis de Piela
+A l'espace Inter-Générations à partir de 18h, vente en barquettes - 5€ -à consommer sur place ou à emporter.
+
+O﻿rganisé par Liffré Piela
