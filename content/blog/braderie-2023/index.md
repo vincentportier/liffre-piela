@@ -1,19 +1,19 @@
 ---
-title: Braderie 2024
-date: 2024-09-09T17:28:29.157Z
-featuredImage: p1000674.jpg
-description: Le dimanche 8 septembre 2024 se tenait la Braderie de Liffré.
+title: Braderie 2025
+date: 2025-09-15T16:32:30.729Z
+featuredImage: p1000915-copie-5-.jpg
+description: Le dimanche 7septembre 2025 se tenait la Braderie de Liffré.
 categories:
   - fête
 ---
-**Malgré un temps maussade, les chineurs sont quand-même passés voir ce qui pouvait les intéresser**
+**Le beau soleil a permis à un grand nombre de chineurs de faire de bonnes affaires sur le stand de Liffré Piela et aussi d'y déguster une bonne galette saucisse.**
 
-![](p1000786.jpg)
+![](p1000916-copie-5-.jpg)
 
-L’odeur alléchante de galettes saucisses a aiguisé l’appétit des nombreux visiteurs
 
-![](p1000787.jpg)
 
-**Prochain rendez-vous pour la fête d'automne le 17 novembre 2024**
+![](p1000918-copie.jpg)
 
-![](p1000788.jpg)
+**Prochain rendez-vous pour la fête d'automne le dimanche 16 novembre 2025**
+
+![](p1000917-copie-2-.jpg)
