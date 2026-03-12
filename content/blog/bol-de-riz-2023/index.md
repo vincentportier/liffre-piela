@@ -1,6 +1,6 @@
 ---
 title: Bol de Riz 2026 Salle boléro Maurice ravel
-date: 2025-03-30T18:52:57.078Z
+date: 2026-03-12T19:39:31.895Z
 featuredImage: istockphoto-1242507868-612x612.jpg
 description: Bol de Riz Samedi 28 Mars 2026
 categories:
