@@ -1,12 +1,12 @@
 ---
-title: "Bol de Riz 2025 Espace Inter Génération "
+title: Bol de Riz 2026 Salle boléro Maurice ravel
 date: 2025-03-30T18:52:57.078Z
 featuredImage: istockphoto-1242507868-612x612.jpg
-description: Bol de Riz Samedi 29 Mars 2025
+description: Bol de Riz Samedi 28 Mars 2026
 categories:
   - divers
 ---
-A l'espace Inter-Générations à partir de 18h, vente en barquettes - 5€ -à consommer sur place ou à emporter.
+A la salle Maurice Ravel rue de Rennes, à partir de 17h, vente en barquettes - 5€ -à consommer sur place ou à emporter. 
 
 O﻿rganisé par Liffré Piela
 
