@@ -10,8 +10,8 @@ A la salle Maurice Ravel rue de Rennes, à partir de 17h, vente en barquettes - 
 
 O﻿rganisé par Liffré Piela
 
-L﻿a participation identique à 2024 d'environ 130 personnes contribuera à la réalisation des projets en cours à Piela
+
 
 ![](cuisinières.jpg)
 
-![](participants.jpg)
+![]()
