@@ -1,0 +1,49 @@
+---
+import Layout from "../../../../../layouts/Layout.astro"
+import PostsGrid from "../../../../../components/PostsGrid.astro"
+import Categories from "../../../../../components/Categories.astro"
+import Pagination from "../../../../../components/Pagination.astro"
+import { allPosts, categoryCounts, postsByCategorySlug, paginate } from "../../../../../lib/blog.js"
+
+export async function getStaticPaths() {
+  const posts = await allPosts()
+  const counts = categoryCounts(posts)
+  const paths = []
+  for (const { slug, label, posts: list } of postsByCategorySlug(posts).values()) {
+    for (const p of paginate(list)) {
+      if (p.currentPage === 1) continue // servie par l'index de la categorie
+      paths.push({
+        params: { category: slug, page: String(p.currentPage) },
+        props: { label, page: p, counts, total: list.length },
+      })
+    }
+  }
+  return paths
+}
+
+const { label, page, counts, total } = Astro.props
+---
+
+<Layout
+  title={`Catégorie: ${label} - Liffré Piéla`}
+  description={`Retrouvez tous les blogs de Liffré Piéla dans la catégorie ${label}`}
+>
+  <div class="no-banner">
+    <h1 class="category-title">
+      {total} article{total <= 1 ? "" : "s"} dans la categorie: {label}
+    </h1>
+    <PostsGrid posts={page.items} />
+    <Pagination
+      base={`/blog/category/${Astro.params.category}`}
+      currentPage={page.currentPage}
+      numPages={page.numPages}
+    />
+    <Categories counts={counts} />
+  </div>
+</Layout>
+
+<style>
+  .category-title {
+    font-size: var(--fz-xxl);
+  }
+</style>

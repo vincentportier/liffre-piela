@@ -1,0 +1,11 @@
+---
+import Layout from "../layouts/Layout.astro"
+import LatestBlogs from "../components/LatestBlogs.astro"
+import { allPosts } from "../lib/blog.js"
+
+const posts = (await allPosts()).slice(0, 6)
+---
+
+<Layout banner={true} home={true}>
+  <LatestBlogs posts={posts} />
+</Layout>

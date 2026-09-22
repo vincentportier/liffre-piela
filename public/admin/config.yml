@@ -1,0 +1,73 @@
+# Sveltia CMS — remplace Netlify CMS + Identity + Git Gateway.
+#
+# AVANT LA MISE EN LIGNE : renseigner base_url ci-dessous avec l'URL du
+# Worker Cloudflare (voir docs/CMS.md, etape 2). Sans lui, la connexion
+# echouera.
+
+backend:
+  name: github
+  repo: vincentportier/liffre-piela
+  branch: master
+  # URL du Worker Cloudflare qui gere le "Se connecter avec GitHub".
+  base_url: https://REMPLACER-PAR-VOTRE-WORKER.workers.dev
+
+# Emplacement par defaut des images deposees depuis l'editeur.
+# (Les articles ont leur propre reglage plus bas : images dans leur dossier.)
+media_folder: public/img
+public_folder: /img
+
+# Libelles de l'interface
+site_url: https://www.liffre-piela.netlify.app
+display_url: https://www.liffre-piela.netlify.app
+logo_url: https://www.liffre-piela.netlify.app/favicon.png
+
+collections:
+  - name: "blog"
+    label: "Articles"
+    label_singular: "Article"
+    folder: "content/blog"
+    create: true
+    slug: "index"
+    # Un dossier par article, nomme d'apres le titre, avec ses propres images.
+    # ATTENTION : ce dossier est fige a la CREATION. Renommer le titre ensuite
+    # ne deplace pas le dossier (c'est ce qui a produit les URLs trompeuses
+    # avant la refonte). Toujours utiliser "Nouvel article", jamais reecrire
+    # un article existant pour en faire un nouveau.
+    path: "{{title}}/index"
+    media_folder: ""
+    public_folder: ""
+    preview_path: "blog/{{dirname}}"
+    summary: "{{title}}"
+    sortable_fields: ["date", "title"]
+    editor:
+      preview: false
+    fields:
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Date de publication", name: "date", widget: "datetime" }
+      - {
+          label: "Image à la une",
+          name: "featuredImage",
+          widget: "image",
+          multiple: false,
+          required: false,
+          hint: "Visible sur la page d'accueil et lors des partages sur les réseaux sociaux.",
+        }
+      - {
+          label: "Description",
+          name: "description",
+          widget: "string",
+          hint: "Une phrase de résumé, affichée dans la liste des articles.",
+        }
+      # Champ libre, comme avant la refonte : on peut créer une catégorie.
+      # Les accents n'ont pas d'incidence sur l'URL ("fête" et "fete"
+      # aboutissent à la même page de catégorie).
+      - {
+          label: "Catégories",
+          name: "categories",
+          widget: "list",
+          allow_add: true,
+          required: false,
+          field: { label: "Catégorie", name: "category", widget: "string" },
+          hint: "Catégories existantes : comité, divers, fête.",
+        }
+      - { label: "Contenu", name: "body", widget: "markdown" }

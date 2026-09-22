@@ -1,0 +1,62 @@
+---
+// base : "/blog" ou "/blog/category/fete"
+const { base, currentPage, numPages } = Astro.props
+
+const pageUrl = (n) => (n === 1 ? base : `${base}/page/${n}`)
+const pages = Array.from({ length: numPages }, (_, i) => i + 1)
+---
+
+{
+  numPages > 1 && (
+    <div class="pagination flex-center">
+      <ul>
+        <li>
+          {currentPage === 1 ? (
+            <span class="disabled" aria-hidden="true">
+              &#129040;
+            </span>
+          ) : (
+            <a href={pageUrl(currentPage - 1)} rel="prev" aria-label="Page précédente">
+              &#129040;
+            </a>
+          )}
+        </li>
+
+        {pages.map((n) => (
+          <li class:list={[{ active: n === currentPage }]}>
+            {n === currentPage ? <span aria-current="page">{n}</span> : <a href={pageUrl(n)}>{n}</a>}
+          </li>
+        ))}
+
+        <li>
+          {currentPage === numPages ? (
+            <span class="disabled" aria-hidden="true">
+              &#129042;
+            </span>
+          ) : (
+            <a href={pageUrl(currentPage + 1)} rel="next" aria-label="Page suivante">
+              &#129042;
+            </a>
+          )}
+        </li>
+      </ul>
+    </div>
+  )
+}
+
+<style>
+  .pagination ul {
+    display: flex;
+    list-style-type: none;
+    flex-wrap: wrap;
+  }
+  .pagination li {
+    margin: 5px;
+  }
+  .pagination .active {
+    font-weight: 900;
+  }
+  .pagination .disabled {
+    opacity: 0.35;
+  }
+</style>

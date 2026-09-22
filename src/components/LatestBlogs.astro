@@ -1,0 +1,177 @@
+---
+import { Image } from "astro:assets"
+import placeholder from "../../content/blog/placeholder.jpg"
+import { kebabCase, formatDate } from "../lib/utils.js"
+
+const { posts } = Astro.props
+---
+
+<section class="latest">
+  <header class="section-header">
+    <h1>Nos derniers articles</h1>
+    <h2>Retrouvez l'actualité de Liffré Piéla</h2>
+  </header>
+
+  <div class="grid">
+    {
+      posts.map((post) => {
+        const { title, description, categories, date, featuredImage } = post.data
+        const img = featuredImage || placeholder
+        const blurb =
+          description && description.length > 200
+            ? description.substring(0, 160) + "..."
+            : description
+        return (
+          <div class="card box-shadow">
+            <div class="card-image-container">
+              <Image src={img} alt={title} width={500} height={336} />
+            </div>
+            <div class="card-content">
+              <header>
+                <small><a href="/blog">BLOG</a></small>
+                <h1><a href={`/blog/${post.id}`}>{title}</a></h1>
+                <small>Liffré-Piela, {formatDate(date)}</small>
+                <ul>
+                  {categories.map((cat) => (
+                    <li>
+                      <a href={`/blog/category/${kebabCase(cat)}`}>{cat}</a>
+                    </li>
+                  ))}
+                </ul>
+              </header>
+              <p>{blurb}</p>
+            </div>
+            <footer>
+              <a href={`/blog/${post.id}`}><span>&gt;&gt; Lire l'article complet</span></a>
+            </footer>
+          </div>
+        )
+      })
+    }
+  </div>
+
+  <div>
+    <div class="blog-button-wrapper flex-center">
+      <a href="/blog" class="button">Tous les articles</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .latest {
+    display: flex;
+    flex-direction: column;
+  }
+  .section-header {
+    text-align: center;
+  }
+  .section-header h1 {
+    font-size: var(--fz-xxl);
+    margin-bottom: 0;
+  }
+  .section-header h2 {
+    margin-top: 1rem;
+    color: var(--text-secondary);
+    font-size: var(--fz-lg);
+  }
+
+  .grid {
+    display: grid;
+    margin: 2rem 0;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+  }
+  @media (max-width: 1080px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(250px, 1fr));
+    }
+  }
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(1, minmax(250px, 1fr));
+    }
+  }
+
+  .card {
+    overflow: hidden;
+    position: relative;
+    transition: var(--transition);
+  }
+  .card-image-container {
+    width: 100%;
+    height: 168px;
+    overflow: hidden;
+  }
+  .card-image-container :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-content {
+    padding: 5px 10px;
+  }
+  .card-content h1 {
+    margin: 0;
+    font-size: var(--fz-xxl);
+  }
+  .card-content h1 a {
+    transition: var(--transition);
+  }
+  .card-content h1 a:hover {
+    opacity: 0.85;
+  }
+  .card-content p {
+    margin-bottom: 50px;
+    font-size: var(--fz-md);
+  }
+  .card-content small {
+    color: var(--text-secondary);
+    transition: var(--transition);
+  }
+  .card-content small a:hover {
+    text-decoration: underline;
+    color: var(--text-secondary);
+  }
+  .card-content ul {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    list-style-type: none;
+    flex-wrap: wrap;
+    margin-top: 3px;
+    margin-bottom: 1rem;
+  }
+  .card-content ul li {
+    background: var(--black);
+    color: var(--white);
+    border-radius: var(--border-radius);
+    padding: 2px 6px;
+    margin: 5px 5px 0 0;
+    font-size: var(--fz-xxs);
+  }
+  .card-content ul li:hover {
+    opacity: 0.75;
+  }
+  .card-content ul li a:hover {
+    color: var(--white);
+  }
+
+  .card footer {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+  .card footer a {
+    color: var(--text-secondary);
+    font-size: var(--fz-lg);
+  }
+  .card footer a:hover {
+    text-decoration: underline;
+  }
+
+  .blog-button-wrapper {
+    margin-top: 50px;
+  }
+</style>

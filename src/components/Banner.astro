@@ -1,0 +1,174 @@
+---
+import { getImage } from "astro:assets"
+import heroSrc from "../images/hero-home.jpg"
+
+const { bannerText, home = false } = Astro.props
+
+// L'ancien site servait cette image en background-image via
+// gatsby-background-image. On garde le principe, avec une version
+// optimisee par Astro (WebP).
+const hero = await getImage({ src: heroSrc, width: 1980, format: "webp" })
+---
+
+<section
+  class:list={["hero", home ? "hero-home" : "hero-page"]}
+  style={`background-image: url('${hero.src}')`}
+>
+  {
+    home ? (
+      <div class="content-home">
+        <div class="title">
+          <h1>LIFFRE-PIELA</h1>
+        </div>
+        <div class="subtitle">
+          <h2>Association d'aide à la région de</h2>
+          <h3>Piéla, Burkina Faso.</h3>
+        </div>
+      </div>
+    ) : (
+      <div class="content-innerPage">
+        <h1>{bannerText}</h1>
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .hero {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .hero-home {
+    min-height: 100vh;
+    padding-bottom: 100px;
+  }
+  .hero-page {
+    height: 300px;
+  }
+
+  .content-innerPage {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    padding-top: var(--nav-height);
+  }
+  .content-innerPage h1 {
+    margin: 0;
+    padding: 20px 50px;
+    background: var(--primary);
+  }
+  @media (max-width: 780px) {
+    .content-innerPage h1 {
+      font-size: 25px;
+    }
+  }
+
+  .content-home {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: var(--white);
+    padding-top: calc(var(--nav-height) + 150px);
+    padding-left: 100px;
+  }
+  @media (max-width: 780px) {
+    .content-home {
+      padding-top: calc(var(--nav-height) + 75px);
+      padding-left: 25px;
+      padding-right: 25px;
+      align-items: center;
+    }
+  }
+
+  .title {
+    font-family: "Montserrat", sans-serif;
+  }
+  .title h1 {
+    background: var(--primary);
+    font-size: 130px;
+    margin: 0 0 2rem 0;
+    padding: 10px 30px;
+  }
+  @media (max-width: 1280px) {
+    .title h1 {
+      font-size: 100px;
+    }
+  }
+  @media (max-width: 1080px) {
+    .title h1 {
+      font-size: 80px;
+    }
+  }
+  @media (max-width: 780px) {
+    .title h1 {
+      font-size: 60px;
+    }
+  }
+  @media (max-width: 680px) {
+    .title h1 {
+      font-size: 40px;
+    }
+  }
+  @media (max-width: 380px) {
+    .title h1 {
+      font-size: 25px;
+    }
+  }
+
+  .subtitle h2 {
+    background: var(--text-primary);
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    margin: 0;
+    padding: 10px 30px;
+    font-size: 50px;
+  }
+  @media (max-width: 1280px) {
+    .subtitle h2 {
+      font-size: 40px;
+    }
+  }
+  @media (max-width: 1080px) {
+    .subtitle h2 {
+      font-size: 30px;
+    }
+  }
+  @media (max-width: 680px) {
+    .subtitle h2 {
+      font-size: 25px;
+    }
+  }
+
+  .subtitle h3 {
+    background: var(--text-primary);
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 10px 30px;
+    font-size: 100px;
+  }
+  @media (max-width: 1280px) {
+    .subtitle h3 {
+      font-size: 80px;
+    }
+  }
+  @media (max-width: 1080px) {
+    .subtitle h3 {
+      font-size: 60px;
+    }
+  }
+  @media (max-width: 780px) {
+    .subtitle h3 {
+      font-size: 50px;
+    }
+  }
+  @media (max-width: 680px) {
+    .subtitle h3 {
+      font-size: 30px;
+    }
+  }
+</style>

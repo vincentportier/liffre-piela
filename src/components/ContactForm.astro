@@ -1,0 +1,115 @@
+---
+// Formulaire Netlify Forms en soumission native : pas de JavaScript.
+// Netlify detecte le formulaire au deploiement (data-netlify), enregistre
+// la soumission puis redirige vers l'action.
+---
+
+<section class="contact" id="contact">
+  <h2>Envoyez nous un message!</h2>
+
+  <form
+    class="contact-form"
+    name="contact"
+    method="POST"
+    action="/thanks"
+    data-netlify="true"
+    data-netlify-honeypot="bot-field"
+  >
+    <input type="hidden" name="form-name" value="contact" />
+    <p class="hidden">
+      <label>Ne pas remplir : <input name="bot-field" /></label>
+    </p>
+    <p>
+      <label for="name">
+        Nom:
+        <input type="text" id="name" name="name" placeholder="Nom" required />
+      </label>
+    </p>
+    <p>
+      <label for="email">
+        Email:
+        <input type="email" id="email" name="email" placeholder="Email" required />
+      </label>
+    </p>
+    <p>
+      <label for="message">
+        Message:
+        <textarea
+          name="message"
+          id="message"
+          rows="6"
+          placeholder="Votre message ..."
+          required></textarea>
+      </label>
+    </p>
+    <button type="submit" class="button box-shadow email-button">Envoyer</button>
+  </form>
+</section>
+
+<style>
+  .contact {
+    max-width: 600px;
+    margin: 0 auto 100px;
+    text-align: center;
+  }
+  @media (max-width: 768px) {
+    .contact {
+      margin-bottom: 60px;
+    }
+  }
+  .contact h2 {
+    display: block;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    font-size: var(--fz-xxl);
+    font-weight: 400;
+  }
+  .contact p {
+    font-size: var(--fz-md);
+    color: var(--text-secondary);
+  }
+
+  .contact-form {
+    margin-top: 50px;
+  }
+  .contact-form label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: var(--fz-xxs);
+    margin-bottom: 5px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    color: var(--text-secondary);
+    width: 80%;
+    font-family: var(--font-heading);
+  }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: var(--text-secondary);
+    font-family: monospace;
+  }
+  .contact-form input {
+    padding: 5px 10px;
+  }
+  .contact-form textarea {
+    padding: 15px 10px;
+  }
+
+  .email-button {
+    margin-top: 30px;
+  }
+  @media (max-width: 768px) {
+    .email-button {
+      margin-top: 15px;
+    }
+  }
+
+  /* piege a robots */
+  .hidden {
+    position: absolute;
+    left: -9999px;
+    visibility: hidden;
+  }
+</style>

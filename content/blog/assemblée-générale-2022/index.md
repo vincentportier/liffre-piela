@@ -1,54 +1,31 @@
 ---
-title: Assemblée Générale 2026
-date: 2026-04-23T16:45:24.704Z
-featuredImage: ag2026_2.png
+title: Assemblée Générale 2022
+date: 2022-09-04T19:46:39.425Z
+featuredImage: ag2022_1.jpg
 description: PV Assemblée Générale
 categories:
   - comité
 ---
-**Assemblée générale du samedi 28 Mars 2026**
+**Assemblée générale du samedi 03 Septembre 2022 à 17 h (Salle Boléro) Maurice Ravel Liffré**
 
+En début de séance , lecture par le Président Louis Gieu des derniers mails envoyés par Josué, mails évoquant les différents projets effectués grâce à nos versements. Evoquées également la situation politique et les diverses exactions non loin de Piéla qui font craindre toujours le pire pour nos amis Burkinabés. De chaleureux remerciements pour notre aide sans faille malgré les obstacles dus à la pandémie
 
+Relecture point par point et en détail du bilan moral et financier par le Président, bilan financier distribué à chaque présent dès leur arrivée.
 
-![]()
+Avec une 3ème année impactée par la Covid, on peut constater que la plantation de pommes de terre n’a pas eu lieu, le loto a été supprimé à plusieurs reprises, mais les bons d’achat ont été rachetés à prix coûtant permettant une opération blanche, hormis les 150€ reversés pour l’animation.
 
-\
-<!--StartFragment-->
+Le bol de riz a pu avoir lieu à l’exterieur, derrrière la mairie, et a remporté un vif succès.
 
-Après avoir évoqué la situation internationale,le président Louis Gieu a repris en détail le bilan  d'activités et financier de l'année 2025.
+Le bilan financier a été voté à l’unanimité .
 
-\-Grâce à nos actions: bol de riz, braderie de septembre,journée Liffré- Piéla de novembre
+Demande du Président de garder ou non le même montant pour l’adhésion à savoir 10€ minimum et 20€ pour obtenir un reçu fiscal. Décision acceptée à l’unanimité .
 
-\-Grâce à nos 175 adhésions
+Après deux années d’arrêt de la braderie , due à la pandémie, le Président est heureux d’annoncer qu’elle reprend le dimanche 11 septembre 2022 (notre emplacement se tiendra derrière le Crédit Agricole ) Louis Gieu rappelle que cette braderie dépend de 4 associations liffréennes (L’Amicale laïque, le Hand, la ludothèque et Liffré-Piéla)
 
-\-Grâce à la subvention précieuse de la mairie de Liffré.
+Intervention des deux religieuses de Rillé : Soeur Madeleine et Soeur Marguerite .
 
-Nous avons pu faire parvenir à l'ADDESP(Association Départementale de Développement Économique et Social de la région de Piéla) la somme de 22000€. 
+Soeur Madeleine a donné des nouvelles du dispensaire de Piéla (responsable Soeur Alice) : les actions et achats divers menés grâce aux 3000 € alloués par notre Association, les remerciements de cette dernière pour notre aide précieuse.
 
-Cette somme a été utilisée :-pour le fonctionnement du dispensaire catholique
+Soeur Marguerite a rappelé que les écoles de la région sont fermées ainsi que les paroisses . Que certaines écoles sont fermées depuis 2018, que la faim sévit de plus en plus et que le danger persiste toujours générant plus d’un million de réfugiés. Les Soeurs de Fada confirment ces déplacements massifs.
 
-\-construction d'une cuisine scolaire
-
-\-construction de latrines scolaire
-
-Les projets pour 2026
-
-\- Fonctionnement du dispensaire
-
-\- Construction de latrines scolaire et familiales
-
-\- Constitution d'un stock de céréales 
-
-Nous avons pu échanger en visio avec Josué.
-
-Il nous a parlé de la situation à Piéla.La région est relativement calme 
-
-Il a été évoqué la possibilité de relation entre le lycée de Liffré et celui de Piéla.
-
-Sœur Evelyne religieuse Burkinabé est intervenue.Elle a su nous préciser la mentalité des habitants du Burkina.
-
-C'est un peuple pacifique et pour Elle il n'y a pas de guerre ethniques ,mais plutôt des attaques autour des ressources minières(or)
-
-<!--EndFragment-->
-
-![](ag-2026.png)
+Distribution à l’Assemblée du 1er journal de la paroisse : Août /septembre 2022 où on peut retrouver dans la rubrique solidarité un long article sur la genèse de notre Association et ses actions menées depuis 44 ans pour venir en aide et travailler avec le Burkina-Faso et notamment Piéla.

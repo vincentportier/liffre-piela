@@ -1,0 +1,14 @@
+# Liffré-Piéla — redirections Netlify
+# Syntaxe : <ancien chemin>  <nouveau chemin>  <code>
+
+# --- Article réel supprimé en 2023, doublon du Bol de Riz 2023 ---
+/blog/bol-de-riz-le-1er-avril-2023    /blog/bol-de-riz-2023    301
+/blog/bol-de-riz-le-1er-avril-2023/*  /blog/bol-de-riz-2023    301
+
+# --- Canonisation de la pagination (évite le contenu dupliqué) ---
+/blog/page/1                          /blog                    301
+/blog/category/:cat/page/1            /blog/category/:cat      301
+
+# Note : les anciennes URLs des articles d'archives ne sont PAS redirigées,
+# car elles servent à nouveau leur article d'origine (aucune 404).
+# Les pages de test de 2021 (/blog/test, /blog/first-blog, ...) restent en 404 : voulu.

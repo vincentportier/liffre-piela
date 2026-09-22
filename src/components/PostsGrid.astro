@@ -1,0 +1,60 @@
+---
+import { formatDate, excerpt } from "../lib/utils.js"
+
+const { posts } = Astro.props
+---
+
+<div class="posts">
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <article>
+            <header>
+              <h1><a href={`/blog/${post.id}`}>{post.data.title}</a></h1>
+              <p>{formatDate(post.data.date)}</p>
+            </header>
+            <section>
+              <p>{post.data.description || excerpt(post.body)}</p>
+            </section>
+            <footer>
+              <a href={`/blog/${post.id}`}><span>&gt;&gt; Lire l'article complet</span></a>
+            </footer>
+          </article>
+          <hr />
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .posts {
+    padding: 2rem;
+  }
+  @media (max-width: 480px) {
+    .posts {
+      padding: 1rem;
+    }
+  }
+  .posts ul {
+    list-style: none;
+  }
+  .posts header h1 {
+    font-size: var(--fz-xxl);
+    margin: 0;
+  }
+  .posts header p {
+    color: var(--text-secondary);
+    font-style: italic;
+    font-size: var(--fz-sm);
+  }
+  .posts footer {
+    margin: 10px 0;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .posts footer a {
+    color: #8c451d;
+  }
+</style>

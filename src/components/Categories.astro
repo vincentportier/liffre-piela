@@ -1,0 +1,71 @@
+---
+import { kebabCase } from "../lib/utils.js"
+
+// counts : objet { "fête": 17, "comité": 10, ... }
+const { counts } = Astro.props
+const all = Object.keys(counts)
+---
+
+<section class="categories">
+  <header>
+    <h1>Catégories</h1>
+    <p>retrouvez tous nos articles par catégories</p>
+  </header>
+  <ul>
+    {
+      all.map((cat) => (
+        <li>
+          <a href={`/blog/category/${kebabCase(cat)}`}>
+            <div class="chip">
+              <span>{cat}</span>
+              <div class="badge flex-center">{counts[cat] >= 100 ? "99+" : counts[cat]}</div>
+            </div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .categories {
+    display: flex;
+    flex-direction: column;
+  }
+  .categories header {
+    text-align: center;
+  }
+  .categories header h1 {
+    font-size: var(--fz-xxl);
+  }
+  .categories ul {
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  .categories li {
+    margin: 1rem;
+  }
+  /* Classe dediee (et non "li div") : Astro ajoute un attribut de scope a
+     chaque compound du selecteur, donc un selecteur plus long gagne en
+     specificite et ecraserait le position:absolute du badge. */
+  .categories .chip {
+    position: relative;
+    color: var(--white);
+    background-color: rgba(1, 1, 1, 0.75);
+    border-radius: var(--border-radius);
+    padding: 3px 15px;
+  }
+  .categories .badge {
+    position: absolute;
+    background: var(--primary);
+    font-size: var(--fz-xxs);
+    color: var(--white);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    top: -18px;
+    right: -18px;
+  }
+</style>

@@ -1,0 +1,194 @@
+---
+import { Image, getImage } from "astro:assets"
+import Layout from "../layouts/Layout.astro"
+
+// Toutes les photos du dossier gallery. L'ancien site les triait par nom
+// (tri alphabetique simple) : on garde exactement le meme ordre.
+const modules = import.meta.glob("../images/gallery/*.{jpg,jpeg,png,JPG}", { eager: true })
+
+const photos = Object.entries(modules)
+  .map(([path, mod]) => ({
+    name: path.split("/").pop().replace(/\.[^.]+$/, ""),
+    image: mod.default,
+  }))
+  .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
+
+// URL plein ecran precalculee pour chaque photo (servie au clic).
+const fullsizes = await Promise.all(
+  photos.map((p) => getImage({ src: p.image, width: 1080, format: "webp" }))
+)
+---
+
+<Layout
+  banner={true}
+  bannerText="GALERIE"
+  title="Gallerie photos - Liffré-Piéla"
+  description="Retrouvez les dernières photos de Liffré-Piéla, association d'aide humanitaire et de coopération avec la région de Piéla au Burkina Faso"
+>
+  <div class="image-grid">
+    {
+      photos.map((photo, i) => (
+        <button
+          type="button"
+          class="image-container"
+          data-index={i}
+          data-full={fullsizes[i].src}
+          aria-label={`Agrandir la photo ${photo.name}`}
+        >
+          <Image src={photo.image} alt={photo.name} width={500} />
+        </button>
+      ))
+    }
+  </div>
+
+  <dialog class="lightbox" aria-label="photo">
+    <div class="lightbox-inner">
+      <button type="button" class="close" aria-label="Fermer">X</button>
+      <button type="button" class="prev" aria-label="Photo précédente">&lt;</button>
+      <img class="lightbox-image" src="" alt="" />
+      <button type="button" class="next" aria-label="Photo suivante">&gt;</button>
+    </div>
+  </dialog>
+</Layout>
+
+<style>
+  .image-grid {
+    margin-top: 2rem;
+    width: 100%;
+    display: grid;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+  }
+  @media (max-width: 1080px) {
+    .image-grid {
+      grid-template-columns: repeat(2, minmax(250px, 1fr));
+    }
+  }
+  @media (max-width: 768px) {
+    .image-grid {
+      grid-template-columns: repeat(1, minmax(250px, 1fr));
+    }
+  }
+
+  .image-container {
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    object-fit: cover;
+    width: 100%;
+    max-height: 220px;
+    overflow: hidden;
+  }
+  @media (max-width: 768px) {
+    .image-container {
+      max-height: 100%;
+    }
+  }
+  .image-container :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .lightbox {
+    position: relative;
+    margin: auto;
+    margin-top: var(--nav-height);
+    width: 70vw;
+    max-width: none;
+    padding: 0;
+    border: 0;
+    z-index: 1000;
+  }
+  @media (max-width: 780px) {
+    .lightbox {
+      width: 100vw;
+    }
+  }
+  .lightbox::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .lightbox-inner {
+    width: 100%;
+    display: flex;
+  }
+  .lightbox-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    z-index: 1;
+  }
+  .lightbox-inner button {
+    font-family: "Montserrat", sans-serif;
+    background: var(--primary);
+    padding: 2px 5px;
+    color: var(--white);
+    outline: none;
+    border: none;
+    border-radius: var(--border-radius);
+  }
+  .lightbox-inner button:hover {
+    cursor: pointer;
+  }
+  .close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 10000;
+    background: var(--error) !important;
+  }
+  .next {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    font-size: 25px;
+    z-index: 10000;
+  }
+  .prev {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    z-index: 10000;
+    font-size: 25px;
+  }
+</style>
+
+<script>
+  const thumbs = [...document.querySelectorAll(".image-container")]
+  const dialog = document.querySelector(".lightbox")
+  const img = document.querySelector(".lightbox-image")
+  let index = 0
+
+  const show = (i) => {
+    index = (i + thumbs.length) % thumbs.length
+    const thumb = thumbs[index]
+    img.src = thumb.dataset.full
+    img.alt = thumb.querySelector("img")?.alt || ""
+  }
+
+  thumbs.forEach((thumb, i) =>
+    thumb.addEventListener("click", () => {
+      show(i)
+      dialog.showModal()
+    })
+  )
+
+  document.querySelector(".close").addEventListener("click", () => dialog.close())
+  document.querySelector(".prev").addEventListener("click", () => show(index - 1))
+  document.querySelector(".next").addEventListener("click", () => show(index + 1))
+
+  // Fleches du clavier ; Echap est deja gere par <dialog>.
+  dialog.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") show(index - 1)
+    if (e.key === "ArrowRight") show(index + 1)
+  })
+
+  // Clic sur le fond (hors image) : on ferme.
+  dialog.addEventListener("click", (e) => {
+    if (e.target === dialog) dialog.close()
+  })
+</script>

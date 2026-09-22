@@ -1,0 +1,321 @@
+---
+import Logo from "./Logo.astro"
+import { navLinks } from "../lib/site.js"
+---
+
+<header class="site-header flex-center" data-scroll="top">
+  <nav class="site-nav flex-between">
+    <div class="left-nav">
+      <a class="logo" href="/" aria-label="Accueil">
+        <Logo />
+      </a>
+      <div class="links">
+        <ul>
+          {navLinks.map(({ name, url }) => <li><a href={url}>{name}</a></li>)}
+        </ul>
+      </div>
+    </div>
+    <a href="/blog"><button class="button nav-blog-button" type="button">Blog</button></a>
+  </nav>
+
+  <div class="mobile-menu">
+    <div class="menu-wrapper">
+      <button
+        class="hamburger flex-center"
+        type="button"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="mobile-sidebar"
+      >
+        <span class="ham-box"><span class="ham-box-inner"></span></span>
+      </button>
+      <div class="sidebar flex-center" id="mobile-sidebar" aria-hidden="true">
+        <nav>
+          <ul>
+            <li><a href="/">Accueil</a></li>
+            {navLinks.map(({ name, url }) => <li><a href={url}>{name}</a></li>)}
+          </ul>
+          <div><a href="/blog" class="button blog-button">Blog</a></div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    padding: 0px 50px;
+    width: 100%;
+    height: var(--nav-height);
+    filter: none !important;
+    pointer-events: auto !important;
+    user-select: auto !important;
+    background: var(--white);
+    transition: var(--transition);
+  }
+  /* Remonte vers le haut : barre reduite + ombre */
+  .site-header[data-scroll="up"] {
+    border: none;
+    height: var(--nav-height-scroll);
+    transform: translateY(0px);
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 6px 9px 0px;
+  }
+  /* Descente : la barre se masque */
+  .site-header[data-scroll="down"] {
+    border: none;
+    height: var(--nav-height-scroll);
+    transform: translateY(calc(var(--nav-height-scroll) * -1));
+    box-shadow: none;
+  }
+
+  .site-nav {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    max-width: 1380px;
+  }
+  .left-nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .logo :global(svg) {
+    height: 200px;
+    max-height: calc(var(--nav-height) - 20px);
+    margin-right: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .site-header:not([data-scroll="top"]) .logo :global(svg) {
+    max-height: calc(var(--nav-height-scroll) - 20px);
+  }
+
+  .links ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    list-style: none;
+    font-size: var(--fz-lg);
+    font-weight: 600;
+  }
+  .links li {
+    margin: 0 20px;
+  }
+  @media (max-width: 768px) {
+    .links {
+      display: none;
+    }
+    .nav-blog-button {
+      display: none;
+    }
+  }
+
+  .mobile-menu {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .mobile-menu {
+      display: block;
+    }
+  }
+
+  .hamburger {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+      position: relative;
+      z-index: 10;
+      margin-right: -15px;
+      padding: 15px;
+      border: 0;
+      background-color: transparent;
+      text-transform: none;
+      transition-timing-function: linear;
+      transition-duration: 0.15s;
+      transition-property: opacity, filter;
+    }
+    .hamburger:focus {
+      outline-color: var(--primary);
+    }
+  }
+
+  .ham-box {
+    display: inline-block;
+    position: relative;
+    width: var(--hamburger-width);
+    height: 24px;
+  }
+  .ham-box-inner {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: var(--hamburger-width);
+    height: 2px;
+    border-radius: var(--border-radius);
+    background-color: var(--black);
+    transition-duration: 0.22s;
+    transition-property: transform;
+    transition-delay: 0s;
+    transform: rotate(0deg);
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  .ham-box-inner:before,
+  .ham-box-inner:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: auto;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 4px;
+    background-color: var(--black);
+    transition-timing-function: ease;
+    transition-duration: 0.15s;
+    transition-property: transform;
+  }
+  .ham-box-inner:before {
+    top: -10px;
+    opacity: 1;
+    transition: var(--ham-before);
+  }
+  .ham-box-inner:after {
+    bottom: -10px;
+    transform: rotate(0);
+    transition: var(--ham-after);
+  }
+
+  /* etat ouvert : la croix */
+  .hamburger[aria-expanded="true"] .ham-box-inner {
+    transition-delay: 0.12s;
+    transform: rotate(225deg);
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .hamburger[aria-expanded="true"] .ham-box-inner:before {
+    top: 0;
+    opacity: 0;
+    transition: var(--ham-before-active);
+  }
+  .hamburger[aria-expanded="true"] .ham-box-inner:after {
+    bottom: 0;
+    transform: rotate(-90deg);
+    transition: var(--ham-after-active);
+  }
+
+  .sidebar {
+    display: none;
+    font-family: var(--font-heading);
+  }
+  @media (max-width: 768px) {
+    .sidebar {
+      display: flex;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      padding: 50px 10px;
+      width: min(75vw, 400px);
+      height: 100vh;
+      outline: 0;
+      background-color: var(--white);
+      box-shadow: -10px 0px 30px -15px var(--black);
+      z-index: 9;
+      transition: var(--transition);
+      /* Etat ouvert */
+      transform: translateX(0);
+      visibility: visible;
+    }
+    /* Etat ferme. Ecrit en :not() pour que les deux regles soient
+       mutuellement exclusives : le rendu ne depend alors plus de l'ordre
+       de la cascade (en mode dev, Vite injecte les styles dans un ordre
+       different du build, ce qui laissait le panneau masque a l'ouverture). */
+    .sidebar:not([aria-hidden="false"]) {
+      transform: translateX(100vw);
+      visibility: hidden;
+    }
+  }
+  .sidebar nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+  }
+  .sidebar ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 100%;
+  }
+  .sidebar li {
+    position: relative;
+    font-size: clamp(var(--fz-sm), 4vw, var(--fz-lg));
+  }
+  @media (max-width: 600px) {
+    .sidebar li {
+      margin: 0 auto 10px;
+    }
+  }
+  .sidebar a {
+    width: 100%;
+    padding: 3px 20px 20px;
+  }
+  .sidebar .blog-button {
+    padding: 18px 50px;
+    margin: 10% auto 0;
+    width: max-content;
+  }
+</style>
+
+<script>
+  // Barre qui se masque a la descente et reapparait a la remontee.
+  const header = document.querySelector(".site-header")
+  let lastY = window.scrollY
+
+  const onScroll = () => {
+    const y = window.scrollY
+    if (y < 50) {
+      header.dataset.scroll = "top"
+    } else {
+      header.dataset.scroll = y > lastY ? "down" : "up"
+    }
+    lastY = y
+  }
+  window.addEventListener("scroll", onScroll, { passive: true })
+  onScroll()
+
+  // Menu mobile
+  const hamburger = document.querySelector(".hamburger")
+  const sidebar = document.querySelector(".sidebar")
+  const wrapper = document.querySelector(".menu-wrapper")
+
+  const setMenu = (open) => {
+    hamburger.setAttribute("aria-expanded", String(open))
+    hamburger.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu")
+    sidebar.setAttribute("aria-hidden", String(!open))
+    document.body.classList.toggle("blur", open)
+  }
+
+  hamburger.addEventListener("click", () => {
+    setMenu(hamburger.getAttribute("aria-expanded") !== "true")
+  })
+
+  sidebar.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)))
+
+  document.addEventListener("click", (e) => {
+    if (!wrapper.contains(e.target)) setMenu(false)
+  })
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.key === "Esc") setMenu(false)
+  })
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) setMenu(false)
+  })
+</script>

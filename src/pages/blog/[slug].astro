@@ -1,0 +1,235 @@
+---
+import { render } from "astro:content"
+import { Image, getImage } from "astro:assets"
+import Layout from "../../layouts/Layout.astro"
+import Logo from "../../components/Logo.astro"
+import { allPosts } from "../../lib/blog.js"
+import { kebabCase, formatDate } from "../../lib/utils.js"
+import { footerBlurb } from "../../lib/site.js"
+
+export async function getStaticPaths() {
+  const posts = await allPosts()
+  // Les articles sont tries du plus recent au plus ancien :
+  // "precedent" = plus ancien, "suivant" = plus recent.
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: {
+      post,
+      newer: i > 0 ? posts[i - 1] : null,
+      older: i < posts.length - 1 ? posts[i + 1] : null,
+    },
+  }))
+}
+
+const { post, newer, older } = Astro.props
+const { Content } = await render(post)
+const { title, date, description, categories, featuredImage } = post.data
+
+// Image de partage : on genere une version dediee au format Open Graph.
+// Utiliser featuredImage.src ferait publier l'original non optimise
+// (jusqu'a 3 Mo pour certaines photos de l'asso).
+const ogImage = featuredImage
+  ? (
+      await getImage({
+        src: featuredImage,
+        width: 1200,
+        height: 630,
+        fit: "cover",
+        format: "jpeg",
+        // Une seule taille : sans ca, le layout "constrained" global
+        // ferait generer un jeu de variantes responsive inutile ici.
+        layout: "none",
+      })
+    ).src
+  : undefined
+---
+
+<Layout
+  title={`${title} - Liffré Piéla`}
+  description={description}
+  article={true}
+  image={ogImage}
+>
+  <div class="no-banner">
+    <article class="post">
+      <header>
+        <a href="/blog" class="blog-link">BLOG</a>
+        <h1>{title}</h1>
+        <p>Liffre Piela, {formatDate(date)}</p>
+        {
+          categories.length > 0 && (
+            <ul>
+              {categories.map((cat) => (
+                <li>
+                  <a href={`/blog/category/${kebabCase(cat)}`}>{cat}</a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+        {
+          featuredImage && (
+            <div class="image-container">
+              <Image src={featuredImage} alt={`image à la une - ${title}`} width={1600} />
+            </div>
+          )
+        }
+      </header>
+      <section class="post-body">
+        <Content />
+      </section>
+    </article>
+  </div>
+
+  <footer class="post-footer flex-center">
+    <div class="flex-center">
+      <Logo />
+      <p>{footerBlurb}</p>
+    </div>
+  </footer>
+
+  <nav class="post-nav flex-center">
+    <ul>
+      <li class="previous">
+        {
+          older && (
+            <div>
+              <p>← Article précédent</p>
+              <a href={`/blog/${older.id}`} rel="prev">
+                {older.data.title}
+              </a>
+            </div>
+          )
+        }
+      </li>
+      <li class="next">
+        {
+          newer && (
+            <div>
+              <p>Article suivant →</p>
+              <a href={`/blog/${newer.id}`} rel="next">
+                {newer.data.title}
+              </a>
+            </div>
+          )
+        }
+      </li>
+    </ul>
+  </nav>
+</Layout>
+
+<style>
+  .post .blog-link {
+    margin-top: 2rem;
+  }
+  .post a {
+    text-decoration: underline;
+    transition: var(--transition);
+  }
+  .post a:hover {
+    color: var(--primary);
+  }
+  .post-body :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .post header a {
+    text-decoration: underline;
+    color: var(--text-secondary);
+  }
+  .post header h1 {
+    margin-bottom: 0;
+  }
+  .post header p {
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+  .post header .image-container {
+    margin-bottom: 2rem;
+  }
+  .post header .image-container :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .post header ul {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    list-style-type: none;
+    flex-wrap: wrap;
+  }
+  .post header ul li {
+    background: var(--text-primary);
+    color: var(--white);
+    border-radius: var(--border-radius);
+    padding: 2px 6px;
+    margin: 10px 10px 0 0;
+    font-size: var(--fz-xxs);
+    transition: var(--transition);
+  }
+  .post header ul li:hover {
+    opacity: 0.75;
+  }
+  .post header ul li a {
+    text-decoration: none;
+    color: var(--white);
+  }
+  .post header ul li a:hover {
+    color: var(--white);
+  }
+
+  .post-footer {
+    margin-top: 2rem;
+    border-top: 1px solid rgba(1, 1, 1, 0.2);
+    padding: 1rem;
+  }
+  @media (max-width: 480px) {
+    .post-footer > div {
+      flex-wrap: wrap;
+    }
+  }
+  .post-footer p {
+    margin: 0;
+    font-style: italic;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: var(--fz-md);
+  }
+  .post-footer :global(svg) {
+    width: 200px;
+    min-width: 75px;
+    margin: 2rem;
+  }
+  @media (max-width: 480px) {
+    .post-footer :global(svg) {
+      width: 100px;
+    }
+  }
+
+  .post-nav {
+    margin-top: 2rem;
+  }
+  .post-nav ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    list-style: none;
+  }
+  .post-nav .next {
+    text-align: right;
+  }
+  .post-nav li {
+    font-size: var(--fz-sm);
+    width: 40%;
+  }
+  .post-nav li p {
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+  }
+</style>
