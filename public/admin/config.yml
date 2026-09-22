@@ -1,15 +1,16 @@
 # Sveltia CMS — remplace Netlify CMS + Identity + Git Gateway.
 #
-# AVANT LA MISE EN LIGNE : renseigner base_url ci-dessous avec l'URL du
-# Worker Cloudflare (voir docs/CMS.md, etape 2). Sans lui, la connexion
-# echouera.
+# Le Worker Cloudflare qui gere la connexion GitHub est deploye sur
+# https://sveltia-cms-auth.vinz-portier.workers.dev
+# Il lui faut ses trois variables d'environnement cote Cloudflare
+# (GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, ALLOWED_DOMAINS) : voir docs/CMS.md.
 
 backend:
   name: github
   repo: vincentportier/liffre-piela
   branch: master
   # URL du Worker Cloudflare qui gere le "Se connecter avec GitHub".
-  base_url: https://REMPLACER-PAR-VOTRE-WORKER.workers.dev
+  base_url: https://sveltia-cms-auth.vinz-portier.workers.dev
 
 # Emplacement par defaut des images deposees depuis l'editeur.
 # (Les articles ont leur propre reglage plus bas : images dans leur dossier.)
@@ -17,9 +18,9 @@ media_folder: public/img
 public_folder: /img
 
 # Libelles de l'interface
-site_url: https://www.liffre-piela.netlify.app
-display_url: https://www.liffre-piela.netlify.app
-logo_url: https://www.liffre-piela.netlify.app/favicon.png
+site_url: https://liffre-piela.netlify.app
+display_url: https://liffre-piela.netlify.app
+logo_url: https://liffre-piela.netlify.app/favicon.png
 
 collections:
   # ------------------------------------------------------------------

@@ -5,6 +5,15 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Service worker auto-destructeur (voir public/sw.js) : il doit toujours etre
+# recharge depuis le serveur, jamais depuis le cache, sinon les navigateurs
+# gardent l'ancien service worker de Gatsby.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Content-Type = "application/javascript; charset=utf-8"
+
 # Le panneau d'administration ne doit pas etre indexe.
 [[headers]]
   for = "/admin/*"

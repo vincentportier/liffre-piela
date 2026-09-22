@@ -3,7 +3,7 @@
 Site de l'association **Liffré-Piéla**, aide humanitaire et coopération avec la
 région de Piéla (Burkina Faso).
 
-<https://www.liffre-piela.netlify.app>
+<https://liffre-piela.netlify.app>
 
 ## Stack
 

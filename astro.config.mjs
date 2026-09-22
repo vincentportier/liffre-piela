@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config"
 import sitemap from "@astrojs/sitemap"
 
 export default defineConfig({
-  site: "https://www.liffre-piela.netlify.app",
+  site: "https://liffre-piela.netlify.app",
   trailingSlash: "ignore",
   integrations: [sitemap()],
   // Astro 7 passe compressHTML a 'jsx', ce qui supprime les espaces entre

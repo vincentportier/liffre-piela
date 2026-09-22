@@ -30,13 +30,13 @@ Il tourne gratuitement sur Cloudflare Workers.
    Noter l'URL obtenue, du type `https://xxxx.workers.dev`.
 3. Sur GitHub, créer une **OAuth App** :
    *Settings → Developer settings → OAuth Apps → New OAuth App*
-   - Homepage URL : `https://www.liffre-piela.netlify.app`
+   - Homepage URL : `https://liffre-piela.netlify.app`
    - Authorization callback URL : `https://xxxx.workers.dev/callback`
    - Récupérer le *Client ID* et générer un *Client Secret*.
 4. Dans les variables d'environnement du Worker, renseigner :
    - `GITHUB_CLIENT_ID`
    - `GITHUB_CLIENT_SECRET`
-   - `ALLOWED_DOMAINS` = `www.liffre-piela.netlify.app`
+   - `ALLOWED_DOMAINS` = `liffre-piela.netlify.app`
 5. Reporter l'URL du Worker dans [`public/admin/config.yml`](../public/admin/config.yml),
    à la place de `https://REMPLACER-PAR-VOTRE-WORKER.workers.dev`.
 
@@ -77,7 +77,7 @@ legacy, c'est le seul quota à surveiller côté formulaire.
 
 ## 4. Pour le rédacteur
 
-L'administration est sur **<https://www.liffre-piela.netlify.app/admin>**,
+L'administration est sur **<https://liffre-piela.netlify.app/admin>**,
 connexion avec un compte GitHub.
 
 ### La règle importante
