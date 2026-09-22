@@ -2,70 +2,119 @@
 import { kebabCase } from "../lib/utils.js"
 
 // counts : objet { "fête": 17, "comité": 10, ... }
-const { counts } = Astro.props
-const all = Object.keys(counts)
+const { counts, current } = Astro.props
+const all = Object.keys(counts).sort((a, b) => counts[b] - counts[a])
 ---
 
 <section class="categories">
   <header>
-    <h1>Catégories</h1>
-    <p>retrouvez tous nos articles par catégories</p>
+    <p class="eyebrow">Explorer</p>
+    <h2>Catégories</h2>
+    <p class="lead">Retrouvez tous nos articles par catégories</p>
   </header>
+
   <ul>
     {
-      all.map((cat) => (
-        <li>
-          <a href={`/blog/category/${kebabCase(cat)}`}>
-            <div class="chip">
-              <span>{cat}</span>
-              <div class="badge flex-center">{counts[cat] >= 100 ? "99+" : counts[cat]}</div>
-            </div>
-          </a>
-        </li>
-      ))
+      all.map((cat) => {
+        const slug = kebabCase(cat)
+        return (
+          <li>
+            <a
+              href={`/blog/category/${slug}`}
+              class:list={["chip", { active: current === slug }]}
+              aria-current={current === slug ? "page" : undefined}
+            >
+              <span class="chip-label">{cat}</span>
+              <span class="chip-count">{counts[cat] >= 100 ? "99+" : counts[cat]}</span>
+            </a>
+          </li>
+        )
+      })
     }
   </ul>
 </section>
 
 <style>
   .categories {
-    display: flex;
-    flex-direction: column;
-  }
-  .categories header {
+    margin-top: var(--space-8);
+    padding-top: var(--space-7);
+    border-top: 1px solid var(--line);
     text-align: center;
   }
-  .categories header h1 {
-    font-size: var(--fz-xxl);
+  .categories header {
+    max-width: 40ch;
+    margin: 0 auto var(--space-6);
   }
+  .categories h2 {
+    margin: var(--space-2) 0 var(--space-2);
+    font-size: var(--fz-h3);
+  }
+  .lead {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--fz-md);
+  }
+
   .categories ul {
     display: flex;
-    justify-content: space-evenly;
-    list-style: none;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
   .categories li {
-    margin: 1rem;
+    margin: 0;
   }
-  /* Classe dediee (et non "li div") : Astro ajoute un attribut de scope a
-     chaque compound du selecteur, donc un selecteur plus long gagne en
-     specificite et ecraserait le position:absolute du badge. */
-  .categories .chip {
-    position: relative;
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.5rem 0.55rem 0.5rem 1rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-full);
+    background: var(--surface);
+    color: var(--ink-800);
+    font-family: var(--font-heading);
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+    transition:
+      background-color 0.2s var(--ease),
+      border-color 0.2s var(--ease),
+      color 0.2s var(--ease),
+      transform 0.2s var(--ease);
+  }
+  .chip:hover {
+    background: var(--brand-50);
+    border-color: var(--brand-200);
+    color: var(--brand-700);
+    transform: translateY(-1px);
+  }
+
+  .chip-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.6rem;
+    height: 1.6rem;
+    padding: 0 0.35rem;
+    border-radius: var(--radius-full);
+    background: var(--brand-500);
     color: var(--white);
-    background-color: rgba(1, 1, 1, 0.75);
-    border-radius: var(--border-radius);
-    padding: 3px 15px;
-  }
-  .categories .badge {
-    position: absolute;
-    background: var(--primary);
     font-size: var(--fz-xxs);
+    font-weight: 700;
+  }
+
+  .chip.active {
+    background: var(--brand-600);
+    border-color: var(--brand-600);
     color: var(--white);
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    top: -18px;
-    right: -18px;
+  }
+  .chip.active .chip-count {
+    background: rgba(255, 255, 255, 0.22);
+    color: var(--white);
   }
 </style>

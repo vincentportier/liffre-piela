@@ -36,8 +36,6 @@ const ogImage = featuredImage
         height: 630,
         fit: "cover",
         format: "jpeg",
-        // Une seule taille : sans ca, le layout "constrained" global
-        // ferait generer un jeu de variantes responsive inutile ici.
         layout: "none",
       })
     ).src
@@ -50,186 +48,280 @@ const ogImage = featuredImage
   article={true}
   image={ogImage}
 >
-  <div class="no-banner">
-    <article class="post">
-      <header>
-        <a href="/blog" class="blog-link">BLOG</a>
-        <h1>{title}</h1>
-        <p>Liffre Piela, {formatDate(date)}</p>
-        {
-          categories.length > 0 && (
-            <ul>
-              {categories.map((cat) => (
-                <li>
-                  <a href={`/blog/category/${kebabCase(cat)}`}>{cat}</a>
-                </li>
-              ))}
-            </ul>
-          )
-        }
-        {
-          featuredImage && (
-            <div class="image-container">
-              <Image src={featuredImage} alt={`image à la une - ${title}`} width={1600} />
-            </div>
-          )
-        }
-      </header>
-      <section class="post-body">
-        <Content />
-      </section>
-    </article>
-  </div>
+  <article class="post no-banner">
+    <header class="post-header">
+      <a href="/blog" class="back-link">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
+          <path
+            d="M13 8H4M7.5 11.5 4 8l3.5-3.5"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+        Tous les articles
+      </a>
 
-  <footer class="post-footer flex-center">
-    <div class="flex-center">
-      <Logo />
-      <p>{footerBlurb}</p>
+      <h1>{title}</h1>
+
+      <div class="post-meta">
+        <span>Liffré-Piéla</span>
+        <span class="dot" aria-hidden="true">·</span>
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+      </div>
+
+      {
+        categories.length > 0 && (
+          <ul class="chips">
+            {categories.map((cat) => (
+              <li>
+                <a href={`/blog/category/${kebabCase(cat)}`}>{cat}</a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+
+    {
+      featuredImage && (
+        <figure class="featured">
+          <Image src={featuredImage} alt={`Image à la une — ${title}`} width={1600} />
+        </figure>
+      )
+    }
+
+    <div class="post-body prose">
+      <Content />
     </div>
-  </footer>
+  </article>
 
-  <nav class="post-nav flex-center">
-    <ul>
-      <li class="previous">
-        {
-          older && (
-            <div>
-              <p>← Article précédent</p>
-              <a href={`/blog/${older.id}`} rel="prev">
-                {older.data.title}
-              </a>
-            </div>
-          )
-        }
-      </li>
-      <li class="next">
-        {
-          newer && (
-            <div>
-              <p>Article suivant →</p>
-              <a href={`/blog/${newer.id}`} rel="next">
-                {newer.data.title}
-              </a>
-            </div>
-          )
-        }
-      </li>
-    </ul>
-  </nav>
+  <aside class="about-card">
+    <Logo />
+    <p>{footerBlurb}</p>
+  </aside>
+
+  {
+    (older || newer) && (
+      <nav class="post-nav" aria-label="Navigation entre les articles">
+        {older ? (
+          <a href={`/blog/${older.id}`} rel="prev" class="nav-card">
+            <span class="nav-label">← Article précédent</span>
+            <span class="nav-title">{older.data.title}</span>
+          </a>
+        ) : (
+          <span />
+        )}
+        {newer && (
+          <a href={`/blog/${newer.id}`} rel="next" class="nav-card next">
+            <span class="nav-label">Article suivant →</span>
+            <span class="nav-title">{newer.data.title}</span>
+          </a>
+        )}
+      </nav>
+    )
+  }
 </Layout>
 
 <style>
-  .post .blog-link {
-    margin-top: 2rem;
-  }
-  .post a {
-    text-decoration: underline;
-    transition: var(--transition);
-  }
-  .post a:hover {
-    color: var(--primary);
-  }
-  .post-body :global(img) {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
+  .post {
+    max-width: 800px;
+    margin: 0 auto;
   }
 
-  .post header a {
-    text-decoration: underline;
-    color: var(--text-secondary);
+  /* ---- en-tete ---- */
+  .post-header {
+    margin-bottom: var(--space-6);
   }
-  .post header h1 {
-    margin-bottom: 0;
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-heading);
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--brand-600);
   }
-  .post header p {
-    color: var(--text-secondary);
-    font-style: italic;
+  .back-link:hover {
+    color: var(--brand-700);
   }
-  .post header .image-container {
-    margin-bottom: 2rem;
+  .back-link svg {
+    transition: transform 0.22s var(--ease);
   }
-  .post header .image-container :global(img) {
-    display: block;
-    width: 100%;
-    height: auto;
+  .back-link:hover svg {
+    transform: translateX(-3px);
   }
-  .post header ul {
+
+  .post-header h1 {
+    margin: var(--space-4) 0 var(--space-3);
+  }
+
+  .post-meta {
     display: flex;
     align-items: center;
-    text-decoration: none;
-    list-style-type: none;
-    flex-wrap: wrap;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: var(--fz-sm);
+    letter-spacing: 0.02em;
   }
-  .post header ul li {
-    background: var(--text-primary);
-    color: var(--white);
-    border-radius: var(--border-radius);
-    padding: 2px 6px;
-    margin: 10px 10px 0 0;
-    font-size: var(--fz-xxs);
-    transition: var(--transition);
-  }
-  .post header ul li:hover {
-    opacity: 0.75;
-  }
-  .post header ul li a {
-    text-decoration: none;
-    color: var(--white);
-  }
-  .post header ul li a:hover {
-    color: var(--white);
+  .dot {
+    color: var(--ink-300);
   }
 
-  .post-footer {
-    margin-top: 2rem;
-    border-top: 1px solid rgba(1, 1, 1, 0.2);
-    padding: 1rem;
-  }
-  @media (max-width: 480px) {
-    .post-footer > div {
-      flex-wrap: wrap;
-    }
-  }
-  .post-footer p {
-    margin: 0;
-    font-style: italic;
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: var(--fz-md);
-  }
-  .post-footer :global(svg) {
-    width: 200px;
-    min-width: 75px;
-    margin: 2rem;
-  }
-  @media (max-width: 480px) {
-    .post-footer :global(svg) {
-      width: 100px;
-    }
-  }
-
-  .post-nav {
-    margin-top: 2rem;
-  }
-  .post-nav ul {
+  .chips {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
-    width: 100%;
+    gap: var(--space-2);
+    margin: var(--space-4) 0 0;
+    padding: 0;
     list-style: none;
   }
-  .post-nav .next {
-    text-align: right;
+  .chips li {
+    margin: 0;
   }
-  .post-nav li {
-    font-size: var(--fz-sm);
-    width: 40%;
+  .chips a {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    background: var(--brand-50);
+    border: 1px solid var(--brand-100);
+    color: var(--brand-700);
+    font-size: var(--fz-xs);
+    font-weight: 600;
   }
-  .post-nav li p {
+  .chips a:hover {
+    background: var(--brand-100);
+    border-color: var(--brand-200);
+  }
+
+  /* ---- image a la une ---- */
+  .featured {
+    margin: 0 0 var(--space-7);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .featured :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ---- corps de l'article ---- */
+  .post-body {
+    font-size: var(--fz-xl);
+  }
+  .post-body :global(img) {
+    width: 100%;
+    height: auto;
+    margin: var(--space-6) 0;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+  .post-body :global(a) {
+    color: var(--brand-700);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .post-body :global(a:hover) {
+    color: var(--brand-600);
+    text-decoration-thickness: 2px;
+  }
+  .post-body :global(h2),
+  .post-body :global(h3) {
+    margin-top: var(--space-7);
+  }
+
+  /* ---- encart association ---- */
+  .about-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    max-width: 800px;
+    margin: var(--space-8) auto 0;
+    padding: var(--space-5);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+  .about-card :global(svg) {
+    width: 120px;
+    min-width: 120px;
+  }
+  .about-card p {
+    margin: 0;
+    font-size: var(--fz-md);
     font-style: italic;
     color: var(--text-secondary);
-    margin-bottom: 0;
+  }
+  @media (max-width: 560px) {
+    .about-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .about-card :global(svg) {
+      width: 90px;
+      min-width: 0;
+    }
+  }
+
+  /* ---- precedent / suivant ---- */
+  .post-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    max-width: 800px;
+    margin: var(--space-6) auto 0;
+  }
+  .nav-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform 0.22s var(--ease),
+      box-shadow 0.22s var(--ease),
+      border-color 0.22s var(--ease);
+  }
+  .nav-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--line-strong);
+  }
+  .nav-card.next {
+    text-align: right;
+  }
+  .nav-label {
+    font-size: var(--fz-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .nav-title {
+    font-family: var(--font-heading);
+    font-size: var(--fz-md);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--ink-900);
+  }
+  .nav-card:hover .nav-title {
+    color: var(--brand-700);
+  }
+
+  @media (max-width: 640px) {
+    .post-nav {
+      grid-template-columns: 1fr;
+    }
+    .nav-card.next {
+      text-align: left;
+    }
   }
 </style>

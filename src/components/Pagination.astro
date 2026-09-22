@@ -8,55 +8,140 @@ const pages = Array.from({ length: numPages }, (_, i) => i + 1)
 
 {
   numPages > 1 && (
-    <div class="pagination flex-center">
+    <nav class="pagination" aria-label="Pagination des articles">
       <ul>
         <li>
           {currentPage === 1 ? (
-            <span class="disabled" aria-hidden="true">
-              &#129040;
+            <span class="nav-btn disabled" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="16" height="16" fill="none">
+                <path
+                  d="M13 8H4M7.5 11.5 4 8l3.5-3.5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </span>
           ) : (
-            <a href={pageUrl(currentPage - 1)} rel="prev" aria-label="Page précédente">
-              &#129040;
+            <a
+              class="nav-btn"
+              href={pageUrl(currentPage - 1)}
+              rel="prev"
+              aria-label="Page précédente"
+            >
+              <svg viewBox="0 0 16 16" width="16" height="16" fill="none">
+                <path
+                  d="M13 8H4M7.5 11.5 4 8l3.5-3.5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </a>
           )}
         </li>
 
         {pages.map((n) => (
-          <li class:list={[{ active: n === currentPage }]}>
-            {n === currentPage ? <span aria-current="page">{n}</span> : <a href={pageUrl(n)}>{n}</a>}
+          <li>
+            {n === currentPage ? (
+              <span class="page current" aria-current="page">
+                {n}
+              </span>
+            ) : (
+              <a class="page" href={pageUrl(n)} aria-label={`Page ${n}`}>
+                {n}
+              </a>
+            )}
           </li>
         ))}
 
         <li>
           {currentPage === numPages ? (
-            <span class="disabled" aria-hidden="true">
-              &#129042;
+            <span class="nav-btn disabled" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="16" height="16" fill="none">
+                <path
+                  d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </span>
           ) : (
-            <a href={pageUrl(currentPage + 1)} rel="next" aria-label="Page suivante">
-              &#129042;
+            <a class="nav-btn" href={pageUrl(currentPage + 1)} rel="next" aria-label="Page suivante">
+              <svg viewBox="0 0 16 16" width="16" height="16" fill="none">
+                <path
+                  d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </a>
           )}
         </li>
       </ul>
-    </div>
+    </nav>
   )
 }
 
 <style>
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-7);
+  }
   .pagination ul {
     display: flex;
-    list-style-type: none;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1);
+    margin: 0;
+    padding: var(--space-1);
+    list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm);
   }
   .pagination li {
-    margin: 5px;
+    margin: 0;
   }
-  .pagination .active {
-    font-weight: 900;
+
+  .page,
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    height: 2.25rem;
+    padding: 0 0.5rem;
+    border-radius: var(--radius-full);
+    font-family: var(--font-heading);
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    color: var(--ink-700);
+    transition:
+      background-color 0.2s var(--ease),
+      color 0.2s var(--ease);
   }
-  .pagination .disabled {
-    opacity: 0.35;
+
+  .page:hover,
+  .nav-btn:hover {
+    background: var(--brand-50);
+    color: var(--brand-700);
+  }
+
+  .page.current {
+    background: var(--brand-500);
+    color: var(--white);
+  }
+
+  .nav-btn.disabled {
+    color: var(--ink-300);
+    cursor: default;
   }
 </style>

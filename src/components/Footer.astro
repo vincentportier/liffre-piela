@@ -1,27 +1,78 @@
 ---
+import { navLinks } from "../lib/site.js"
+const year = new Date().getFullYear()
 ---
 
-<footer class="site-footer flex-center">
-  <div>
-    <span>Conception </span>
-    <a href="https://vportier.com" target="_blank" rel="noreferrer">
-      <span>Vincent Portier</span>
-    </a>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <nav class="footer-nav" aria-label="Pied de page">
+      <a href="/">Accueil</a>
+      {navLinks.map(({ name, url }) => <a href={url}>{name}</a>)}
+      <a href="/blog">Blog</a>
+    </nav>
+
+    <p class="credits">
+      <span>© {year} Association Liffré-Piéla</span>
+      <span class="sep" aria-hidden="true">·</span>
+      <span>
+        Conception
+        <a href="https://vportier.com" target="_blank" rel="noreferrer">Vincent Portier</a>
+      </span>
+    </p>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    flex-direction: column;
-    height: auto;
-    min-height: 70px;
-    padding: 15px;
-    text-align: center;
-    color: var(--text-primary);
-    font-size: var(--fz-xxs);
-    line-height: 1;
+    margin-top: auto;
+    border-top: 1px solid var(--line);
+    background: var(--surface-2);
   }
-  .site-footer a {
+  .footer-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: var(--space-6) clamp(1.25rem, 5vw, 3.5rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    text-align: center;
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2) var(--space-5);
+  }
+  .footer-nav a {
+    font-family: var(--font-heading);
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    color: var(--ink-700);
+  }
+  .footer-nav a:hover {
+    color: var(--brand-600);
+  }
+
+  .credits {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    margin: 0;
+    color: var(--text-muted);
+    font-size: var(--fz-xs);
+  }
+  .credits a {
+    color: var(--brand-600);
     text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .credits a:hover {
+    color: var(--brand-700);
+  }
+  .sep {
+    color: var(--ink-300);
   }
 </style>

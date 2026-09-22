@@ -8,8 +8,9 @@ const { posts } = Astro.props
 
 <section class="latest">
   <header class="section-header">
-    <h1>Nos derniers articles</h1>
-    <h2>Retrouvez l'actualité de Liffré Piéla</h2>
+    <p class="eyebrow">Le journal de l'association</p>
+    <h2>Nos derniers articles</h2>
+    <p class="section-lead">Retrouvez l'actualité de Liffré-Piéla</p>
   </header>
 
   <div class="grid">
@@ -22,156 +23,231 @@ const { posts } = Astro.props
             ? description.substring(0, 160) + "..."
             : description
         return (
-          <div class="card box-shadow">
-            <div class="card-image-container">
-              <Image src={img} alt={title} width={500} height={336} />
+          <article class="card">
+            <div class="card-media">
+              <Image src={img} alt={title} width={640} height={400} />
             </div>
-            <div class="card-content">
-              <header>
-                <small><a href="/blog">BLOG</a></small>
-                <h1><a href={`/blog/${post.id}`}>{title}</a></h1>
-                <small>Liffré-Piela, {formatDate(date)}</small>
-                <ul>
-                  {categories.map((cat) => (
-                    <li>
-                      <a href={`/blog/category/${kebabCase(cat)}`}>{cat}</a>
-                    </li>
-                  ))}
-                </ul>
-              </header>
-              <p>{blurb}</p>
+
+            <div class="card-body">
+              <div class="card-meta">
+                <time datetime={date.toISOString()}>{formatDate(date)}</time>
+              </div>
+
+              <h3 class="card-title">
+                <a href={`/blog/${post.id}`}>
+                  <span class="stretched">{title}</span>
+                </a>
+              </h3>
+
+              {blurb && <p class="card-excerpt">{blurb}</p>}
+
+              <div class="card-footer">
+                {categories.length > 0 && (
+                  <ul class="chips">
+                    {categories.map((cat) => (
+                      <li>
+                        <a href={`/blog/category/${kebabCase(cat)}`}>{cat}</a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <span class="read-more" aria-hidden="true">
+                  Lire
+                  <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
+                    <path
+                      d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </div>
             </div>
-            <footer>
-              <a href={`/blog/${post.id}`}><span>&gt;&gt; Lire l'article complet</span></a>
-            </footer>
-          </div>
+          </article>
         )
       })
     }
   </div>
 
-  <div>
-    <div class="blog-button-wrapper flex-center">
-      <a href="/blog" class="button">Tous les articles</a>
-    </div>
+  <div class="all-posts">
+    <a href="/blog" class="button">Tous les articles</a>
   </div>
 </section>
 
 <style>
   .latest {
-    display: flex;
-    flex-direction: column;
+    padding-top: var(--space-9);
   }
+
   .section-header {
     text-align: center;
-  }
-  .section-header h1 {
-    font-size: var(--fz-xxl);
-    margin-bottom: 0;
+    max-width: 44ch;
+    margin: 0 auto var(--space-7);
   }
   .section-header h2 {
-    margin-top: 1rem;
+    margin: var(--space-2) 0 var(--space-3);
+  }
+  .section-lead {
     color: var(--text-secondary);
-    font-size: var(--fz-lg);
+    font-size: var(--fz-xl);
+    margin: 0;
   }
 
   .grid {
     display: grid;
-    margin: 2rem 0;
-    grid-template-columns: repeat(3, minmax(250px, 1fr));
-    grid-column-gap: 2rem;
-    grid-row-gap: 2rem;
-  }
-  @media (max-width: 1080px) {
-    .grid {
-      grid-template-columns: repeat(2, minmax(250px, 1fr));
-    }
-  }
-  @media (max-width: 768px) {
-    .grid {
-      grid-template-columns: repeat(1, minmax(250px, 1fr));
-    }
+    gap: var(--space-5);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   }
 
+  /* ---- carte ---- */
   .card {
-    overflow: hidden;
     position: relative;
-    transition: var(--transition);
-  }
-  .card-image-container {
-    width: 100%;
-    height: 168px;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform 0.28s var(--ease),
+      box-shadow 0.28s var(--ease),
+      border-color 0.28s var(--ease);
   }
-  .card-image-container :global(img) {
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--line-strong);
+  }
+  /* L'anneau de focus suit le lien, mais s'affiche autour de la carte */
+  .card:focus-within {
+    outline: 2px solid var(--brand-600);
+    outline-offset: 3px;
+  }
+
+  .card-media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+  .card-media :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s var(--ease);
+  }
+  .card:hover .card-media :global(img) {
+    transform: scale(1.05);
   }
 
-  .card-content {
-    padding: 5px 10px;
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: var(--space-3);
+    padding: var(--space-5);
   }
-  .card-content h1 {
-    margin: 0;
+
+  .card-meta {
+    font-size: var(--fz-xs);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .card-title {
     font-size: var(--fz-xxl);
+    line-height: 1.25;
+    margin: 0;
   }
-  .card-content h1 a {
-    transition: var(--transition);
+  .card-title a {
+    color: var(--ink-900);
   }
-  .card-content h1 a:hover {
-    opacity: 0.85;
+  .card:hover .card-title a {
+    color: var(--brand-700);
   }
-  .card-content p {
-    margin-bottom: 50px;
+  /* Toute la carte devient cliquable */
+  .stretched::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .card-title a:focus-visible {
+    outline: none;
+  }
+
+  .card-excerpt {
+    margin: 0;
+    color: var(--text-secondary);
     font-size: var(--fz-md);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
-  .card-content small {
-    color: var(--text-secondary);
-    transition: var(--transition);
-  }
-  .card-content small a:hover {
-    text-decoration: underline;
-    color: var(--text-secondary);
-  }
-  .card-content ul {
+
+  .card-footer {
     display: flex;
     align-items: center;
-    text-decoration: none;
-    list-style-type: none;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-top: auto;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--line);
+  }
+
+  .chips {
+    display: flex;
     flex-wrap: wrap;
-    margin-top: 3px;
-    margin-bottom: 1rem;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
-  .card-content ul li {
-    background: var(--black);
-    color: var(--white);
-    border-radius: var(--border-radius);
-    padding: 2px 6px;
-    margin: 5px 5px 0 0;
+  .chips li {
+    margin: 0;
+  }
+  .chips a {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-full);
+    background: var(--brand-50);
+    border: 1px solid var(--brand-100);
+    color: var(--brand-700);
     font-size: var(--fz-xxs);
+    font-weight: 600;
   }
-  .card-content ul li:hover {
-    opacity: 0.75;
-  }
-  .card-content ul li a:hover {
-    color: var(--white);
-  }
-
-  .card footer {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-  }
-  .card footer a {
-    color: var(--text-secondary);
-    font-size: var(--fz-lg);
-  }
-  .card footer a:hover {
-    text-decoration: underline;
+  .chips a:hover {
+    background: var(--brand-100);
+    border-color: var(--brand-200);
   }
 
-  .blog-button-wrapper {
-    margin-top: 50px;
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex: none;
+    font-family: var(--font-heading);
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    color: var(--brand-600);
+  }
+  .read-more svg {
+    transition: transform 0.25s var(--ease);
+  }
+  .card:hover .read-more svg {
+    transform: translateX(3px);
+  }
+
+  .all-posts {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-8);
   }
 </style>

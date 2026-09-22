@@ -1,0 +1,190 @@
+---
+// Bande "Ce que nous faisons" de la page d'accueil.
+// Le contenu vient de content/settings/accueil.json, editable depuis le CMS
+// (collection "Page d'accueil") : les chiffres peuvent etre actualises apres
+// chaque assemblee generale sans toucher au code.
+import data from "../../content/settings/accueil.json"
+
+const { titre, intro, chiffres = [], actions = [], lien_texte, lien_url } = data
+
+// Jeu d'icones minimal, choisi par la cle "icone" dans le JSON.
+const ICONS = {
+  eau: "M12 3s5.5 6.2 5.5 10a5.5 5.5 0 0 1-11 0C6.5 9.2 12 3 12 3Z",
+  education: "M3 7.5 12 4l9 3.5-9 3.5-9-3.5Zm3 5v4.2c0 .6.3 1.1.8 1.4 1.6.9 3.4 1.4 5.2 1.4s3.6-.5 5.2-1.4c.5-.3.8-.8.8-1.4V12.5",
+  faim: "M4 13h16a8 8 0 0 1-8 8 8 8 0 0 1-8-8Zm8-9c1.7 1.3 2.2 3 1.5 5M9 6c1.2 1 1.6 2.2 1.1 3.6",
+  sante: "M12 20s-7-4.4-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.6-7 9-7 9Z",
+}
+---
+
+<section class="what">
+  <header class="what-header">
+    <p class="eyebrow">Notre action</p>
+    <h2>{titre}</h2>
+    {intro && <p class="intro">{intro}</p>}
+  </header>
+
+  {
+    chiffres.length > 0 && (
+      <dl class="stats">
+        {chiffres.map((c) => (
+          <div class="stat">
+            <dt class="stat-value">{c.valeur}</dt>
+            <dd class="stat-label">{c.libelle}</dd>
+          </div>
+        ))}
+      </dl>
+    )
+  }
+
+  <ul class="actions">
+    {
+      actions.map((a) => (
+        <li class="action">
+          <span class="action-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+              <path
+                d={ICONS[a.icone] || ICONS.eau}
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <h3>{a.titre}</h3>
+          <p>{a.texte}</p>
+        </li>
+      ))
+    }
+  </ul>
+
+  {
+    lien_texte && lien_url && (
+      <p class="more">
+        <a href={lien_url} class="button button-ghost">
+          {lien_texte}
+        </a>
+      </p>
+    )
+  }
+</section>
+
+<style>
+  .what {
+    padding-top: var(--space-9);
+  }
+
+  .what-header {
+    text-align: center;
+    max-width: 62ch;
+    margin: 0 auto var(--space-7);
+  }
+  .what-header h2 {
+    margin: var(--space-2) 0 var(--space-4);
+  }
+  .intro {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--fz-xl);
+  }
+
+  /* ---- chiffres cles ---- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    margin: 0 0 var(--space-7);
+    padding: var(--space-6) var(--space-5);
+    background: var(--brand-50);
+    border: 1px solid var(--brand-100);
+    border-radius: var(--radius-lg);
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-value {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--brand-700);
+  }
+  .stat-label {
+    margin: var(--space-2) 0 0;
+    font-size: var(--fz-sm);
+    line-height: 1.4;
+    color: var(--text-secondary);
+  }
+  @media (max-width: 620px) {
+    .stats {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+  }
+
+  /* ---- domaines d'intervention ---- */
+  /* Colonnes imposees plutot qu'auto-fit : avec 4 domaines, l'ajustement
+     automatique donnait 3 colonnes + 1 orpheline sur la seconde ligne.
+     Ici les lignes restent toujours equilibrees (1, 2x2, puis 4). */
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 560px) {
+    .actions {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1040px) {
+    .actions {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .action {
+    margin: 0;
+    padding: var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform 0.25s var(--ease),
+      box-shadow 0.25s var(--ease);
+  }
+  .action:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  .action-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radius);
+    background: var(--brand-50);
+    color: var(--brand-600);
+    margin-bottom: var(--space-4);
+  }
+  .action h3 {
+    margin: 0 0 var(--space-2);
+    font-size: var(--fz-xl);
+    line-height: 1.25;
+  }
+  .action p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--fz-md);
+  }
+
+  .more {
+    display: flex;
+    justify-content: center;
+    margin: var(--space-7) 0 0;
+  }
+</style>

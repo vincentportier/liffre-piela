@@ -22,6 +22,64 @@ display_url: https://www.liffre-piela.netlify.app
 logo_url: https://www.liffre-piela.netlify.app/favicon.png
 
 collections:
+  # ------------------------------------------------------------------
+  # Contenus de pages (hors articles). Un seul fichier pour l'instant.
+  # ------------------------------------------------------------------
+  - name: "pages"
+    label: "Pages du site"
+    files:
+      - name: "accueil"
+        label: "Accueil — Ce que nous faisons"
+        file: "content/settings/accueil.json"
+        description: >-
+          Le bloc de présentation affiché sur la page d'accueil, sous la photo.
+          Pensez à actualiser les chiffres après chaque assemblée générale.
+        fields:
+          - { label: "Titre de la section", name: "titre", widget: "string" }
+          - {
+              label: "Texte d'introduction",
+              name: "intro",
+              widget: "text",
+              required: false,
+            }
+          - label: "Chiffres clés"
+            name: "chiffres"
+            widget: "list"
+            hint: "Trois chiffres fonctionnent bien. Au-delà, l'affichage se resserre."
+            fields:
+              - {
+                  label: "Chiffre",
+                  name: "valeur",
+                  widget: "string",
+                  hint: "Par exemple : 175, ou 22 000 €",
+                }
+              - { label: "Ce qu'il représente", name: "libelle", widget: "string" }
+          - label: "Domaines d'intervention"
+            name: "actions"
+            widget: "list"
+            fields:
+              - {
+                  label: "Icône",
+                  name: "icone",
+                  widget: "select",
+                  options: ["eau", "education", "faim", "sante"],
+                }
+              - { label: "Titre", name: "titre", widget: "string" }
+              - { label: "Description", name: "texte", widget: "text" }
+          - {
+              label: "Texte du bouton",
+              name: "lien_texte",
+              widget: "string",
+              required: false,
+            }
+          - {
+              label: "Lien du bouton",
+              name: "lien_url",
+              widget: "string",
+              required: false,
+              hint: "Par exemple : /a-propos",
+            }
+
   - name: "blog"
     label: "Articles"
     label_singular: "Article"

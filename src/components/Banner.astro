@@ -1,29 +1,35 @@
 ---
 import { getImage } from "astro:assets"
-import heroSrc from "../images/hero-home.jpg"
+// Accueil : photo d'un forage a Piela (bidons jaunes), prise par l'association.
+// Elle illustre directement la premiere mission de l'asso, la ou la texture de
+// sable d'origine ne disait rien du projet.
+import heroHome from "../images/hero-piela.jpg"
+// Pages interieures : on garde la texture de sable, plus neutre derriere un titre.
+import heroPage from "../images/hero-home.jpg"
 
 const { bannerText, home = false } = Astro.props
 
-// L'ancien site servait cette image en background-image via
-// gatsby-background-image. On garde le principe, avec une version
-// optimisee par Astro (WebP).
-const hero = await getImage({ src: heroSrc, width: 1980, format: "webp" })
+const hero = await getImage({
+  src: home ? heroHome : heroPage,
+  width: 1980,
+  format: "webp",
+})
 ---
 
 <section
   class:list={["hero", home ? "hero-home" : "hero-page"]}
   style={`background-image: url('${hero.src}')`}
 >
+  <div class="scrim"></div>
   {
     home ? (
       <div class="content-home">
-        <div class="title">
-          <h1>LIFFRE-PIELA</h1>
-        </div>
-        <div class="subtitle">
-          <h2>Association d'aide à la région de</h2>
-          <h3>Piéla, Burkina Faso.</h3>
-        </div>
+        <p class="kicker">Association loi 1901 — depuis 1978</p>
+        <h1 class="title">Liffré-Piéla</h1>
+        <p class="subtitle">
+          <span class="subtitle-lead">Association d'aide à la région de</span>
+          <span class="subtitle-strong">Piéla, Burkina Faso</span>
+        </p>
       </div>
     ) : (
       <div class="content-innerPage">
@@ -35,140 +41,138 @@ const hero = await getImage({ src: heroSrc, width: 1980, format: "webp" })
 
 <style>
   .hero {
+    position: relative;
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    isolation: isolate;
   }
   .hero-home {
-    min-height: 100vh;
-    padding-bottom: 100px;
-  }
-  .hero-page {
-    height: 300px;
-  }
-
-  .content-innerPage {
-    height: 300px;
+    min-height: min(100vh, 860px);
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: var(--white);
-    padding-top: var(--nav-height);
   }
-  .content-innerPage h1 {
-    margin: 0;
-    padding: 20px 50px;
-    background: var(--primary);
-  }
-  @media (max-width: 780px) {
-    .content-innerPage h1 {
-      font-size: 25px;
-    }
+  .hero-page {
+    height: 320px;
   }
 
-  .content-home {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    color: var(--white);
-    padding-top: calc(var(--nav-height) + 150px);
-    padding-left: 100px;
+  /* Voile degrade : garantit la lisibilite du texte quelle que soit la photo */
+  .scrim {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
   }
-  @media (max-width: 780px) {
-    .content-home {
-      padding-top: calc(var(--nav-height) + 75px);
-      padding-left: 25px;
-      padding-right: 25px;
-      align-items: center;
-    }
+  .hero-home .scrim {
+    background:
+      linear-gradient(
+        100deg,
+        rgba(28, 26, 34, 0.86) 0%,
+        rgba(28, 26, 34, 0.66) 38%,
+        rgba(28, 26, 34, 0.22) 72%,
+        rgba(28, 26, 34, 0.1) 100%
+      ),
+      linear-gradient(180deg, rgba(28, 26, 34, 0.45) 0%, rgba(28, 26, 34, 0) 28%);
+  }
+  .hero-page .scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(38, 37, 46, 0.45) 0%,
+      rgba(38, 37, 46, 0.3) 60%,
+      rgba(38, 37, 46, 0.45) 100%
+    );
+  }
+
+  /* ---- page d'accueil ---- */
+  .content-home {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding-inline: clamp(1.25rem, 5vw, 3.5rem);
+    padding-top: var(--nav-height);
+    color: var(--white);
+  }
+
+  .kicker {
+    font-family: var(--font-heading);
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brand-200);
+    margin: 0 0 var(--space-4);
   }
 
   .title {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: clamp(2.75rem, 9vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--white);
+    margin: 0 0 var(--space-5);
+    text-wrap: balance;
   }
-  .title h1 {
-    background: var(--primary);
-    font-size: 130px;
-    margin: 0 0 2rem 0;
-    padding: 10px 30px;
+  /* Filet orange, reprise discrete du bloc plein d'origine */
+  .title::after {
+    content: "";
+    display: block;
+    width: clamp(80px, 12vw, 160px);
+    height: 6px;
+    margin-top: var(--space-5);
+    border-radius: var(--radius-full);
+    background: var(--brand-500);
   }
-  @media (max-width: 1280px) {
-    .title h1 {
-      font-size: 100px;
-    }
+
+  .subtitle {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin: 0;
+    max-width: min(34ch, 100%);
   }
-  @media (max-width: 1080px) {
-    .title h1 {
-      font-size: 80px;
-    }
+  .subtitle-lead {
+    font-size: clamp(1rem, 1.4vw, 1.35rem);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.86);
   }
-  @media (max-width: 780px) {
-    .title h1 {
-      font-size: 60px;
-    }
+  .subtitle-strong {
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--white);
   }
+
   @media (max-width: 680px) {
-    .title h1 {
-      font-size: 40px;
+    .hero-home {
+      min-height: 78vh;
     }
-  }
-  @media (max-width: 380px) {
-    .title h1 {
-      font-size: 25px;
+    .subtitle {
+      max-width: none;
     }
   }
 
-  .subtitle h2 {
-    background: var(--text-primary);
-    font-family: "Roboto", sans-serif;
-    font-weight: 100;
+  /* ---- bannieres de pages interieures ---- */
+  .content-innerPage {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: var(--nav-height);
+    padding-inline: var(--space-5);
+  }
+  .content-innerPage h1 {
     margin: 0;
-    padding: 10px 30px;
-    font-size: 50px;
-  }
-  @media (max-width: 1280px) {
-    .subtitle h2 {
-      font-size: 40px;
-    }
-  }
-  @media (max-width: 1080px) {
-    .subtitle h2 {
-      font-size: 30px;
-    }
-  }
-  @media (max-width: 680px) {
-    .subtitle h2 {
-      font-size: 25px;
-    }
-  }
-
-  .subtitle h3 {
-    background: var(--text-primary);
-    font-family: "Montserrat", sans-serif;
-    margin: 0;
-    padding: 10px 30px;
-    font-size: 100px;
-  }
-  @media (max-width: 1280px) {
-    .subtitle h3 {
-      font-size: 80px;
-    }
-  }
-  @media (max-width: 1080px) {
-    .subtitle h3 {
-      font-size: 60px;
-    }
-  }
-  @media (max-width: 780px) {
-    .subtitle h3 {
-      font-size: 50px;
-    }
-  }
-  @media (max-width: 680px) {
-    .subtitle h3 {
-      font-size: 30px;
-    }
+    padding: 0.7em 1.4em;
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--brand-500) 92%, transparent);
+    color: var(--white);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-lg);
   }
 </style>

@@ -1,0 +1,33 @@
+{
+  "titre": "Ce que nous faisons",
+  "intro": "Depuis 1978, l'association soutient la région de Piéla, au nord du Burkina Faso. Sur place, nos projets sont suivis par l'ADDESP, l'Association Départementale pour le Développement Économique et Social de la région de Piéla.",
+  "chiffres": [
+    { "valeur": "1978", "libelle": "Année de création de l'association" },
+    { "valeur": "175", "libelle": "adhérentes et adhérents" },
+    { "valeur": "22 000 €", "libelle": "envoyés à Piéla en 2025" }
+  ],
+  "actions": [
+    {
+      "icone": "eau",
+      "titre": "L'accès à l'eau potable",
+      "texte": "Création et aménagement de forages dans les villages de la région."
+    },
+    {
+      "icone": "education",
+      "titre": "L'éducation et l'instruction",
+      "texte": "Construction de salles de classe, de logements pour les enseignants et de sanitaires scolaires."
+    },
+    {
+      "icone": "faim",
+      "titre": "La lutte contre la faim",
+      "texte": "Achat de mil pour les familles les plus défavorisées, afin de lutter contre la spéculation."
+    },
+    {
+      "icone": "sante",
+      "titre": "L'accès aux soins",
+      "texte": "Depuis 2015, participation au fonctionnement d'un dispensaire à Piéla."
+    }
+  ],
+  "lien_texte": "En savoir plus sur l'association",
+  "lien_url": "/a-propos"
+}

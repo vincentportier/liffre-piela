@@ -3,7 +3,8 @@ import Layout from "../layouts/Layout.astro"
 ---
 
 <Layout banner={true} bannerText="A PROPOS" title="A propos - Liffré-Piéla">
-  <div>
+  <div class="prose about">
+    <p class="eyebrow">Depuis 1978</p>
     <h2>À propos de Liffré-Piéla</h2>
 
     <h3>L'association</h3>
@@ -68,3 +69,25 @@ import Layout from "../layouts/Layout.astro"
     </ol>
   </div>
 </Layout>
+
+<style>
+  .about {
+    margin: 0 auto;
+    padding-top: var(--space-7);
+  }
+  .about h2 {
+    margin-top: var(--space-2);
+  }
+  .about h3 {
+    margin-top: var(--space-7);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--line);
+  }
+  .about ul,
+  .about ol {
+    color: var(--text-primary);
+  }
+  .about b {
+    color: var(--brand-700);
+  }
+</style>
