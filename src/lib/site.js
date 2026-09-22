@@ -2,7 +2,7 @@ export const site = {
   title: "Liffré-Piéla - Association d'aide humanitaire",
   description:
     "Liffré-Piéla est une association d'aide humanitaire et de coopération avec la région de Piéla au Burkina Faso",
-  url: "https://www.liffre-piela.netlify.app",
+  url: "https://liffre-piela.netlify.app",
   image: "/og.png",
   lang: "fr",
 }

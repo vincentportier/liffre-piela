@@ -17,9 +17,9 @@ media_folder: public/img
 public_folder: /img
 
 # Libelles de l'interface
-site_url: https://www.liffre-piela.netlify.app
-display_url: https://www.liffre-piela.netlify.app
-logo_url: https://www.liffre-piela.netlify.app/favicon.png
+site_url: https://liffre-piela.netlify.app
+display_url: https://liffre-piela.netlify.app
+logo_url: https://liffre-piela.netlify.app/favicon.png
 
 collections:
   # ------------------------------------------------------------------

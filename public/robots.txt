@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://www.liffre-piela.netlify.app/sitemap-index.xml
+Sitemap: https://liffre-piela.netlify.app/sitemap-index.xml
