@@ -1,0 +1,120 @@
+---
+import { kebabCase } from "../lib/utils.js"
+
+// counts : objet { "fête": 17, "comité": 10, ... }
+const { counts, current } = Astro.props
+const all = Object.keys(counts).sort((a, b) => counts[b] - counts[a])
+---
+
+<section class="categories">
+  <header>
+    <p class="eyebrow">Explorer</p>
+    <h2>Catégories</h2>
+    <p class="lead">Retrouvez tous nos articles par catégories</p>
+  </header>
+
+  <ul>
+    {
+      all.map((cat) => {
+        const slug = kebabCase(cat)
+        return (
+          <li>
+            <a
+              href={`/blog/category/${slug}`}
+              class:list={["chip", { active: current === slug }]}
+              aria-current={current === slug ? "page" : undefined}
+            >
+              <span class="chip-label">{cat}</span>
+              <span class="chip-count">{counts[cat] >= 100 ? "99+" : counts[cat]}</span>
+            </a>
+          </li>
+        )
+      })
+    }
+  </ul>
+</section>
+
+<style>
+  .categories {
+    margin-top: var(--space-8);
+    padding-top: var(--space-7);
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  .categories header {
+    max-width: 40ch;
+    margin: 0 auto var(--space-6);
+  }
+  .categories h2 {
+    margin: var(--space-2) 0 var(--space-2);
+    font-size: var(--fz-h3);
+  }
+  .lead {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--fz-md);
+  }
+
+  .categories ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .categories li {
+    margin: 0;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.5rem 0.55rem 0.5rem 1rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-full);
+    background: var(--surface);
+    color: var(--ink-800);
+    font-family: var(--font-heading);
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+    transition:
+      background-color 0.2s var(--ease),
+      border-color 0.2s var(--ease),
+      color 0.2s var(--ease),
+      transform 0.2s var(--ease);
+  }
+  .chip:hover {
+    background: var(--brand-50);
+    border-color: var(--brand-200);
+    color: var(--brand-700);
+    transform: translateY(-1px);
+  }
+
+  .chip-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.6rem;
+    height: 1.6rem;
+    padding: 0 0.35rem;
+    border-radius: var(--radius-full);
+    background: var(--brand-500);
+    color: var(--white);
+    font-size: var(--fz-xxs);
+    font-weight: 700;
+  }
+
+  .chip.active {
+    background: var(--brand-600);
+    border-color: var(--brand-600);
+    color: var(--white);
+  }
+  .chip.active .chip-count {
+    background: rgba(255, 255, 255, 0.22);
+    color: var(--white);
+  }
+</style>

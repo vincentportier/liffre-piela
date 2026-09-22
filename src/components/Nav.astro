@@ -1,0 +1,387 @@
+---
+import Logo from "./Logo.astro"
+import { navLinks } from "../lib/site.js"
+---
+
+<header class="site-header flex-center" data-scroll="top">
+  <nav class="site-nav flex-between">
+    <div class="left-nav">
+      <a class="logo" href="/" aria-label="Accueil">
+        <Logo />
+      </a>
+      <div class="links">
+        <ul>
+          {navLinks.map(({ name, url }) => <li><a href={url}>{name}</a></li>)}
+        </ul>
+      </div>
+    </div>
+    <a href="/blog"><button class="button nav-blog-button" type="button">Blog</button></a>
+  </nav>
+
+  <div class="mobile-menu">
+    <div class="menu-wrapper">
+      <button
+        class="hamburger flex-center"
+        type="button"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+        aria-controls="mobile-sidebar"
+      >
+        <span class="ham-box"><span class="ham-box-inner"></span></span>
+      </button>
+      <div class="sidebar flex-center" id="mobile-sidebar" aria-hidden="true">
+        <nav>
+          <ul>
+            <li><a href="/">Accueil</a></li>
+            {navLinks.map(({ name, url }) => <li><a href={url}>{name}</a></li>)}
+          </ul>
+          <div><a href="/blog" class="button blog-button">Blog</a></div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+    width: 100%;
+    height: var(--nav-height);
+    filter: none !important;
+    pointer-events: auto !important;
+    user-select: auto !important;
+    background: color-mix(in srgb, var(--surface) 82%, transparent);
+    backdrop-filter: saturate(160%) blur(12px);
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid transparent;
+    transition:
+      height 0.3s var(--ease),
+      transform 0.3s var(--ease),
+      box-shadow 0.3s var(--ease),
+      border-color 0.3s var(--ease),
+      background-color 0.3s var(--ease);
+  }
+  /* En haut de page : barre pleine, sans separation */
+  .site-header[data-scroll="top"] {
+    background: var(--surface);
+  }
+  /* Remontee : barre reduite, legere separation */
+  .site-header[data-scroll="up"] {
+    height: var(--nav-height-scroll);
+    transform: translateY(0px);
+    border-bottom-color: var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+  /* Descente : la barre s'escamote */
+  .site-header[data-scroll="down"] {
+    height: var(--nav-height-scroll);
+    transform: translateY(calc(var(--nav-height-scroll) * -1));
+    box-shadow: none;
+  }
+
+  .site-nav {
+    width: 100%;
+    height: 100%;
+    max-width: var(--container);
+    gap: var(--space-5);
+  }
+  .left-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    min-width: 0;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    flex: none;
+  }
+  /* Le SVG n'a pas de dimensions intrinseques (viewBox seul) : il faut
+     une hauteur explicite, sinon il s'effondre a zero. */
+  .logo :global(svg) {
+    height: calc(var(--nav-height) - 30px);
+    width: auto;
+    transition: height 0.3s var(--ease);
+  }
+  .site-header:not([data-scroll="top"]) .logo :global(svg) {
+    height: calc(var(--nav-height-scroll) - 20px);
+  }
+
+  .links ul {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2.5vw, 2rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .links li {
+    margin: 0;
+  }
+  .links a {
+    position: relative;
+    display: inline-block;
+    padding: 0.35rem 0;
+    font-family: var(--font-heading);
+    font-size: var(--fz-md);
+    font-weight: 600;
+    color: var(--ink-700);
+    white-space: nowrap;
+  }
+  /* Soulignement qui se deploie au survol */
+  .links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    border-radius: var(--radius-full);
+    background: var(--brand-500);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.28s var(--ease);
+  }
+  .links a:hover {
+    color: var(--brand-600);
+  }
+  .links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  @media (max-width: 768px) {
+    .links {
+      display: none;
+    }
+    .nav-blog-button {
+      display: none;
+    }
+  }
+
+  .mobile-menu {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .mobile-menu {
+      display: block;
+    }
+  }
+
+  .hamburger {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+      position: relative;
+      z-index: 10;
+      margin-right: -15px;
+      padding: 15px;
+      border: 0;
+      background-color: transparent;
+      text-transform: none;
+      transition-timing-function: linear;
+      transition-duration: 0.15s;
+      transition-property: opacity, filter;
+    }
+    .hamburger:focus {
+      outline-color: var(--primary);
+    }
+  }
+
+  .ham-box {
+    display: inline-block;
+    position: relative;
+    width: var(--hamburger-width);
+    height: 24px;
+  }
+  .ham-box-inner {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: var(--hamburger-width);
+    height: 2px;
+    border-radius: var(--border-radius);
+    background-color: var(--black);
+    transition-duration: 0.22s;
+    transition-property: transform;
+    transition-delay: 0s;
+    transform: rotate(0deg);
+    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  .ham-box-inner:before,
+  .ham-box-inner:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: auto;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 4px;
+    background-color: var(--black);
+    transition-timing-function: ease;
+    transition-duration: 0.15s;
+    transition-property: transform;
+  }
+  .ham-box-inner:before {
+    top: -10px;
+    opacity: 1;
+    transition: var(--ham-before);
+  }
+  .ham-box-inner:after {
+    bottom: -10px;
+    transform: rotate(0);
+    transition: var(--ham-after);
+  }
+
+  /* etat ouvert : la croix */
+  .hamburger[aria-expanded="true"] .ham-box-inner {
+    transition-delay: 0.12s;
+    transform: rotate(225deg);
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .hamburger[aria-expanded="true"] .ham-box-inner:before {
+    top: 0;
+    opacity: 0;
+    transition: var(--ham-before-active);
+  }
+  .hamburger[aria-expanded="true"] .ham-box-inner:after {
+    bottom: 0;
+    transform: rotate(-90deg);
+    transition: var(--ham-after-active);
+  }
+
+  .sidebar {
+    display: none;
+    font-family: var(--font-heading);
+  }
+  @media (max-width: 768px) {
+    .sidebar {
+      display: flex;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      padding: 50px 10px;
+      width: min(75vw, 400px);
+      height: 100vh;
+      outline: 0;
+      background-color: var(--white);
+      box-shadow: -10px 0px 30px -15px var(--black);
+      z-index: 9;
+      transition: var(--transition);
+      /* Etat ouvert */
+      transform: translateX(0);
+      visibility: visible;
+    }
+    /* Etat ferme. Ecrit en :not() pour que les deux regles soient
+       mutuellement exclusives : le rendu ne depend alors plus de l'ordre
+       de la cascade (en mode dev, Vite injecte les styles dans un ordre
+       different du build, ce qui laissait le panneau masque a l'ouverture). */
+    .sidebar:not([aria-hidden="false"]) {
+      transform: translateX(100vw);
+      visibility: hidden;
+    }
+  }
+  .sidebar nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-6);
+  }
+  .sidebar ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .sidebar li {
+    position: relative;
+    margin: 0;
+  }
+  .sidebar a {
+    display: block;
+    width: 100%;
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius);
+    font-family: var(--font-heading);
+    font-size: var(--fz-xl);
+    font-weight: 600;
+    color: var(--ink-800);
+    transition:
+      background-color 0.2s var(--ease),
+      color 0.2s var(--ease);
+  }
+  .sidebar a:hover {
+    background: var(--brand-50);
+    color: var(--brand-700);
+  }
+  .sidebar .blog-button {
+    width: max-content;
+    margin: 0 auto;
+    padding: 0.95rem 2.75rem;
+    font-size: var(--fz-xl);
+    color: var(--white);
+  }
+  .sidebar .blog-button:hover {
+    background: var(--brand-600);
+    color: var(--white);
+  }
+</style>
+
+<script>
+  // Barre qui se masque a la descente et reapparait a la remontee.
+  const header = document.querySelector(".site-header")
+  let lastY = window.scrollY
+
+  const onScroll = () => {
+    const y = window.scrollY
+    if (y < 50) {
+      header.dataset.scroll = "top"
+    } else {
+      header.dataset.scroll = y > lastY ? "down" : "up"
+    }
+    lastY = y
+  }
+  window.addEventListener("scroll", onScroll, { passive: true })
+  onScroll()
+
+  // Menu mobile
+  const hamburger = document.querySelector(".hamburger")
+  const sidebar = document.querySelector(".sidebar")
+  const wrapper = document.querySelector(".menu-wrapper")
+
+  const setMenu = (open) => {
+    hamburger.setAttribute("aria-expanded", String(open))
+    hamburger.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu")
+    sidebar.setAttribute("aria-hidden", String(!open))
+    document.body.classList.toggle("blur", open)
+  }
+
+  hamburger.addEventListener("click", () => {
+    setMenu(hamburger.getAttribute("aria-expanded") !== "true")
+  })
+
+  sidebar.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)))
+
+  document.addEventListener("click", (e) => {
+    if (!wrapper.contains(e.target)) setMenu(false)
+  })
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.key === "Esc") setMenu(false)
+  })
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) setMenu(false)
+  })
+</script>

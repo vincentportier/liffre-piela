@@ -1,0 +1,37 @@
+---
+import Seo from "../components/Seo.astro"
+import Nav from "../components/Nav.astro"
+import Banner from "../components/Banner.astro"
+import Footer from "../components/Footer.astro"
+import { site } from "../lib/site.js"
+import "../styles/global.css"
+
+const {
+  title,
+  description,
+  image,
+  article = false,
+  banner = false,
+  bannerText,
+  home = false,
+} = Astro.props
+---
+
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <Seo title={title} description={description} image={image} article={article} />
+  </head>
+  <body>
+    <div id="root">
+      <Nav />
+      {banner && <Banner bannerText={bannerText} home={home} />}
+      <main>
+        <div id="content">
+          <slot />
+        </div>
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

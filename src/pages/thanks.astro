@@ -1,0 +1,54 @@
+---
+import Layout from "../layouts/Layout.astro"
+---
+
+<Layout title="Merci d'avoir contacté Liffré-Piéla">
+  <div class="thanks no-banner">
+    <div class="check" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="30" height="30" fill="none">
+        <path
+          d="m5 12.5 4.5 4.5L19 7.5"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </div>
+    <h1>Message bien reçu</h1>
+    <p>
+      Merci d'avoir contacté Liffré-Piéla. Nous reviendrons vers vous dès que possible.
+    </p>
+    <a href="/" class="button">Retourner à l'accueil</a>
+  </div>
+</Layout>
+
+<style>
+  .thanks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 44ch;
+    margin: 0 auto;
+    padding-bottom: var(--space-8);
+  }
+  .check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: var(--radius-full);
+    background: var(--brand-50);
+    border: 1px solid var(--brand-100);
+    color: var(--brand-600);
+    margin-bottom: var(--space-5);
+  }
+  .thanks h1 {
+    margin: 0 0 var(--space-4);
+  }
+  .thanks p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+  }
+</style>

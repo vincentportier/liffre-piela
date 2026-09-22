@@ -1,0 +1,327 @@
+---
+import { render } from "astro:content"
+import { Image, getImage } from "astro:assets"
+import Layout from "../../layouts/Layout.astro"
+import Logo from "../../components/Logo.astro"
+import { allPosts } from "../../lib/blog.js"
+import { kebabCase, formatDate } from "../../lib/utils.js"
+import { footerBlurb } from "../../lib/site.js"
+
+export async function getStaticPaths() {
+  const posts = await allPosts()
+  // Les articles sont tries du plus recent au plus ancien :
+  // "precedent" = plus ancien, "suivant" = plus recent.
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: {
+      post,
+      newer: i > 0 ? posts[i - 1] : null,
+      older: i < posts.length - 1 ? posts[i + 1] : null,
+    },
+  }))
+}
+
+const { post, newer, older } = Astro.props
+const { Content } = await render(post)
+const { title, date, description, categories, featuredImage } = post.data
+
+// Image de partage : on genere une version dediee au format Open Graph.
+// Utiliser featuredImage.src ferait publier l'original non optimise
+// (jusqu'a 3 Mo pour certaines photos de l'asso).
+const ogImage = featuredImage
+  ? (
+      await getImage({
+        src: featuredImage,
+        width: 1200,
+        height: 630,
+        fit: "cover",
+        format: "jpeg",
+        layout: "none",
+      })
+    ).src
+  : undefined
+---
+
+<Layout
+  title={`${title} - Liffré Piéla`}
+  description={description}
+  article={true}
+  image={ogImage}
+>
+  <article class="post no-banner">
+    <header class="post-header">
+      <a href="/blog" class="back-link">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="none" aria-hidden="true">
+          <path
+            d="M13 8H4M7.5 11.5 4 8l3.5-3.5"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+        Tous les articles
+      </a>
+
+      <h1>{title}</h1>
+
+      <div class="post-meta">
+        <span>Liffré-Piéla</span>
+        <span class="dot" aria-hidden="true">·</span>
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+      </div>
+
+      {
+        categories.length > 0 && (
+          <ul class="chips">
+            {categories.map((cat) => (
+              <li>
+                <a href={`/blog/category/${kebabCase(cat)}`}>{cat}</a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </header>
+
+    {
+      featuredImage && (
+        <figure class="featured">
+          <Image src={featuredImage} alt={`Image à la une — ${title}`} width={1600} />
+        </figure>
+      )
+    }
+
+    <div class="post-body prose">
+      <Content />
+    </div>
+  </article>
+
+  <aside class="about-card">
+    <Logo />
+    <p>{footerBlurb}</p>
+  </aside>
+
+  {
+    (older || newer) && (
+      <nav class="post-nav" aria-label="Navigation entre les articles">
+        {older ? (
+          <a href={`/blog/${older.id}`} rel="prev" class="nav-card">
+            <span class="nav-label">← Article précédent</span>
+            <span class="nav-title">{older.data.title}</span>
+          </a>
+        ) : (
+          <span />
+        )}
+        {newer && (
+          <a href={`/blog/${newer.id}`} rel="next" class="nav-card next">
+            <span class="nav-label">Article suivant →</span>
+            <span class="nav-title">{newer.data.title}</span>
+          </a>
+        )}
+      </nav>
+    )
+  }
+</Layout>
+
+<style>
+  .post {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* ---- en-tete ---- */
+  .post-header {
+    margin-bottom: var(--space-6);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-heading);
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--brand-600);
+  }
+  .back-link:hover {
+    color: var(--brand-700);
+  }
+  .back-link svg {
+    transition: transform 0.22s var(--ease);
+  }
+  .back-link:hover svg {
+    transform: translateX(-3px);
+  }
+
+  .post-header h1 {
+    margin: var(--space-4) 0 var(--space-3);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: var(--fz-sm);
+    letter-spacing: 0.02em;
+  }
+  .dot {
+    color: var(--ink-300);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: var(--space-4) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .chips li {
+    margin: 0;
+  }
+  .chips a {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    background: var(--brand-50);
+    border: 1px solid var(--brand-100);
+    color: var(--brand-700);
+    font-size: var(--fz-xs);
+    font-weight: 600;
+  }
+  .chips a:hover {
+    background: var(--brand-100);
+    border-color: var(--brand-200);
+  }
+
+  /* ---- image a la une ---- */
+  .featured {
+    margin: 0 0 var(--space-7);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  .featured :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  /* ---- corps de l'article ---- */
+  .post-body {
+    font-size: var(--fz-xl);
+  }
+  .post-body :global(img) {
+    width: 100%;
+    height: auto;
+    margin: var(--space-6) 0;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+  }
+  .post-body :global(a) {
+    color: var(--brand-700);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .post-body :global(a:hover) {
+    color: var(--brand-600);
+    text-decoration-thickness: 2px;
+  }
+  .post-body :global(h2),
+  .post-body :global(h3) {
+    margin-top: var(--space-7);
+  }
+
+  /* ---- encart association ---- */
+  .about-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    max-width: 800px;
+    margin: var(--space-8) auto 0;
+    padding: var(--space-5);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+  }
+  .about-card :global(svg) {
+    width: 120px;
+    min-width: 120px;
+  }
+  .about-card p {
+    margin: 0;
+    font-size: var(--fz-md);
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+  @media (max-width: 560px) {
+    .about-card {
+      flex-direction: column;
+      text-align: center;
+    }
+    .about-card :global(svg) {
+      width: 90px;
+      min-width: 0;
+    }
+  }
+
+  /* ---- precedent / suivant ---- */
+  .post-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    max-width: 800px;
+    margin: var(--space-6) auto 0;
+  }
+  .nav-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform 0.22s var(--ease),
+      box-shadow 0.22s var(--ease),
+      border-color 0.22s var(--ease);
+  }
+  .nav-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--line-strong);
+  }
+  .nav-card.next {
+    text-align: right;
+  }
+  .nav-label {
+    font-size: var(--fz-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .nav-title {
+    font-family: var(--font-heading);
+    font-size: var(--fz-md);
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--ink-900);
+  }
+  .nav-card:hover .nav-title {
+    color: var(--brand-700);
+  }
+
+  @media (max-width: 640px) {
+    .post-nav {
+      grid-template-columns: 1fr;
+    }
+    .nav-card.next {
+      text-align: left;
+    }
+  }
+</style>

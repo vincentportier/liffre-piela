@@ -1,0 +1,11 @@
+{
+  "name": "LiffrePiela",
+  "short_name": "LiffrePiela",
+  "start_url": "/",
+  "background_color": "#FFFFFF",
+  "theme_color": "#d56d31",
+  "display": "standalone",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

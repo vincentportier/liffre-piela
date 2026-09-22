@@ -1,0 +1,64 @@
+---
+import Layout from "../../../../layouts/Layout.astro"
+import PostsGrid from "../../../../components/PostsGrid.astro"
+import Categories from "../../../../components/Categories.astro"
+import Pagination from "../../../../components/Pagination.astro"
+import { allPosts, categoryCounts, postsByCategorySlug, paginate } from "../../../../lib/blog.js"
+
+export async function getStaticPaths() {
+  const posts = await allPosts()
+  const counts = categoryCounts(posts)
+  return [...postsByCategorySlug(posts).values()].map(({ slug, label, posts: list }) => ({
+    params: { category: slug },
+    props: { label, page: paginate(list)[0], counts, total: list.length },
+  }))
+}
+
+const { label, page, counts, total } = Astro.props
+---
+
+<Layout
+  title={`Catégorie: ${label} - Liffré Piéla`}
+  description={`Retrouvez tous les blogs de Liffré Piéla dans la catégorie ${label}`}
+>
+  <div class="no-banner">
+    <header class="category-header">
+      <a href="/blog" class="back-link">&#8592; Tous les articles</a>
+      <h1>{label}</h1>
+      <p class="count">{total} article{total <= 1 ? "" : "s"} dans cette catégorie</p>
+    </header>
+    <PostsGrid posts={page.items} />
+    <Pagination
+      base={`/blog/category/${Astro.params.category}`}
+      currentPage={page.currentPage}
+      numPages={page.numPages}
+    />
+    <Categories counts={counts} current={Astro.params.category} />
+  </div>
+</Layout>
+
+<style>
+  .category-header {
+    margin-bottom: var(--space-6);
+  }
+  .back-link {
+    font-family: var(--font-heading);
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--brand-600);
+  }
+  .back-link:hover {
+    color: var(--brand-700);
+  }
+  .category-header h1 {
+    margin: var(--space-4) 0 var(--space-2);
+    text-transform: capitalize;
+  }
+  .count {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: var(--fz-md);
+  }
+</style>

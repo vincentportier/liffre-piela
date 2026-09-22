@@ -1,0 +1,138 @@
+---
+// Formulaire Netlify Forms en soumission native : pas de JavaScript.
+// Netlify detecte le formulaire au deploiement (data-netlify), enregistre
+// la soumission puis redirige vers l'action.
+---
+
+<section class="contact" id="contact">
+  <header class="contact-header">
+    <p class="eyebrow">Nous écrire</p>
+    <h2>Envoyez-nous un message</h2>
+    <p class="lead">
+      Une question sur l'association, une envie de nous rejoindre ou de soutenir Piéla ?
+      Écrivez-nous, nous vous répondrons.
+    </p>
+  </header>
+
+  <form
+    class="contact-form"
+    name="contact"
+    method="POST"
+    action="/thanks"
+    data-netlify="true"
+    data-netlify-honeypot="bot-field"
+  >
+    <input type="hidden" name="form-name" value="contact" />
+    <p class="hidden">
+      <label>Ne pas remplir : <input name="bot-field" /></label>
+    </p>
+
+    <div class="field">
+      <label for="name">Nom</label>
+      <input type="text" id="name" name="name" placeholder="Votre nom" required />
+    </div>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="vous@exemple.fr" required />
+    </div>
+
+    <div class="field">
+      <label for="message">Message</label>
+      <textarea
+        name="message"
+        id="message"
+        rows="6"
+        placeholder="Votre message…"
+        required></textarea>
+    </div>
+
+    <button type="submit" class="button">Envoyer</button>
+  </form>
+</section>
+
+<style>
+  .contact {
+    max-width: 600px;
+    margin: 0 auto var(--space-8);
+  }
+
+  .contact-header {
+    text-align: center;
+    margin-bottom: var(--space-7);
+  }
+  .contact-header h2 {
+    margin: var(--space-2) 0 var(--space-3);
+    font-size: var(--fz-h2);
+  }
+  .lead {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--fz-md);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-6);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .field label {
+    font-family: var(--font-heading);
+    font-size: var(--fz-sm);
+    font-weight: 600;
+    color: var(--ink-800);
+  }
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink-800);
+    font-family: var(--font-body);
+    font-size: var(--fz-md);
+    line-height: 1.5;
+    transition:
+      border-color 0.2s var(--ease),
+      box-shadow 0.2s var(--ease);
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--ink-300);
+  }
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--brand-400);
+    box-shadow: var(--ring);
+  }
+
+  .contact-form .button {
+    align-self: center;
+    margin-top: var(--space-1);
+    padding-inline: 2.5rem;
+  }
+
+  /* piege a robots */
+  .hidden {
+    position: absolute;
+    left: -9999px;
+    visibility: hidden;
+  }
+</style>

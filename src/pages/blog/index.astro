@@ -1,0 +1,22 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import PostsGrid from "../../components/PostsGrid.astro"
+import Categories from "../../components/Categories.astro"
+import Pagination from "../../components/Pagination.astro"
+import { allPosts, categoryCounts, paginate } from "../../lib/blog.js"
+
+const posts = await allPosts()
+const counts = categoryCounts(posts)
+const page = paginate(posts)[0]
+---
+
+<Layout
+  banner={true}
+  bannerText="BLOG"
+  title="Tous les blogs - Liffré-Piéla"
+  description="Retrouvez tous les blogs de Liffré-Piéla, l'association d'aide humanitaire et de coopération avec la région de Piéla au Burkina Faso"
+>
+  <PostsGrid posts={page.items} />
+  <Pagination base="/blog" currentPage={page.currentPage} numPages={page.numPages} />
+  <Categories counts={counts} />
+</Layout>

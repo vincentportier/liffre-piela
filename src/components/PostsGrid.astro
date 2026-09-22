@@ -1,0 +1,143 @@
+---
+import { formatDate, excerpt } from "../lib/utils.js"
+
+const { posts } = Astro.props
+---
+
+<ol class="posts">
+  {
+    posts.map((post) => (
+      <li>
+        <article class="post-row">
+          <div class="post-date">
+            <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+          </div>
+          <div class="post-main">
+            <h2 class="post-title">
+              <a href={`/blog/${post.id}`}>
+                <span class="stretched">{post.data.title}</span>
+              </a>
+            </h2>
+            <p class="post-excerpt">{post.data.description || excerpt(post.body)}</p>
+          </div>
+          <span class="post-arrow" aria-hidden="true">
+            <svg viewBox="0 0 16 16" width="18" height="18" fill="none">
+              <path
+                d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </article>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .posts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .posts li {
+    margin: 0;
+  }
+  .posts li + li {
+    border-top: 1px solid var(--line);
+  }
+
+  .post-row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 9.5rem 1fr auto;
+    align-items: start;
+    gap: var(--space-5);
+    padding: var(--space-5) var(--space-4);
+    border-radius: var(--radius);
+    transition:
+      background-color 0.22s var(--ease),
+      transform 0.22s var(--ease);
+  }
+  .post-row:hover {
+    background: var(--surface-2);
+  }
+  .post-row:focus-within {
+    outline: 2px solid var(--brand-600);
+    outline-offset: 2px;
+  }
+
+  .post-date {
+    padding-top: 0.35rem;
+    font-size: var(--fz-xs);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .post-title {
+    font-size: var(--fz-xxl);
+    line-height: 1.25;
+    margin: 0 0 var(--space-2);
+  }
+  .post-title a {
+    color: var(--ink-900);
+  }
+  .post-row:hover .post-title a {
+    color: var(--brand-700);
+  }
+  .stretched::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .post-title a:focus-visible {
+    outline: none;
+  }
+
+  .post-excerpt {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--fz-md);
+    max-width: var(--measure);
+  }
+
+  .post-arrow {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    color: var(--brand-500);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition:
+      opacity 0.22s var(--ease),
+      transform 0.22s var(--ease);
+  }
+  .post-row:hover .post-arrow,
+  .post-row:focus-within .post-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (max-width: 720px) {
+    .post-row {
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+      padding-inline: var(--space-2);
+    }
+    .post-date {
+      padding-top: 0;
+      order: -1;
+    }
+    .post-arrow {
+      display: none;
+    }
+  }
+</style>

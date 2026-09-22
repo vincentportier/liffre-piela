@@ -1,17 +1,9 @@
 ---
-title: Bol de Riz 2026 Salle boléro Maurice ravel
-date: 2026-03-12T19:39:31.895Z
+title: Bol de Riz 2023
+date: 2023-03-13T08:26:52.757Z
 featuredImage: istockphoto-1242507868-612x612.jpg
-description: Bol de Riz Samedi 28 Mars 2026
+description: Bol de RIz Samedi 1er Avril 2023
 categories:
   - divers
 ---
-A la salle Maurice Ravel rue de Rennes, à partir de 17h, vente en barquettes - 5€ -à consommer sur place ou à emporter. 
-
-O﻿rganisé par Liffré Piela
-
-
-
-![](cuisinières.jpg)
-
-![]()
+De 17H30 à 19h le samedi 1er Avril , vous pourrez récupérer votre bol de riz sur la place de la mairie sous un barnum. 5€/bol de riz au bénéfice de nos amis de Piela
