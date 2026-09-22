@@ -8,6 +8,6 @@ categories: []
 
 **Le beau soleil a permis à un grand nombre de chineurs , de faire de bonnes affaires aux deux stands de Liffré Piéla.**
 
-**L'odeur alléchante des bonnes saucisses, galettes et crêpes a excité l'appétit des chineurs.**
+**L'odeur alléchante des bonnes saucisses, galettes et crêpes a excité l'appétit des visiteurs.**
 
 **Le prochain rendez vous est prévu pour la Fête d'Automne le dimanche 15 Novembre 2026**
